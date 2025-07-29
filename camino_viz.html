@@ -129,13 +129,15 @@
         const customColors = originalColors.filter(color => !colorsToRemove.includes(color));
         const colorScale = d3.scaleOrdinal(customColors);
         
-        const caminoFeatures = caminoData.map(day => ({
-            type: "Feature",
-            properties: day,
-            geometry: { type: "LineString", coordinates: day.path_simple }
+        const caminoFeatures = caminoData
+            .filter(day => day.path_simple)
+            .map(day => ({
+                type: "Feature",
+                properties: day,
+                geometry: { type: "LineString", coordinates: day.path_simple }
         }));
 
-        let currentDay = 0;
+        let currentDay = -1;
         let casingLayer, colorLayer;
         let isAnimatingFlyTo = false;
 
@@ -186,7 +188,7 @@
         }).addTo(map);
 
         function setInitialStoryPanel() {
-            currentDay = 0;
+            currentDay = -1;
             stageTitle.text("The Pilgrim's Path");
             stageInfo.text("An 800km journey across Spain");
             stagePhoto.attr("src", "https://placehold.co/600x400/e5e7eb/a1a1aa?text=The+Camino");
@@ -204,9 +206,8 @@
             if (!dayData) return;
 
             stageTitle.text(`Day ${dayData.day}: ${dayData.start} to ${dayData.end}`);
-            stageInfo.text(`Distance: ${dayData.distance} km`);
+            stageInfo.text(dayData.distance > 0 ? `Distance: ${dayData.distance} km` : 'Preparation Day');
             stagePhoto.attr("src", dayData.photo);
-            dayCounter.text(`Day ${currentDay} / ${TOTAL_DAYS}`);
             
             if (dayData.diaryFile) {
                 stageDescription.text("Loading diary...");
@@ -221,18 +222,26 @@
                 stageDescription.text(dayData.description);
             }
             
-            casingLayer.setStyle(styleCasing);
-            colorLayer.setStyle(stylePath);
+            if (dayNumber === 0) {
+                casingLayer.setStyle({ opacity: 0 });
+                colorLayer.setStyle({ opacity: 0 });
+            } else {
+                casingLayer.setStyle(styleCasing);
+                colorLayer.setStyle(stylePath);
+            }
 
-            prevDayBtn.property("disabled", currentDay <= 1);
+            prevDayBtn.property("disabled", currentDay <= 0);
             nextDayBtn.property("disabled", currentDay >= TOTAL_DAYS || !caminoData.find(d => d.day === currentDay + 1));
 
             zoomToDay(dayData);
         }
         
         map.on('zoomstart', function() {
-            casingLayer.setStyle({ opacity: 0 });
-            colorLayer.setStyle({ opacity: 0 });
+            if (currentDay > 0) { 
+                isAnimatingFlyTo = true;
+                casingLayer.setStyle({ opacity: 0 });
+                colorLayer.setStyle({ opacity: 0 });
+            }
         });
         
         map.on('zoomend', function() {
@@ -245,40 +254,50 @@
                     layer.setLatLngs(L.GeoJSON.coordsToLatLngs(newCoords));
                 }
             };
-            casingLayer.eachLayer(swapCoords);
-            colorLayer.eachLayer(swapCoords);
-            casingLayer.setStyle(styleCasing);
-            colorLayer.setStyle(stylePath);
+            if (currentDay > 0) {
+                casingLayer.setStyle(styleCasing);
+                colorLayer.setStyle(stylePath);
+            }
+            isAnimatingFlyTo = false;
         });
 
         map.on('zoom', function() {
-            if (isAnimatingFlyTo) return;
+            if (isAnimatingFlyTo || currentDay === 0) return;
             casingLayer.setStyle(styleCasing);
             colorLayer.setStyle(stylePath);
         });
 
         function zoomToDay(dayData) {
-            isAnimatingFlyTo = true;
-            const geoJsonLayerForZoom = L.geoJSON({ type: "LineString", coordinates: dayData.path_simple });
-            map.flyToBounds(geoJsonLayerForZoom.getBounds(), { 
-                paddingTopLeft: L.point(panelWidth + 50, 50), 
-                paddingBottomRight: L.point(50, 50),
-                duration: 0.75 
-            });
+            const storyPanelContainer = document.getElementById('story-panel-container');
+            const panelWidth = storyPanelContainer.offsetWidth;
+
+            if (dayData.path_simple) {
+                const geoJsonLayerForZoom = L.geoJSON({ type: "LineString", coordinates: dayData.path_simple });
+                map.flyToBounds(geoJsonLayerForZoom.getBounds(), { 
+                    paddingTopLeft: L.point(panelWidth + 50, 50),
+                    paddingBottomRight: L.point(50, 50),
+                    duration: 0.75 
+                });
+            } else if (dayData.center_coord) {
+                map.flyTo(dayData.center_coord, dayData.zoom_level, { duration: 1.5 });
+            }
         }
 
         function setInitialView() {
-            const fullPathGeoJson = { type: "MultiLineString", coordinates: caminoData.map(d => d.path_simple) };
+            const storyPanelContainer = document.getElementById('story-panel-container');
+            const panelWidth = storyPanelContainer.offsetWidth;
+            const walkingDays = caminoData.filter(d => d.path_simple);
+            const fullPathGeoJson = { type: "MultiLineString", coordinates: walkingDays.map(d => d.path_simple) };
             const fullPathLayer = L.geoJSON(fullPathGeoJson);
-            const initialCenter = [42.6, -6.5]; 
-            const initialZoom = 7; 
-
-            map.setView(initialCenter, initialZoom);
+            map.fitBounds(fullPathLayer.getBounds(), { 
+                paddingTopLeft: L.point(panelWidth + 20, 20),
+                paddingBottomRight: L.point(20, 20)
+            });
             setInitialStoryPanel();
         }
 
         prevDayBtn.on("click", () => {
-            if (currentDay > 1) {
+            if (currentDay > 0) {
                 updateStory(currentDay - 1);
             }
         });
