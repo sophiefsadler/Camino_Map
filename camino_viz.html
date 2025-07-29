@@ -91,11 +91,10 @@
         </div>
     </div>
 
-    <script src="camino-data.js"></script>
+    <script src="camino-metadata.js"></script>
     <script src="config.js"></script>
 
     <script>
-
         const TOTAL_DAYS = 31;
         const DETAIL_THRESHOLD = 13; 
 
@@ -129,17 +128,19 @@
         const customColors = originalColors.filter(color => !colorsToRemove.includes(color));
         const colorScale = d3.scaleOrdinal(customColors);
         
-        const caminoFeatures = caminoData
-            .filter(day => day.path_simple)
+        const caminoFeatures = caminoMetadata
+            .filter(day => day.path_simple) 
             .map(day => ({
                 type: "Feature",
                 properties: day,
-                geometry: { type: "LineString", coordinates: day.path_simple }
-        }));
+                geometry: { type: "LineString", coordinates: [] } 
+            }));
 
         let currentDay = -1;
         let casingLayer, colorLayer;
         let isAnimatingFlyTo = false;
+
+        const pathDataCache = {};
 
         function getWeights() {
             const currentZoom = map.getZoom();
@@ -177,15 +178,25 @@
             });
         }
 
-        casingLayer = L.geoJSON(caminoFeatures, {
-            style: styleCasing,
-            onEachFeature: onEachFeature
-        }).addTo(map);
-        
-        colorLayer = L.geoJSON(caminoFeatures, {
-            style: stylePath,
-            onEachFeature: onEachFeature
-        }).addTo(map);
+        async function getPathData(dayNumber) {
+            if (pathDataCache[dayNumber]) {
+                return pathDataCache[dayNumber];
+            }
+            const path = `data/day_${String(dayNumber).padStart(2, '0')}.json`;
+            try {
+                const response = await fetch(path);
+                if (!response.ok) throw new Error('Path file not found');
+                const data = await response.json();
+                pathDataCache[dayNumber] = data; 
+                return data;
+            } catch (error) {
+                console.error(`Could not load path data for day ${dayNumber}:`, error);
+                return null;
+            }
+        }
+
+        casingLayer = L.geoJSON(null, { style: styleCasing, onEachFeature: onEachFeature }).addTo(map);
+        colorLayer = L.geoJSON(null, { style: stylePath, onEachFeature: onEachFeature }).addTo(map);
 
         function setInitialStoryPanel() {
             currentDay = -1;
@@ -202,12 +213,19 @@
 
         function updateStory(dayNumber) {
             currentDay = dayNumber;
-            const dayData = caminoData.find(d => d.day === dayNumber);
+            const dayData = caminoMetadata.find(d => d.day === dayNumber);
             if (!dayData) return;
 
-            stageTitle.text(`Day ${dayData.day}: ${dayData.start} to ${dayData.end}`);
-            stageInfo.text(dayData.distance > 0 ? `Distance: ${dayData.distance} km` : 'Preparation Day');
+            if (dayData.day === 0) {
+                stageTitle.text(`Day ${dayData.day}: ${dayData.start} ${dayData.end}`);
+            } else {
+                stageTitle.text(`Day ${dayData.day}: ${dayData.start} to ${dayData.end}`);
+            }
+
+            stageInfo.text(dayData.distance > 0 ? `Distance: ${dayData.distance} km` : '');
             stagePhoto.attr("src", dayData.photo);
+            
+            dayCounter.text(`Day ${currentDay} / ${TOTAL_DAYS}`);
             
             if (dayData.diaryFile) {
                 stageDescription.text("Loading diary...");
@@ -230,8 +248,8 @@
                 colorLayer.setStyle(stylePath);
             }
 
-            prevDayBtn.property("disabled", currentDay <= 0);
-            nextDayBtn.property("disabled", currentDay >= TOTAL_DAYS || !caminoData.find(d => d.day === currentDay + 1));
+            prevDayBtn.property("disabled", currentDay <= 0); 
+            nextDayBtn.property("disabled", currentDay >= TOTAL_DAYS || !caminoMetadata.find(d => d.day === currentDay + 1));
 
             zoomToDay(dayData);
         }
@@ -246,14 +264,24 @@
         
         map.on('zoomend', function() {
             const currentZoom = map.getZoom();
-            const swapCoords = (layer) => {
+            
+            const updateLayerCoords = (layer) => {
+                const day = layer.feature.properties.day;
+                const pathData = pathDataCache[day];
+                if (!pathData) return;
+
                 const newCoords = currentZoom > DETAIL_THRESHOLD ? 
-                    layer.feature.properties.path_full : 
-                    layer.feature.properties.path_simple;
+                    pathData.path_full : 
+                    pathData.path_simple;
+                
                 if (layer.getLatLngs().length !== newCoords.length) {
                     layer.setLatLngs(L.GeoJSON.coordsToLatLngs(newCoords));
                 }
             };
+
+            casingLayer.eachLayer(updateLayerCoords);
+            colorLayer.eachLayer(updateLayerCoords);
+
             if (currentDay > 0) {
                 casingLayer.setStyle(styleCasing);
                 colorLayer.setStyle(stylePath);
@@ -267,45 +295,66 @@
             colorLayer.setStyle(stylePath);
         });
 
-        function zoomToDay(dayData) {
+        async function zoomToDay(dayData) {
             const storyPanelContainer = document.getElementById('story-panel-container');
             const panelWidth = storyPanelContainer.offsetWidth;
 
-            if (dayData.path_simple) {
-                const geoJsonLayerForZoom = L.geoJSON({ type: "LineString", coordinates: dayData.path_simple });
-                map.flyToBounds(geoJsonLayerForZoom.getBounds(), { 
-                    paddingTopLeft: L.point(panelWidth + 50, 50),
-                    paddingBottomRight: L.point(50, 50),
-                    duration: 0.75 
-                });
-            } else if (dayData.center_coord) {
-                map.flyTo(dayData.center_coord, dayData.zoom_level, { duration: 1.5 });
+            if (dayData.center_coord) {
+                return map.flyTo(dayData.center_coord, dayData.zoom_level, { duration: 1.5 });
             }
+            
+            const pathData = await getPathData(dayData.day);
+            if (!pathData) return;
+
+            const geoJsonLayerForZoom = L.geoJSON({ type: "LineString", coordinates: pathData.path_simple });
+            map.flyToBounds(geoJsonLayerForZoom.getBounds(), { 
+                paddingTopLeft: L.point(panelWidth + 50, 50),
+                paddingBottomRight: L.point(50, 50),
+                duration: 0.75 
+            });
         }
 
         function setInitialView() {
             const storyPanelContainer = document.getElementById('story-panel-container');
             const panelWidth = storyPanelContainer.offsetWidth;
-            const walkingDays = caminoData.filter(d => d.path_simple);
-            const fullPathGeoJson = { type: "MultiLineString", coordinates: walkingDays.map(d => d.path_simple) };
-            const fullPathLayer = L.geoJSON(fullPathGeoJson);
-            map.fitBounds(fullPathLayer.getBounds(), { 
-                paddingTopLeft: L.point(panelWidth + 20, 20),
-                paddingBottomRight: L.point(20, 20)
+            
+            const walkingDaysMetadata = caminoMetadata.filter(d => d.day > 0);
+            const promises = walkingDaysMetadata.map(d => getPathData(d.day));
+
+            Promise.all(promises).then(allPaths => {
+                const features = walkingDaysMetadata.map((dayMeta, i) => {
+                    return {
+                        type: "Feature",
+                        properties: dayMeta,
+                        geometry: { type: "LineString", coordinates: allPaths[i].path_simple }
+                    };
+                });
+                
+                casingLayer.addData(features);
+                colorLayer.addData(features);
+
+                const fullBounds = colorLayer.getBounds();
+                if (fullBounds.isValid()) {
+                    map.fitBounds(fullBounds, { 
+                        paddingTopLeft: L.point(panelWidth + 20, 20),
+                        paddingBottomRight: L.point(20, 20)
+                    });
+                }
             });
+            
             setInitialStoryPanel();
         }
 
         prevDayBtn.on("click", () => {
-            if (currentDay > 0) {
+            if (currentDay === 0) {
+                setInitialView();
+            } else if (currentDay > 0) { 
                 updateStory(currentDay - 1);
             }
         });
 
         nextDayBtn.on("click", () => {
-            if (currentDay === 0) {
-                updateStory(1);
-            } else if (currentDay < TOTAL_DAYS && caminoData.find(d => d.day === currentDay + 1)) {
+            if (currentDay < TOTAL_DAYS) {
                  updateStory(currentDay + 1);
             }
         });
