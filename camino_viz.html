@@ -70,7 +70,7 @@
                     <h2 id="stage-title" class="text-2xl font-bold text-gray-900 mb-2">The Pilgrim's Path</h2>
                     <p id="stage-info" class="text-sm text-gray-500 mb-4">An 800km journey across Spain</p>
                     <div id="stage-photo" class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="https://placehold.co/600x400/e5e7eb/a1a1aa?text=The+Camino" alt="Stage photo" class="w-full h-full object-cover">
+                        <img src="https://placehold.co/600x400/e5e7eb/a1a1aa?text=The+Camino" alt="Stage photo" class="w-full h-full object-cover transition-opacity duration-300">
                     </div>
                     <p id="stage-description" class="prose prose-font text-gray-700 leading-relaxed">
                         Hi! I'm Sophie, and in March & April 2024 I walked the Camino Frances from Saint-Jean-Pied-de-Port to Santiago de Compostela. This is the story of my 31-day walk across northern Spain. Click 'Next' to begin the journey.
@@ -106,6 +106,11 @@
         const dayCounter = d3.select("#day-counter");
         const prevDayBtn = d3.select("#prev-day");
         const nextDayBtn = d3.select("#next-day");
+
+        const photoElement = stagePhoto.node(); 
+        photoElement.addEventListener('load', () => {
+            stagePhoto.classed('opacity-0', false); // Fade the photo in
+        });
 
         const storyPanelContainer = document.getElementById('story-panel-container');
         const panelWidth = storyPanelContainer.offsetWidth;
@@ -225,6 +230,7 @@
             }
 
             stageInfo.text(dayData.distance > 0 ? `Distance: ${dayData.distance} km` : '');
+            stagePhoto.classed('opacity-0', true);
             stagePhoto.attr("src", dayData.photo);
             stagePhotoContainer.classed('h-64', false).classed('h-48', true);
             
