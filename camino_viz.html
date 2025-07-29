@@ -101,6 +101,7 @@
         const stageTitle = d3.select("#stage-title");
         const stageInfo = d3.select("#stage-info");
         const stagePhoto = d3.select("#stage-photo img");
+        const stagePhotoContainer = d3.select("#stage-photo");
         const stageDescription = d3.select("#stage-description");
         const dayCounter = d3.select("#day-counter");
         const prevDayBtn = d3.select("#prev-day");
@@ -200,9 +201,10 @@
 
         function setInitialStoryPanel() {
             currentDay = -1;
-            stageTitle.text("The Pilgrim's Path");
+            stageTitle.text("My Camino Frances");
             stageInfo.text("An 800km journey across Spain");
-            stagePhoto.attr("src", "https://placehold.co/600x400/e5e7eb/a1a1aa?text=The+Camino");
+            stagePhoto.attr("src", "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Overview.jpg?raw=true");
+            stagePhotoContainer.classed('h-64', true).classed('h-48', false);
             stageDescription.text("Hi! I'm Sophie, and in March & April 2024 I walked the Camino Frances from Saint-Jean-Pied-de-Port to Santiago de Compostela. This is the story of my 31-day walk across northern Spain. Click 'Next' to begin the journey.");
             dayCounter.text(`Day 0 / ${TOTAL_DAYS}`);
             prevDayBtn.property("disabled", true);
@@ -224,6 +226,7 @@
 
             stageInfo.text(dayData.distance > 0 ? `Distance: ${dayData.distance} km` : '');
             stagePhoto.attr("src", dayData.photo);
+            stagePhotoContainer.classed('h-64', false).classed('h-48', true);
             
             dayCounter.text(`Day ${currentDay} / ${TOTAL_DAYS}`);
             
