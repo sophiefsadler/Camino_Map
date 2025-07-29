@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Camino Francés Journey</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrolling on the page */
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .prose-font { font-family: 'Lora', serif; }
+        
+        #map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 10; /* Map is on the bottom */
+        }
+        .leaflet-interactive {
+            cursor: pointer;
+        }
+        .leaflet-tile-pane {
+            filter: saturate(85%) grayscale(15%) sepia(20%);
+        }
+        /* Custom scrollbar for the diary panel */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        #stage-description p + p {
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div id="map"></div>
+
+    <div id="story-panel-container" class="fixed top-0 left-0 h-full p-4 md:p-6 z-20 pointer-events-none">
+        <div id="story-panel" class="bg-white/80 backdrop-blur-md rounded-xl shadow-lg h-full w-80 flex flex-col pointer-events-auto">
+            <div class="p-6 flex-grow overflow-y-auto custom-scrollbar">
+                <div id="story-content">
+                    <h2 id="stage-title" class="text-2xl font-bold text-gray-900 mb-2">The Pilgrim's Path</h2>
+                    <p id="stage-info" class="text-sm text-gray-500 mb-4">An 800km journey across Spain</p>
+                    <div id="stage-photo" class="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://placehold.co/600x400/e5e7eb/a1a1aa?text=The+Camino" alt="Stage photo" class="w-full h-full object-cover">
+                    </div>
+                    <p id="stage-description" class="prose prose-font text-gray-700 leading-relaxed">
+                        Hi! I'm Sophie, and in March & April 2024 I walked the Camino Frances from Saint-Jean-Pied-de-Port to Santiago de Compostela. This is the story of my 31-day walk across northern Spain. Click 'Next' to begin the journey.
+                    </p>
+                </div>
+            </div>
+            <div class="p-6 border-t border-gray-200/80">
+                <div class="flex justify-center items-center">
+                    <button id="prev-day" class="mr-4 bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg shadow hover:bg-gray-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        Previous
+                    </button>
+                    <span id="day-counter" class="font-mono text-gray-600 flex-shrink-0">Day 0 / 31</span>
+                    <button id="next-day" class="ml-4 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="camino-data.js"></script>
+    <script src="config.js"></script>
+
+    <script>
+
+        const TOTAL_DAYS = 31;
+        const DETAIL_THRESHOLD = 13; 
+
+        const stageTitle = d3.select("#stage-title");
+        const stageInfo = d3.select("#stage-info");
+        const stagePhoto = d3.select("#stage-photo img");
+        const stageDescription = d3.select("#stage-description");
+        const dayCounter = d3.select("#day-counter");
+        const prevDayBtn = d3.select("#prev-day");
+        const nextDayBtn = d3.select("#next-day");
+
+        const storyPanelContainer = document.getElementById('story-panel-container');
+        const panelWidth = storyPanelContainer.offsetWidth;
+
+        const map = L.map('map', {
+            zoomControl: false
+        });
+        L.control.zoom({ position: 'topright' }).addTo(map);
+
+        const apiKey = MAPBOX_API_KEY;
+        L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/tiles/{z}/{x}/{y}?access_token=${apiKey}`, {
+            attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 22, tileSize: 512, zoomOffset: -1
+        }).addTo(map);
+
+        const originalColors = d3.schemeSet1; 
+        const colorsToRemove = [
+            originalColors[2],
+            originalColors[8]
+        ];
+        const customColors = originalColors.filter(color => !colorsToRemove.includes(color));
+        const colorScale = d3.scaleOrdinal(customColors);
+        
+        const caminoFeatures = caminoData.map(day => ({
+            type: "Feature",
+            properties: day,
+            geometry: { type: "LineString", coordinates: day.path_simple }
+        }));
+
+        let currentDay = 0;
+        let casingLayer, colorLayer;
+        let isAnimatingFlyTo = false;
+
+        function getWeights() {
+            const currentZoom = map.getZoom();
+            let baseWeight = 3;
+            let activeWeight = 5;
+            if (currentZoom > 13) { baseWeight = 2.5; activeWeight = 4.5; }
+            if (currentZoom > 15) { baseWeight = 2; activeWeight = 4; }
+            return { baseWeight, activeWeight };
+        }
+
+        function stylePath(feature) {
+            const day = feature.properties.day;
+            const isActive = day === currentDay;
+            const { baseWeight, activeWeight } = getWeights();
+            return {
+                color: isActive ? d3.color(colorScale(day)).brighter(0.5) : colorScale(day),
+                weight: isActive ? activeWeight : baseWeight,
+                opacity: 0.9
+            };
+        }
+        
+        function styleCasing(feature) {
+            const isActive = feature.properties.day === currentDay;
+            const { baseWeight, activeWeight } = getWeights();
+            return {
+                color: '#FFFFFF',
+                weight: isActive ? activeWeight + 2 : baseWeight + 2,
+                opacity: 0.7
+            };
+        }
+
+        function onEachFeature(feature, layer) {
+            layer.on('click', function (e) {
+                updateStory(feature.properties.day);
+            });
+        }
+
+        casingLayer = L.geoJSON(caminoFeatures, {
+            style: styleCasing,
+            onEachFeature: onEachFeature
+        }).addTo(map);
+        
+        colorLayer = L.geoJSON(caminoFeatures, {
+            style: stylePath,
+            onEachFeature: onEachFeature
+        }).addTo(map);
+
+        function setInitialStoryPanel() {
+            currentDay = 0;
+            stageTitle.text("The Pilgrim's Path");
+            stageInfo.text("An 800km journey across Spain");
+            stagePhoto.attr("src", "https://placehold.co/600x400/e5e7eb/a1a1aa?text=The+Camino");
+            stageDescription.text("Hi! I'm Sophie, and in March & April 2024 I walked the Camino Frances from Saint-Jean-Pied-de-Port to Santiago de Compostela. This is the story of my 31-day walk across northern Spain. Click 'Next' to begin the journey.");
+            dayCounter.text(`Day 0 / ${TOTAL_DAYS}`);
+            prevDayBtn.property("disabled", true);
+            nextDayBtn.property("disabled", false);
+            casingLayer.setStyle(styleCasing);
+            colorLayer.setStyle(stylePath);
+        }
+
+        function updateStory(dayNumber) {
+            currentDay = dayNumber;
+            const dayData = caminoData.find(d => d.day === dayNumber);
+            if (!dayData) return;
+
+            stageTitle.text(`Day ${dayData.day}: ${dayData.start} to ${dayData.end}`);
+            stageInfo.text(`Distance: ${dayData.distance} km`);
+            stagePhoto.attr("src", dayData.photo);
+            dayCounter.text(`Day ${currentDay} / ${TOTAL_DAYS}`);
+            
+            if (dayData.diaryFile) {
+                stageDescription.text("Loading diary...");
+                fetch(dayData.diaryFile)
+                    .then(response => response.ok ? response.text() : Promise.reject('File not found'))
+                    .then(text => { stageDescription.html(marked.parse(text)); })
+                    .catch(error => {
+                        console.error('Error fetching diary file:', error);
+                        stageDescription.text("Could not load diary entry for this day.");
+                    });
+            } else {
+                stageDescription.text(dayData.description);
+            }
+            
+            casingLayer.setStyle(styleCasing);
+            colorLayer.setStyle(stylePath);
+
+            prevDayBtn.property("disabled", currentDay <= 1);
+            nextDayBtn.property("disabled", currentDay >= TOTAL_DAYS || !caminoData.find(d => d.day === currentDay + 1));
+
+            zoomToDay(dayData);
+        }
+        
+        map.on('zoomstart', function() {
+            casingLayer.setStyle({ opacity: 0 });
+            colorLayer.setStyle({ opacity: 0 });
+        });
+        
+        map.on('zoomend', function() {
+            const currentZoom = map.getZoom();
+            const swapCoords = (layer) => {
+                const newCoords = currentZoom > DETAIL_THRESHOLD ? 
+                    layer.feature.properties.path_full : 
+                    layer.feature.properties.path_simple;
+                if (layer.getLatLngs().length !== newCoords.length) {
+                    layer.setLatLngs(L.GeoJSON.coordsToLatLngs(newCoords));
+                }
+            };
+            casingLayer.eachLayer(swapCoords);
+            colorLayer.eachLayer(swapCoords);
+            casingLayer.setStyle(styleCasing);
+            colorLayer.setStyle(stylePath);
+        });
+
+        map.on('zoom', function() {
+            if (isAnimatingFlyTo) return;
+            casingLayer.setStyle(styleCasing);
+            colorLayer.setStyle(stylePath);
+        });
+
+        function zoomToDay(dayData) {
+            isAnimatingFlyTo = true;
+            const geoJsonLayerForZoom = L.geoJSON({ type: "LineString", coordinates: dayData.path_simple });
+            map.flyToBounds(geoJsonLayerForZoom.getBounds(), { 
+                paddingTopLeft: L.point(panelWidth + 50, 50), 
+                paddingBottomRight: L.point(50, 50),
+                duration: 0.75 
+            });
+        }
+
+        function setInitialView() {
+            const fullPathGeoJson = { type: "MultiLineString", coordinates: caminoData.map(d => d.path_simple) };
+            const fullPathLayer = L.geoJSON(fullPathGeoJson);
+            const initialCenter = [42.6, -6.5]; 
+            const initialZoom = 7; 
+
+            map.setView(initialCenter, initialZoom);
+            setInitialStoryPanel();
+        }
+
+        prevDayBtn.on("click", () => {
+            if (currentDay > 1) {
+                updateStory(currentDay - 1);
+            }
+        });
+
+        nextDayBtn.on("click", () => {
+            if (currentDay === 0) {
+                updateStory(1);
+            } else if (currentDay < TOTAL_DAYS && caminoData.find(d => d.day === currentDay + 1)) {
+                 updateStory(currentDay + 1);
+            }
+        });
+
+        setInitialView();
+    </script>
+</body>
+</html>

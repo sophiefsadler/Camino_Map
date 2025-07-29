@@ -1,0 +1,21 @@
+We woke up this morning and collectively refused to get out of bed, especially as the room was so cold. Instead we lay in bed talking about Flat Stanley. When we finally mustered the strength to get ready, we went down to the kitchen to have our leftover yogurts, before finally setting off.
+
+It started INCREDIBLY cold and we all split up quickly along a long road. I listened to a podcast about a woman who went trekking in Namibia before swapping it for music. We soon crossed a road and moved onto dirt and gravel again. Although incredibly cold, I was feeling upbeat and ready for adventure. Mountains had appeared in the distance which lifted my mood enormously.
+
+Arriving at the first village, Woody had chosen not to stop but the rest of us did for tortilla and cake. We tested eachother with silly games like patting our heads and rubbing our stomachs at the same time. We also talked about podcasts. As we were leaving Corey showed up, having walked 20k already, and we gave him a hug and chatted for a bit. Fynn was apparently still in Léon, feeling sick.
+
+Carrying on, I chatted with Nils about his future career options, how much money is really needed, whether it's okay to job hop and so on. Talking to Nils I felt a lot more confident than I did talking to Lawrence. I had a feeling as though Lawrence was challenging my internal assumptions, which was not so much the case with Nils.
+
+We arrived in Hospital de Órbigo which I found unexpectedly beautiful. Lawrence said he would've stayed there if he wasn't on a deadline, but we carried on through the town. After the town the route splits but the sign encourages you to avoid the road with drawings of cars emitting a lot of fumes. We talked about Doctor Who, then Tumblr, then Supernatural, and I found myself getting nostalgic and craving some Supernatural fanfiction.
+
+In the next town we found an albergue and stopped to buy drinks and snacks from a fridge. The lady in the albergue was lovely and brought us other snacks for free, as well as opening the toilets for us and offering a stamp. Having had time to think about Supernatural fanfiction, I instead bought and downloaded Book Lovers on Audible. I discovered at this point that my Columbia hat had been devastatingly lost on the Camino!!
+
+We left and walked through a second small village before Lawrence and I stopped by some cows. The cows were extremely inquisitive with their big tongues and they took great delight in licking and grabbing Lawrence's stick. He also befriended a baby cow who was shy but friendly. We dallied for a lengthy period, but carried on when we saw a farmer coming. This didn't last as we found a dirty looking pool of water not much further on where we stopped to look at rabbits and skim stones. Lawrence impressed me immensely with his rock skimming abilities, but fell over when uncovering a load of ants under a rock.
+
+We were soon joined by Corey and a new friend of his who lives in Wales and told us he's writing a workbook about sex. They increased our pace enormously and we chatted about the journeys of our minds and souls on the Camino until we reached Nils and Woody on the crest of a hill. We said goodbye to Corey and his friend and sat with them a while, hearing about Woody's many escapades since we'd last seen him earlier that morning.
+
+Finally the four of us progressed along the last 10km together. It took us past an adorable pop-up food stand, through beautiful pine trees with gorgeous mountains in the distance, to a couple of viewpoints, before heading down a hill towards Astorga. The looming mountains grew closer.
+
+In Astorga we checked in to the municipal albergue where an adorable Korean lady we'd met previously on the Camino greeted us with immense enthusiasm just inside the door. We also said hi to Corey again, but were once again granted a private room for the four of us. After showering we got greasy pizza from a fast food chain. Lawrence was very emotional about his hunger and made us play cards to distract him.
+
+I got to talk to Alex a lot for the first time in many days, as he was now flying home from Spain to Swansea. If anything, talking more made me miss him more. Overall, this was one of my favourite days of the Camino.

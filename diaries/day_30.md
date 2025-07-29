@@ -1,0 +1,9 @@
+I woke up at 6am to listen to The Tortured Poets Department, which released that day, and although I managed to get through it before we all got up, this was of course undone when more songs were added.
+
+We finished our many yoghurts from the night before and everyone was pooing a LOT this morning after the beans we had eaten. When we set off, we all listened to the album from the beginning again, and finished the first side when we arrived at our first café.
+
+I had a big chocolate yoghurt thing just because it looked really good, which the others were initially jealous of but only Nils actually enjoyed. When we set off again I continued listening to Taylor Swift but Alex demanded some attention so we called for a bit while I walked. There were lots of pretty flowers today.
+
+When I caught up to the guys again they were sitting and eating with the guy that Woody had declared the love of his life. The guy chatted about The Alchemist. The food was actually very good (I had a pork burrito) but the waiter was quite creepy and put his hands on me multiple times 🤮 Woody's love vanished and I walked with the guys again for the rest of the day, Woody declaring that after the conversation, he was no longer in love. It started getting very hot which I didn't enjoy. Lawrence, Woody and Nils described their impressions of Masha and Alex and sent silly voice notes saying hello to all of our various friends.
+
+When we arrived in O Pedrouzo we got another nice albergue and for the first time on the entire Camino I felt like I needed an urgent nap and slept for an hour. After showering, we then went to find a restaurant and have our last Pilgrim's menu. We played many games of cards and I won 3 of them.

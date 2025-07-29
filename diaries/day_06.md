@@ -1,0 +1,17 @@
+I slept decently, without the screaming pain in my legs that I had the night before. Nils did have to wake Lawrence up to stop him snoring but it didn't bother me too much. Everyone was sitting at the kitchen table having breakfast when I came down from packing my bag, which I was a little dismayed by as I just wanted to get walking. We eventually set off through Estella which looked less beautiful from the outskirts where we could just see the outlet shops. After leaving the town, the path wound up to the monastery where the infamous wine fountain is. I'd always pictured it out in the desert, but the monastery is actually beneath the very green Montejurra and there's plenty of other buildings around. The others gathered their wine and drank it while I took videos since I don't drink alcohol.
+
+Just leaving the monastery behind, we had a sprint race as I was feeling cold. I could outrun Woody but I could only outrun Lawrence in endurance. Nils was faster than me. It didn't warm me up for long and I soon put my down jacket back on. The day was strangely cold despite the warm sun and lack of clouds.
+
+The way went through a series of rolling fields with little shade, and we talked about politics (Boris and Brexit), AI and technology, and having romantic experiences in tents. Lawrence was obsessed with receiving more riddles, which I wasn't so keen on. They also made up a significant part of the conversation.
+
+In the distance a new mountain soon came into view which I found absolutely beautiful. I like to have some kind of mountain on the horizon and found myself dreading the Meseta, especially afraid I'd be walking it on my own after taking a 2-day break in Madrid to see my boyfriend, Alex.
+
+Finally the path approached Los Arcos, which looked like something from the wild west as there were pieces of old farm equipment and pens of chickens on the outskirts. We fed leaves to a goat which was very wholesome. The town appeared to be larger as we entered further however, and became more similar to the other Spanish villages we'd stayed in over the last few days. The municipal albergue seemed to be closed, so we chose an Austrian one instead.
+
+The decor was lovely but my shower was freezing cold and for the first time I decided to just not bother. I found myself thinking about Alex. For the first few days I really missed him a lot, and I felt sad knowing that he was depressed at home by himself. Then he set off for a ski trip, which made me scared that we would argue because he becomes uncommunicative when he's busy sometimes. Throughout day 6 though, I had barely thought about it at all. I'd been so much busier and more occupied on this trip than I was expecting, since I'd been with the others and almost never on my own.
+
+But then I called him and the second I saw his face and heard his voice I was so gooey in love all over again and I missed him so badly!!!
+
+The one restaurant in town didn't serve dinner until 7:30pm and Lawrence was having another emotional breakdown at the delay to our dinner. It didn't even make any sense because they basically made us microwave food so I'm not sure why they couldn't have served that any earlier. I finished the day by listening to the 5 new Olivia Rodrigo songs and other music in bed. This was the first day I'd listened to music since starting the Camino!
+
+Corey, Fynn and Mille were nowhere to be seen. Maybe they all walked on to the next town? I hoped we'd see them in Logroño the next day.
