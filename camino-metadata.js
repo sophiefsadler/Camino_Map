@@ -14,7 +14,7 @@ const caminoMetadata = [
   },
   {
     "day": 1,
-    "start": "SJPDP",
+    "start": "Saint-Jean-Pied-de-Port",
     "end": "Roncesvalles",
     "distance": 26.0,
     "diaryFile": "diaries/day_01.md",
@@ -255,7 +255,7 @@ const caminoMetadata = [
   {
     "day": 31,
     "start": "O Pedrouzo",
-    "end": "SANTIAGO DE COMPOSTELA ",
+    "end": "Santiago de Compostela",
     "distance": 21.3,
     "diaryFile": "diaries/day_31.md",
     "photo": "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Day_31.jpg?raw=true"
