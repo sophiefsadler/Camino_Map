@@ -40,6 +40,7 @@
         .leaflet-tile-pane {
             filter: saturate(85%) grayscale(15%) sepia(20%);
         }
+
         /* Custom scrollbar for the diary panel */
         .custom-scrollbar::-webkit-scrollbar {
             width: 8px;
@@ -57,6 +58,10 @@
         #stage-description p + p {
             margin-top: 1em;
         }
+
+        .leaflet-popup-tip-container {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -73,7 +78,7 @@
                         <img src="https://placehold.co/600x400/e5e7eb/a1a1aa?text=The+Camino" alt="Stage photo" class="w-full h-full object-cover transition-opacity duration-300">
                     </div>
                     <p id="stage-description" class="prose prose-font text-gray-700 leading-relaxed">
-                        Hi! I'm Sophie, and in March & April 2024 I walked the Camino Frances from Saint-Jean-Pied-de-Port to Santiago de Compostela. This is the story of my 31-day walk across northern Spain. Click 'Next' to begin the journey.
+                        Hi! I'm Sophie, and in March & April 2024 I walked the Camino Francés from Saint-Jean-Pied-de-Port to Santiago de Compostela. This is the story of my 31-day walk across northern Spain. Click 'Next' to begin the journey.
                     </p>
                 </div>
             </div>
@@ -93,6 +98,7 @@
 
     <script src="camino-metadata.js"></script>
     <script src="config.js"></script>
+    <script src="poi-data.js"></script>
 
     <script>
         const TOTAL_DAYS = 31;
@@ -144,9 +150,16 @@
 
         let currentDay = -1;
         let casingLayer, colorLayer;
+        let poiLayerGroup = L.layerGroup().addTo(map);
         let isAnimatingFlyTo = false;
 
         const pathDataCache = {};
+
+        const poiPopup = L.popup({
+            closeButton: false,
+            minWidth: 200,
+            autoPan: false
+        });
 
         function getWeights() {
             const currentZoom = map.getZoom();
@@ -155,6 +168,22 @@
             if (currentZoom > 13) { baseWeight = 2.5; activeWeight = 4.5; }
             if (currentZoom > 15) { baseWeight = 2; activeWeight = 4; }
             return { baseWeight, activeWeight };
+        }
+
+        function createPoiIcon(color) {
+            const iconHtml = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36px" height="36px">
+                    <path fill="${color}" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                    <circle cx="12" cy="9" r="2.5" fill="white"/>
+                </svg>`;
+
+            return L.divIcon({
+                html: iconHtml,
+                className: '', 
+                iconSize: [36, 36],
+                iconAnchor: [12, 24], 
+                popupAnchor: [0, -24]
+            });
         }
 
         function stylePath(feature) {
@@ -184,6 +213,50 @@
             });
         }
 
+        function drawPoisForDay(dayNumber) {
+            poiLayerGroup.clearLayers();
+            const poisForDay = poiData.filter(poi => poi.day === dayNumber);
+
+            poisForDay.forEach(poi => {
+                const dayColor = colorScale(poi.day);
+                const customIcon = createPoiIcon(dayColor);
+                
+                const marker = L.marker(poi.coordinates, { icon: customIcon }).addTo(poiLayerGroup);
+
+                marker.on('mouseover', function (e) {
+                    const popupContent = `
+                        <div class="w-48">
+                            <img src="${poi.photoUrl}" alt="${poi.title}" class="w-full h-24 object-cover rounded-t-md">
+                            <div class="p-2">
+                                <h3 class="font-bold text-sm mb-1">${poi.title}</h3>
+                                <p class="text-xs text-gray-600">${poi.description}</p>
+                            </div>
+                        </div>`;
+                    
+                    // Check if the default position (above) is off-screen
+                    const markerPoint = map.latLngToContainerPoint(e.latlng);
+                    if (markerPoint.y < 150) { // If marker is near the top of the screen
+                        // Open below instead
+                        poiPopup.options.offset = L.point(0, 265);
+                        poiPopup.options.className = 'popup-flipped';
+                    } else {
+                        // Open above (default)
+                        poiPopup.options.offset = L.point(0, 0);
+                        poiPopup.options.className = '';
+                    }
+
+                    poiPopup
+                        .setLatLng(e.latlng)
+                        .setContent(popupContent)
+                        .openOn(map);
+                });
+
+                marker.on('mouseout', function (e) {
+                    map.closePopup(poiPopup);
+                });
+            });
+        }
+
         async function getPathData(dayNumber) {
             if (pathDataCache[dayNumber]) {
                 return pathDataCache[dayNumber];
@@ -206,11 +279,12 @@
 
         function setInitialStoryPanel() {
             currentDay = -1;
+            poiLayerGroup.clearLayers();
             stageTitle.text("My Camino Francés");
             stageInfo.text("An 800km journey across Spain");
             stagePhoto.attr("src", "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Overview.jpg?raw=true");
             stagePhotoContainer.classed('h-64', true).classed('h-48', false);
-            stageDescription.text("Hi! I'm Sophie, and in March & April 2024 I walked the Camino Frances from Saint-Jean-Pied-de-Port to Santiago de Compostela. This is the story of my 31-day walk across northern Spain. Click 'Next' to begin the journey.");
+            stageDescription.text("Hi! I'm Sophie, and in March & April 2024 I walked the Camino Francés from Saint-Jean-Pied-de-Port to Santiago de Compostela. This is the story of my 31-day walk across northern Spain. Click 'Next' to begin the journey.");
             dayCounter.text(`Day 0 / ${TOTAL_DAYS}`);
             prevDayBtn.property("disabled", true);
             nextDayBtn.property("disabled", false);
@@ -264,6 +338,8 @@
         }
         
         map.on('zoomstart', function() {
+            poiLayerGroup.clearLayers();
+
             if (currentDay > 0) { 
                 isAnimatingFlyTo = true;
                 casingLayer.setStyle({ opacity: 0 });
@@ -295,6 +371,8 @@
                 casingLayer.setStyle(styleCasing);
                 colorLayer.setStyle(stylePath);
             }
+
+            drawPoisForDay(currentDay);
             isAnimatingFlyTo = false;
         });
 
