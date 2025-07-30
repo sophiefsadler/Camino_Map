@@ -6,7 +6,7 @@ A little further down the road we ran into American Victoria at a café and sat 
 
 Back on the road, it had become unpleasantly hot. We began to spread out, eventually leaving the main road to go between the vineyards promised by the guidebook. Although the heat was making me irritable, I listened to Lush Life and had a sudden wave of gratitude that I was in Spain living my dream. The path weaved down through a village and out again. I awkwardly waved at someone who was not waving at me.
 
-The paths then continued through green hills, with an amazing view of an isolated chapel on a hill between two or three trees. I caught up to the guys sitting in the shade of an abandoned building and Lawrence finally took pity and lent me his hat, since I'd been wearing an awful blue abomination ever since losing my Columbia cap.
+The paths then continued through green hills, with an amazing view of an isolated chapel on a hill between two or three trees. I caught up to the guys sitting in the shade of an abandoned building and Lawrence finally took pity and lent me his hat, since I'd been wearing his awful blue abomination ever since losing my Columbia cap.
 
 Villafranca del Bierzo was not far beyond but it was getting hotter and hotter and hotter, almost 30 degrees when we finally arrived. The town was beautiful and summery. Having arrived at a decent time, the others had time to go down to the river while I went to buy a new cap. I then read on the grass outside the albergue. We all went out for dinner with Victoria. Initially I was irritable again as it was so late and I wanted to leave early the next morning, but the food and games of cards cheered me up. Afterwards, I shared with Lawrence my concerns about how moody I've been.
 

@@ -12,6 +12,6 @@ The decor was lovely but my shower was freezing cold and for the first time I de
 
 But then I called him and the second I saw his face and heard his voice I was so gooey in love all over again and I missed him so badly!!!
 
-The one restaurant in town didn't serve dinner until 7:30pm and Lawrence was having another emotional breakdown at the delay to our dinner. It didn't even make any sense because they basically made us microwave food so I'm not sure why they couldn't have served that any earlier. I finished the day by listening to the 5 new Olivia Rodrigo songs and other music in bed. This was the first day I'd listened to music since starting the Camino!
+The one restaurant in town didn't serve dinner until 7:30pm and Lawrence was having another emotional breakdown at the delay to our dinner. It didn't even make any sense because they basically made us microwave food so I'm not sure why they couldn't have served that any earlier. I finished the day by listening to the five new Olivia Rodrigo songs and other music in bed. This was the first day I'd listened to music since starting the Camino!
 
 Corey, Fynn and Mille were nowhere to be seen. Maybe they all walked on to the next town? I hoped we'd see them in Logroño the next day.

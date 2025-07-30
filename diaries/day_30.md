@@ -1,6 +1,6 @@
 I woke up at 6am to listen to The Tortured Poets Department, which released that day, and although I managed to get through it before we all got up, this was of course undone when more songs were added.
 
-We finished our many yoghurts from the night before and everyone was pooing a LOT this morning after the beans we had eaten. When we set off, we all listened to the album from the beginning again, and finished the first side when we arrived at our first café.
+We finished our many yoghurts from the night before and everyone was pooing a LOT after the beans we had eaten the night before. When we set off, we all listened to the album from the beginning again, and finished the first side when we arrived at our first café.
 
 I had a big chocolate yoghurt thing just because it looked really good, which the others were initially jealous of but only Nils actually enjoyed. When we set off again I continued listening to Taylor Swift but Alex demanded some attention so we called for a bit while I walked. There were lots of pretty flowers today.
 

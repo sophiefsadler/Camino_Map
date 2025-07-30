@@ -1,4 +1,4 @@
-In the morning, the guy in the albergue came in and switched our light on at 7am! We also discovered shortly afterwards from him that someone down the hallway had bed bugs, which made me scared and paranoid. We left the albergue with Corey, the sweet Korean lady and an American girl called Victoria we hadn't met before, and all of us went together for breakfast at a chocolate café. I had a Napolitana and a magadelena.
+In the morning, the guy in the albergue came in and switched our light on at 7am! We also discovered shortly afterwards from him that someone down the hallway had bed bugs, which made me scared and paranoid. We left the albergue with Corey, the sweet Korean lady and an American girl called Victoria we hadn't met before, and all of us went together for breakfast at a chocolate café. I had a Napolitana and a magdalena.
 
 The Korean lady told us about her dating life and said that she doesn't want to get married and rejects her boyfriend's marriage proposals, even though he has a tattoo of his devotion to her.
 
