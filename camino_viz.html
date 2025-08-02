@@ -232,7 +232,7 @@
                 const marker = L.marker(poi.coordinates, { icon: customIcon }).addTo(poiLayerGroup);
 
                 marker.on('mouseover', function (e) {
-                    const popupContent = `
+                    const popupContentHTML = `
                         <div class="w-48 rounded-xl shadow-lg overflow-hidden font-sans bg-white">
                             <img src="${poi.photoUrl}" alt="${poi.title}" class="w-full h-28 object-cover">
                             <div class="p-3 text-center">
@@ -240,22 +240,36 @@
                                 <p class="text-xs text-gray-600 mt-1">${poi.description}</p>
                             </div>
                         </div>`;
-                    
-                    // Check if the default position (above) is off-screen
+
+                    // --- DYNAMIC HEIGHT CALCULATION ---
+                    // Create a temporary, hidden div to measure the content
+                    const tempWrapper = document.createElement('div');
+                    tempWrapper.style.position = 'absolute';
+                    tempWrapper.style.visibility = 'hidden';
+                    tempWrapper.style.left = '-9999px';
+                    tempWrapper.innerHTML = popupContentHTML;
+                    document.body.appendChild(tempWrapper);
+
+                    // Measure the height of the content, plus some padding
+                    const popupHeight = tempWrapper.offsetHeight + 30; // +30px for margin
+
+                    // Remove the temporary div from the page
+                    document.body.removeChild(tempWrapper);
+
                     const markerPoint = map.latLngToContainerPoint(e.latlng);
-                    if (markerPoint.y < 150) { // If marker is near the top of the screen
-                        // Open below instead
-                        poiPopup.options.offset = L.point(0, 265);
-                        poiPopup.options.className = 'popup-flipped';
+
+                    // Now, use our dynamically calculated height in the check
+                    if (markerPoint.y < popupHeight) {
+                        poiPopup.options.offset = L.point(0, 275);
+                        poiPopup.options.className = '';
                     } else {
-                        // Open above (default)
                         poiPopup.options.offset = L.point(0, 0);
                         poiPopup.options.className = '';
                     }
 
                     poiPopup
                         .setLatLng(e.latlng)
-                        .setContent(popupContent)
+                        .setContent(popupContentHTML)
                         .openOn(map);
                 });
 
