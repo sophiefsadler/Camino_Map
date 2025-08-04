@@ -15,8 +15,8 @@ const poiData = [
   },
   {
     day: 1,
-    title: "The village of Pekotxeta",
-    description: "On the right side of the river is Spain; on the left side of the river is France!",
+    title: "The village of Pekotxeta / Arnéguy",
+    description: "On the right side of the river is Spain (Pekotxeta); on the left side of the river is France (Arnéguy)!",
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_1/france_spain_river.jpg?raw=true",
     coordinates: [43.110742, -1.280233]
   },
