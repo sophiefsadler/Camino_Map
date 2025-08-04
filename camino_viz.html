@@ -59,14 +59,21 @@
             margin-top: 1em;
         }
 
-        .leaflet-popup-content-wrapper,
-        .leaflet-popup-content {
-            background: transparent;
-            padding: 0;
-            box-shadow: none;
+        #stage-photo {
+            height: auto;
         }
-        .leaflet-popup-tip-container {
-            display: none;
+        #stage-photo img {
+            max-height: 300px;
+            width: 100%;
+            height: auto;
+        }
+
+        #story-content {
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        #story-content.content-fading {
+            opacity: 0;
         }
     </style>
 </head>
@@ -163,12 +170,6 @@
 
         const pathDataCache = {};
 
-        const poiPopup = L.popup({
-            closeButton: false,
-            minWidth: 200,
-            autoPan: false
-        });
-
         function getWeights() {
             const currentZoom = map.getZoom();
             let baseWeight = 3;
@@ -221,60 +222,44 @@
             });
         }
 
+        function showPoiInPanel(poi) {
+            const storyContent = d3.select("#story-content");
+
+            // Start fading the content out.
+            storyContent.classed('content-fading', true);
+
+            // Wait for the fade-out to finish, then swap the content.
+            setTimeout(() => {
+                stageTitle.text(poi.title);
+                stageInfo.text(''); // Hide the distance text for a POI
+                stagePhoto.classed('opacity-0', true);
+                stagePhoto.attr("src", poi.photoUrl);
+                stageCaption.text(poi.photoCaption || '');
+                stageDescription.text(poi.description);
+
+                // Start fading the new content back in.
+                storyContent.classed('content-fading', false);
+            }, 200);
+        }
+
         function drawPoisForDay(dayNumber) {
             poiLayerGroup.clearLayers();
             const poisForDay = poiData.filter(poi => poi.day === dayNumber);
 
             poisForDay.forEach(poi => {
                 const dayColor = colorScale(poi.day);
-                const customIcon = createPoiIcon(dayColor);
+                const customIcon = createPoiIcon(dayColor); 
                 
                 const marker = L.marker(poi.coordinates, { icon: customIcon }).addTo(poiLayerGroup);
 
+                // When hovering over a marker, show its details in the panel.
                 marker.on('mouseover', function (e) {
-                    const popupContentHTML = `
-                        <div class="w-48 rounded-xl shadow-lg overflow-hidden font-sans bg-white">
-                            <img src="${poi.photoUrl}" alt="${poi.title}" class="w-full h-28 object-cover">
-                            <div class="p-3 text-center">
-                                <h3 class="font-bold text-sm text-gray-800">${poi.title}</h3>
-                                <p class="text-xs text-gray-600 mt-1">${poi.description}</p>
-                            </div>
-                        </div>`;
-
-                    // --- DYNAMIC HEIGHT CALCULATION ---
-                    // Create a temporary, hidden div to measure the content
-                    const tempWrapper = document.createElement('div');
-                    tempWrapper.style.position = 'absolute';
-                    tempWrapper.style.visibility = 'hidden';
-                    tempWrapper.style.left = '-9999px';
-                    tempWrapper.innerHTML = popupContentHTML;
-                    document.body.appendChild(tempWrapper);
-
-                    // Measure the height of the content, plus some padding
-                    const popupHeight = tempWrapper.offsetHeight + 30; // +30px for margin
-
-                    // Remove the temporary div from the page
-                    document.body.removeChild(tempWrapper);
-
-                    const markerPoint = map.latLngToContainerPoint(e.latlng);
-
-                    // Now, use our dynamically calculated height in the check
-                    if (markerPoint.y < popupHeight) {
-                        poiPopup.options.offset = L.point(0, 275);
-                        poiPopup.options.className = '';
-                    } else {
-                        poiPopup.options.offset = L.point(0, 0);
-                        poiPopup.options.className = '';
-                    }
-
-                    poiPopup
-                        .setLatLng(e.latlng)
-                        .setContent(popupContentHTML)
-                        .openOn(map);
+                    showPoiInPanel(poi);
                 });
 
+                // When the mouse leaves, restore the panel to the current day's details.
                 marker.on('mouseout', function (e) {
-                    map.closePopup(poiPopup);
+                    restoreDayInPanel(currentDay);
                 });
             });
         }
@@ -329,7 +314,6 @@
             stagePhoto.classed('opacity-0', true);
             stagePhoto.attr("src", dayData.photo);
             stageCaption.text(dayData.photoCaption ? dayData.photoCaption : '');
-            stagePhotoContainer.classed('h-64', false).classed('h-48', true);
             
             dayCounter.text(`Day ${currentDay} / ${TOTAL_DAYS}`);
             
@@ -358,6 +342,44 @@
             nextDayBtn.property("disabled", currentDay >= TOTAL_DAYS || !caminoMetadata.find(d => d.day === currentDay + 1));
 
             zoomToDay(dayData);
+        }
+
+        function restoreDayInPanel(dayNumber) {
+            const storyContent = d3.select("#story-content");
+            const dayData = caminoMetadata.find(d => d.day === dayNumber);
+
+            if (!dayData) {
+                setInitialStoryPanel();
+                return;
+            }
+            
+            // Start fading the content out.
+            storyContent.classed('content-fading', true);
+
+            // Wait for the fade-out to finish, then restore the day's content.
+            setTimeout(() => {
+                if (dayData.day === 0) {
+                    stageTitle.text(`Day ${dayData.day}: ${dayData.start} ${dayData.end}`);
+                } else {
+                    stageTitle.text(`Day ${dayData.day}: ${dayData.start} to ${dayData.end}`);
+                }
+                stageInfo.text(dayData.distance > 0 ? `Distance: ${dayData.distance} km` : '');
+                stagePhoto.classed('opacity-0', true);
+                stagePhoto.attr("src", dayData.photo);
+                stageCaption.text(dayData.photoCaption || '');
+
+                if (dayData.diaryFile) {
+                    fetch(dayData.diaryFile)
+                        .then(response => response.ok ? response.text() : Promise.reject('File not found'))
+                        .then(text => { stageDescription.html(marked.parse(text)); })
+                        .catch(error => { stageDescription.text("Could not load diary entry."); });
+                } else {
+                    stageDescription.text(dayData.description);
+                }
+
+                // Start fading the new content back in.
+                storyContent.classed('content-fading', false);
+            }, 200);
         }
         
         map.on('zoomstart', function() {
