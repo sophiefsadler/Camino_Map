@@ -132,4 +132,53 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_3/hemingway_cafe.jpg?raw=true",
     coordinates: [42.816911, -1.643117]
   },
+  {
+    day: 4,
+    title: "Ciudadela de Pamplona",
+    description: "Together with Nils and Woody I walked past the ruins of Pamplona's old fortress, which was built in the 1500s",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_4/pamplona_fortress.jpg?raw=true",
+    coordinates: [42.812383, -1.652947]
+  },
+  {
+    day: 4,
+    title: "Leaving Pamplona behind",
+    description: "Shortly after taking this photo, I stopped to put sun cream on and got completely left behind from Woody & Nils",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_4/leaving_pamplona.jpg?raw=true",
+    coordinates: [42.777725, -1.690011]
+  },
+  {
+    day: 4,
+    title: "A Bizarre Roadside Sign",
+    description: "What's the story behind this sign? Why is it here? Is it necessary? I could've googled the answers, but I preferred to keep the mystery",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_4/sexist_aggressions.jpg?raw=true",
+    coordinates: [42.748339, -1.722650]
+  },
+  {
+    day: 4,
+    title: "My first Kas Limon",
+    description: "The beginning of a great love ❤️ From this point onwards, I had at least one per day, normally more",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_4/kas_limon.jpg?raw=true",
+    coordinates: [42.748692, -1.722111]
+  },
+  {
+    day: 4,
+    title: "Alto del Perdón",
+    description: "Walking in the footsteps of many, many pilgrims that came before :)",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_4/alto_perdon.jpg?raw=true",
+    coordinates: [42.735853, -1.742525]
+  },
+  {
+    day: 4,
+    title: "The View from Alto del Perdón",
+    description: "Just breathtaking, especially knowing that we were looking out at our journey of the next 27 days",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_4/alto_perdon_view.jpg?raw=true",
+    coordinates: [42.735653, -1.742653]
+  },
+  {
+    day: 4,
+    title: "The Beautiful Village of Obanos",
+    description: "It was unbelievably quiet, and I didn't see a single soul as I walked through the village",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_4/obanos.jpg?raw=true",
+    coordinates: [42.679267, -1.786697]
+  },
 ];
