@@ -83,4 +83,53 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_2/zubiri_river.jpg?raw=true",
     coordinates: [42.930328, -1.503611]
   },
+  {
+    day: 3,
+    title: "A Misty Morning",
+    description: "Leaving Zubiri, we saw lots of mist blanketing the surrounding hills",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_3/zubiri_mist.jpg?raw=true",
+    coordinates: [42.929897, -1.503450]
+  },
+  {
+    day: 3,
+    title: "Industrial Mining",
+    description: "We saw some very unusual and unexpected views that morning...",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_3/mining.jpg?raw=true",
+    coordinates: [42.923828, -1.504956]
+  },
+  {
+    day: 3,
+    title: "The Basque Country",
+    description: "The Basque Country is a region in the western Pyrenees with a distinct language!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_3/basque_country.jpg?raw=true",
+    coordinates: [42.906614, -1.531644]
+  },
+  {
+    day: 3,
+    title: "Approaching Pamplona",
+    description: "Our group grew larger as we bumped into Corey, Fynn and Mille, leading to minor confusion about which was the right direction (too many cooks!)",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_3/beautiful_views.jpg?raw=true",
+    coordinates: [42.851719, -1.585558]
+  },
+  {
+    day: 3,
+    title: "Trinity Bridge",
+    description: "This bridge marked our arrival into Pamplona, our first larger city of the Camino!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_3/pamplona_bridge.jpg?raw=true",
+    coordinates: [42.835708, -1.604372]
+  },
+  {
+    day: 3,
+    title: "Albergue Jesus y Maria",
+    description: "We stayed in an albergue set in a restored church, which I found very cosy",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_3/pamplona_albergue.jpg?raw=true",
+    coordinates: [42.818783, -1.641900]
+  },
+  {
+    day: 3,
+    title: "Café Iruña",
+    description: "The cafe where Ernest Hemingway used to spend his time, where I had a delicious steak",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_3/hemingway_cafe.jpg?raw=true",
+    coordinates: [42.816911, -1.643117]
+  },
 ];
