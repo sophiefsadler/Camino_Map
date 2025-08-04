@@ -41,4 +41,46 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_1/monument.jpg?raw=true",
     coordinates: [43.020589, -1.323442]
   },
+  {
+    day: 2,
+    title: "Roncesvalles Museum",
+    description: 'Looking back at the "town" of Roncesvalles as we left (basically the museum + the albergue where we slept!)',
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_2/roncesvalles.jpg?raw=true",
+    coordinates: [43.008858, -1.319750]
+  },
+  {
+    day: 2,
+    title: "Making friends on the Camino",
+    description: "I spent that morning walking alone with Nils (that's not him in the photo, though)",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_2/cows.jpg?raw=true",
+    coordinates: [43.008858, -1.319750]
+  },
+  {
+    day: 2,
+    title: "The River Crossing",
+    description: "This is where Nils and I caught up to a large group of pilgrims, including Lawrence and Woody",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_2/river_crossing.jpg?raw=true",
+    coordinates: [42.970806, -1.406044]
+  },
+  {
+    day: 2,
+    title: "Van Refreshments",
+    description: "There was a van by the roadside selling refreshments, where Nils, Lawrence and I caught up to the others. I met Mille & Emma for the first time",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_2/van_stop.jpg?raw=true",
+    coordinates: [42.941469, -1.470506]
+  },
+  {
+    day: 2,
+    title: "Our Albergue in Zubiri",
+    description: "We slept in one big room, with no curtains. A streetlight shone right onto my face during the night",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_2/zubiri_albergue.jpg?raw=true",
+    coordinates: [42.931619, -1.504669]
+  },
+  {
+    day: 2,
+    title: "Yoga by the river",
+    description: "I sat out of the yoga & swimming, instead taking the time to call my boyfriend, Alex",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_2/zubiri_river.jpg?raw=true",
+    coordinates: [42.930328, -1.503611]
+  },
 ];
