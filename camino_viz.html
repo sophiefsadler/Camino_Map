@@ -167,6 +167,7 @@
         let casingLayer, colorLayer;
         let poiLayerGroup = L.layerGroup().addTo(map);
         let isAnimatingFlyTo = false;
+        let panelUpdateTimeoutId = null;
 
         const pathDataCache = {};
 
@@ -223,21 +224,17 @@
         }
 
         function showPoiInPanel(poi) {
+            clearTimeout(panelUpdateTimeoutId);
             const storyContent = d3.select("#story-content");
-
-            // Start fading the content out.
             storyContent.classed('content-fading', true);
 
-            // Wait for the fade-out to finish, then swap the content.
-            setTimeout(() => {
+            panelUpdateTimeoutId = setTimeout(() => {
                 stageTitle.text(poi.title);
-                stageInfo.text(''); // Hide the distance text for a POI
+                stageInfo.text('');
                 stagePhoto.classed('opacity-0', true);
                 stagePhoto.attr("src", poi.photoUrl);
                 stageCaption.text(poi.photoCaption || '');
                 stageDescription.text(poi.description);
-
-                // Start fading the new content back in.
                 storyContent.classed('content-fading', false);
             }, 200);
         }
@@ -345,6 +342,7 @@
         }
 
         function restoreDayInPanel(dayNumber) {
+            clearTimeout(panelUpdateTimeoutId);
             const storyContent = d3.select("#story-content");
             const dayData = caminoMetadata.find(d => d.day === dayNumber);
 
@@ -353,11 +351,9 @@
                 return;
             }
             
-            // Start fading the content out.
             storyContent.classed('content-fading', true);
 
-            // Wait for the fade-out to finish, then restore the day's content.
-            setTimeout(() => {
+            panelUpdateTimeoutId = setTimeout(() => { 
                 if (dayData.day === 0) {
                     stageTitle.text(`Day ${dayData.day}: ${dayData.start} ${dayData.end}`);
                 } else {
@@ -377,7 +373,6 @@
                     stageDescription.text(dayData.description);
                 }
 
-                // Start fading the new content back in.
                 storyContent.classed('content-fading', false);
             }, 200);
         }

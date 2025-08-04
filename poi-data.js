@@ -53,7 +53,7 @@ const poiData = [
     title: "Making friends on the Camino",
     description: "I spent that morning walking alone with Nils (that's not him in the photo, though)",
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_2/cows.jpg?raw=true",
-    coordinates: [43.008858, -1.319750]
+    coordinates: [42.989250, -1.340300]
   },
   {
     day: 2,
