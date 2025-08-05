@@ -265,4 +265,32 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_6/los_arcos_plaza.jpg?raw=true",
     coordinates: [42.569361, -2.192183]
   },
+  {
+    day: 7,
+    title: "Torres del Rio",
+    description: "Cute Camino artwork in the village of Torres del Rio",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_7/torres_del_rio.jpg?raw=true",
+    coordinates: [42.551953, -2.272283]
+  },
+  {
+    day: 7,
+    title: "The Church of Santa Maria",
+    description: "A cute church in the town of Viana! Nils walked into a Spanish girl looking up at the church but she still wished us a Buen Camino",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_7/church.jpg?raw=true",
+    coordinates: [42.514964, -2.371917]
+  },
+  {
+    day: 7,
+    title: "Rock Arrow",
+    description: "It's pretty hard to get lost on the Camino as there are all types of indications of the right direction",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_7/rock_arrow.jpg?raw=true",
+    coordinates: [42.493911, -2.401794]
+  },
+  {
+    day: 7,
+    title: "Cake in Logroño",
+    description: "I took fewer photos today as the weather was grey, but we rewarded ourselves when we arrived with cake and the usual lemonade",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_7/logrono_cake.jpg?raw=true",
+    coordinates: [42.466819, -2.447436]
+  },
 ];
