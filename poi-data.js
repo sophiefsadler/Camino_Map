@@ -216,4 +216,53 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_5/estella.jpg?raw=true",
     coordinates: [42.670533, -2.029678]
   },
+  {
+    day: 6,
+    title: "Even Closer to Montejurra!",
+    description: "Although Montejurra had been visible in the distance for a while now, on day 6 we finally left it behind us",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_6/montejurra.jpg?raw=true",
+    coordinates: [42.655908, -2.039697]
+  },
+  {
+    day: 6,
+    title: "The Infamous Wine Fountain",
+    description: "A major landmark for the Camino, pilgrims are able to enjoy free wine from the fountain shortly after leaving Estella",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_6/wine_fountain.jpg?raw=true",
+    coordinates: [42.650911, -2.043636]
+  },
+  {
+    day: 6,
+    title: "Monastery of Santa Maria de Irache",
+    description: "The winery is right next door to a beautiful monastery",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_6/irache_monastery.jpg?raw=true",
+    coordinates: [42.650331, -2.044094]
+  },
+  {
+    day: 6,
+    title: "Fun at a Playground",
+    description: "When walking non-stop for a month straight, amusement and distraction can be found in even the smallest things",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_6/nils_slide.jpg?raw=true",
+    coordinates: [42.646569, -2.056439]
+  },
+  {
+    day: 6,
+    title: "New Mountain Views",
+    description: "Shortly after losing sight of Montejurra, we were greeted by more mountains. I distinctly remember needing to pee in almost this exact spot and not seeing shelter for a long way ahead",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_6/mountain_view.jpg?raw=true",
+    coordinates: [42.593031, -2.168297]
+  },
+  {
+    day: 6,
+    title: "Residents of Los Arcos",
+    description: "As we entered the village, we were greeted by goats, dogs and chickens",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_6/goat_and_dog.jpg?raw=true",
+    coordinates: [42.574089, -2.192875]
+  },
+  {
+    day: 6,
+    title: "Plaza de Santa Maria",
+    description: "The beautiful plaza of Los Arcos, where we could only find food in one restaurant serving from 7:30pm",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_6/los_arcos_plaza.jpg?raw=true",
+    coordinates: [42.569361, -2.192183]
+  },
 ];
