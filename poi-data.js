@@ -275,7 +275,7 @@ const poiData = [
   {
     day: 7,
     title: "The Church of Santa Maria",
-    description: "A cute church in the town of Viana! Nils walked into a Spanish girl looking up at the church but she still wished us a Buen Camino",
+    description: "A cute church in the town of Viana! Nils walked into a Spanish girl while looking up at the church, but she still wished us a Buen Camino",
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_7/church.jpg?raw=true",
     coordinates: [42.514964, -2.371917]
   },
@@ -292,5 +292,33 @@ const poiData = [
     description: "I took fewer photos today as the weather was grey, but we rewarded ourselves when we arrived with cake and the usual lemonade",
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_7/logrono_cake.jpg?raw=true",
     coordinates: [42.466819, -2.447436]
+  },
+  {
+    day: 8,
+    title: "Church of Santiago el Real",
+    description: "Since Masha was joining us, we took the opportunity to explore one of the churches in Logroño",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_8/logrono_church.jpg?raw=true",
+    coordinates: [42.467783, -2.447611]
+  },
+  {
+    day: 8,
+    title: "Parque de la Grajera",
+    description: "The beautiful Grajera Park was one of our first stops that morning",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_8/grajera_park.jpg?raw=true",
+    coordinates: [42.448011, -2.503683]
+  },
+  {
+    day: 8,
+    title: "The Town of Navarrete",
+    description: "The town of Navarrete was visible from a long distance",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_8/navarrete.jpg?raw=true",
+    coordinates: [42.436906, -2.540431]
+  },
+  {
+    day: 8,
+    title: "Outside of Ventosa",
+    description: "We had a bit too much fun as we passed by the town of Ventosa, playing rock games at the various art installations",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_8/ventosa.jpg?raw=true",
+    coordinates: [42.407406, -2.627708]
   },
 ];
