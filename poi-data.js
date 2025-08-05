@@ -193,7 +193,7 @@ const poiData = [
     title: "A View of Montejurra",
     description: "Montejurra looked like a very inviting hike in the distance, but the Camino takes a different path",
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_5/montejurra.jpg?raw=true",
-    coordinates: [42.661328, -2.003536]
+    coordinates: [42.660939, -2.001522]
   },
   {
     day: 5,

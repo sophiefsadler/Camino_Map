@@ -66,8 +66,12 @@ let poiMarkers = new L.MarkerClusterGroup({
         const firstPoiData = childMarkers[0].options.poi;
         const dayColor = colorScale(firstPoiData.day);
 
-        // Return a div icon with the count and dynamic background color
-        const innerHtml = `<div style="background-color: ${dayColor};"><span>${count}</span></div>`;
+        // Determine if the background color is light or dark
+        const lightness = d3.lab(dayColor).l;
+        const textColor = lightness > 70 ? 'black' : 'white';
+
+        // Embed both the background and text color in the HTML
+        const innerHtml = `<div style="background-color: ${dayColor}; color: ${textColor};"><span>${count}</span></div>`;
 
         return L.divIcon({
             html: innerHtml,
