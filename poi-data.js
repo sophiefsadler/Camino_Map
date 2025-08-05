@@ -181,4 +181,39 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_4/obanos.jpg?raw=true",
     coordinates: [42.679267, -1.786697]
   },
+  {
+    day: 5,
+    title: "Leaving Puente La Reina",
+    description: "It wasn't until the morning that we saw the bridge (puente) of the town of Puente La Reina!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_5/puente_la_reina.jpg?raw=true",
+    coordinates: [42.670428, -1.819219]
+  },
+  {
+    day: 5,
+    title: "A View of Montejurra",
+    description: "Montejurra looked like a very inviting hike in the distance, but the Camino takes a different path",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_5/montejurra.jpg?raw=true",
+    coordinates: [42.661328, -2.003536]
+  },
+  {
+    day: 5,
+    title: "Wildlife of the Camino",
+    description: "We were fascinated by this hairy black bug but everyone was too scared to hold or touch it",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_5/black_bug.jpg?raw=true",
+    coordinates: [42.661275, -2.004603]
+  },
+  {
+    day: 5,
+    title: "The Lokiz Mountain Range",
+    description: "There were so many beautiful views on the approach into Estella!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_5/lokiz_mountains.jpg?raw=true",
+    coordinates: [42.661294, -2.004767]
+  },
+  {
+    day: 5,
+    title: "Estella",
+    description: "Estella was one of my favourite towns of the whole Camino, with its beautiful rock formations",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_5/estella.jpg?raw=true",
+    coordinates: [42.670533, -2.029678]
+  },
 ];
