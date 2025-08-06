@@ -349,4 +349,25 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_8/najera_dinner.jpg?raw=true",
     coordinates: [42.414767, -2.734308]
   },
+  {
+    day: 9,
+    title: "Sunrise",
+    description: "Masha needed to catch a train just after midday, so we started our hike earlier than normal and saw a beautiful sunrise",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_9/sunrise.jpg?raw=true",
+    coordinates: [42.414419, -2.745325]
+  },
+  {
+    day: 9,
+    title: "Typical Camino Scenery",
+    description: "Few photos were taken today despite the beautiful scenery, as we needed to make good time for Masha to catch her train",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_9/camino_scenery.jpg?raw=true",
+    coordinates: [42.424672, -2.874842]
+  },
+  {
+    day: 9,
+    title: "A Miniature Golf Resort",
+    description: "We took our break that morning in a golf course cafe, where they had an interesting model of the golf resort",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_9/golf_resort.jpg?raw=true",
+    coordinates: [42.417547, -2.886511]
+  },
 ];
