@@ -316,6 +316,13 @@ const poiData = [
   },
   {
     day: 8,
+    title: "Walking with my Camino Family",
+    description: "I'm so glad Masha joined us just to take the one nice photo of the four of us walking together 😂",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_8/camino_family.jpg?raw=true",
+    coordinates: [42.411500, -2.614300]
+  },
+  {
+    day: 8,
     title: "Outside of Ventosa",
     description: "We had a bit too much fun as we passed by the town of Ventosa, playing rock games at the various art installations",
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_8/ventosa.jpg?raw=true",
@@ -369,5 +376,33 @@ const poiData = [
     description: "We took our break that morning in a golf course cafe, where they had an interesting model of the golf resort",
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_9/golf_resort.jpg?raw=true",
     coordinates: [42.417547, -2.886511]
+  },
+  {
+    day: 10,
+    title: "Four Musketeers",
+    description: "With Masha now gone, we were back as the four musketeers",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_10/four_musketeers.jpg?raw=true",
+    coordinates: [42.452333, -3.008289]
+  },
+  {
+    day: 10,
+    title: "The Town of Grañón",
+    description: "By day 10 on the Camino we now had less than 600km to go!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_10/granon_artwork.jpg?raw=true",
+    coordinates: [42.451489, -3.024794]
+  },
+  {
+    day: 10,
+    title: "The Town of Grañón",
+    description: "We stopped for a drink but I was grumpy because there was no Kas Limon",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_10/granon_rest.jpg?raw=true",
+    coordinates: [42.451664, -3.024944]
+  },
+  {
+    day: 10,
+    title: "A Cute House",
+    description: "This was my least favourite day of the Camino so far, as we spent most of the time walking by a main road. This village was a pleasant break from that!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_10/cute_house.jpg?raw=true",
+    coordinates: [42.427356, -3.136631]
   },
 ];
