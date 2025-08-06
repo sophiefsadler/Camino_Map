@@ -321,4 +321,32 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_8/ventosa.jpg?raw=true",
     coordinates: [42.407406, -2.627708]
   },
+  {
+    day: 8,
+    title: "More Mountain Views!!",
+    description: "Views of the mountains just don't get old! These ones are the Sierra de la Demanda mountains",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_8/mountains.jpg?raw=true",
+    coordinates: [42.414542, -2.680464]
+  },
+  {
+    day: 8,
+    title: "Guardaviñas de Alesón",
+    description: "A shelter for pilgrims along the Camino",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_8/mountain_hut.jpg?raw=true",
+    coordinates: [42.413333, -2.686356]
+  },
+  {
+    day: 8,
+    title: "Nájera",
+    description: "We were absolutely exhausted as we walked the final few hundred metres to the albergue!!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_8/najera.jpg?raw=true",
+    coordinates: [42.417214, -2.732067]
+  },
+  {
+    day: 8,
+    title: "A Culinary Success",
+    description: "One of the better meals we cooked on the Camino 😋",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_8/najera_dinner.jpg?raw=true",
+    coordinates: [42.414767, -2.734308]
+  },
 ];
