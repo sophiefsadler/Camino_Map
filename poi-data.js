@@ -664,4 +664,39 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_16/pilgrim_dinner.jpg?raw=true",
     coordinates: [42.360472, -4.924919]
   },
+  {
+    day: 17,
+    title: "Approaching Halfway",
+    description: "We were just about to hit the halfway markers of the Camino Francés at Sahagún",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_17/halfway_bridge.jpg?raw=true",
+    coordinates: [42.370497, -4.999508]
+  },
+  {
+    day: 17,
+    title: "The Halfway Point!",
+    description: "We took a lot of photos, not quite able to believe we were halfway! In fact, we were a little over halfway, as the markers do not take into account the first day in France",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_17/halfway_markers.jpg?raw=true",
+    coordinates: [42.370317, -5.000517]
+  },
+  {
+    day: 17,
+    title: "A Great Monstrosity",
+    description: "Probably one of the ugliest things I saw on the Camino",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_17/monstrosity.jpg?raw=true",
+    coordinates: [42.370203, -5.021050]
+  },
+  {
+    day: 17,
+    title: "Sahagún",
+    description: "The halfway markers are reached just before the lovely town of Sahagún",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_17/sahagun.jpg?raw=true",
+    coordinates: [42.370431, -5.033847]
+  },
+  {
+    day: 17,
+    title: "A Fantastic Meal",
+    description: "I ate one of my best meals of the Camino here (a burger and a chocolate mousse)",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_17/tasty_food.jpg?raw=true",
+    coordinates: [42.388206, -5.141397]
+  },
 ];
