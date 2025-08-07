@@ -433,4 +433,39 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_11/cold_albergue.jpg?raw=true",
     coordinates: [42.376136, -3.437153]
   },
+  {
+    day: 11,
+    title: "Pilgrim Heaven",
+    description: "The bar adjacent to our albergue was so much warmer and cosier!!!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_11/pilgrim_heaven.jpg?raw=true",
+    coordinates: [42.3760599, -3.4376381]
+  },
+  {
+    day: 12,
+    title: "Stonehenge of the Camino",
+    description: "We saw these rocks near the archaeological site of Atapuerca, where the earliest evidence of human occupation in Europe was found",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_12/camino_stonehenge.jpg?raw=true",
+    coordinates: [42.373419, -3.499442]
+  },
+  {
+    day: 12,
+    title: "Gaining Elevation",
+    description: "We had to climb a hill, but the hiking was very pleasant",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_12/climbing_hill.jpg?raw=true",
+    coordinates: [42.378911, -3.523278]
+  },
+  {
+    day: 12,
+    title: "Views of Burgos",
+    description: "From the top of the hill, we could see Burgos. The sign here talks of the beautiful view that greets a pilgrim after her climb",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_12/hill_view.jpg?raw=true",
+    coordinates: [42.379103, -3.535506]
+  },
+  {
+    day: 12,
+    title: "Villafría de Burgos",
+    description: "The approach into Burgos was extremely challenging, as the weather turned very bad and the views gradually grew worse (though not so bad at this point!)",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_12/burgos_approach.jpg?raw=true",
+    coordinates: [42.363953, -3.616467]
+  },
 ];
