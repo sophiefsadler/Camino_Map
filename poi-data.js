@@ -468,4 +468,60 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_12/burgos_approach.jpg?raw=true",
     coordinates: [42.363953, -3.616467]
   },
+  {
+    day: 13,
+    title: "Rejoining the Camino",
+    description: "I had already been walking for over an hour from the train station by the time I rejoined the Camino!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_13/rejoin_camino.jpg?raw=true",
+    coordinates: [42.343281, -3.695453]
+  },
+  {
+    day: 13,
+    title: "University of Burgos",
+    description: "After a couple of hours, I was still on the outskirts of Burgos, walking by the university",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_13/burgos_university.jpg?raw=true",
+    coordinates: [42.341050, -3.726172]
+  },
+  {
+    day: 13,
+    title: "500km To Go!",
+    description: "In total, we walked about 800km, so had walked about 300km already",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_13/500_to_go.jpg?raw=true",
+    coordinates: [42.346111, -3.751256]
+  },
+  {
+    day: 13,
+    title: "Under the Motorway",
+    description: "Passing under the motorway it finally felt like I'd left Burgos behind!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_13/motorway_crossing.jpg?raw=true",
+    coordinates: [42.351558, -3.795867]
+  },
+  {
+    day: 13,
+    title: "Tardajos",
+    description: "While I spent 2 days in Madrid, my friends had spent 1 day in Burgos and then walked to Tardajos the next day. Therefore, they would've set off from here many hours before I arrived",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_13/tardajos.jpg?raw=true",
+    coordinates: [42.348494, -3.813586]
+  },
+  {
+    day: 13,
+    title: "Camino Artwork",
+    description: "I loved seeing artwork of the Camino along the way",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_13/camino_artwork.jpg?raw=true",
+    coordinates: [42.340292, -3.837347]
+  },
+  {
+    day: 13,
+    title: "Hornillos del Camino",
+    description: "When I reached the top of this hill, I could see the town of Hornillos del Camino",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_13/hornillos_del_camino.jpg?raw=true",
+    coordinates: [42.341064, -3.895097]
+  },
+  {
+    day: 13,
+    title: "Albergue in the Middle of Nowhere",
+    description: "With only 5km until I'd catch up with my friends, the rain was wearing me down and I wanted to stop. Thankfully, the albergue was abandoned so I was forced to carry on!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_13/abandoned_albergue.jpg?raw=true",
+    coordinates: [42.324964, -3.990503]
+  },
 ];
