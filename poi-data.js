@@ -524,4 +524,60 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_13/abandoned_albergue.jpg?raw=true",
     coordinates: [42.324964, -3.990503]
   },
+  {
+    day: 14,
+    title: "Reunited with Friends",
+    description: "I was so happy to walk with my friends again that morning",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_14/reunited.jpg?raw=true",
+    coordinates: [42.3126778, -4.0449093]
+  },
+  {
+    day: 14,
+    title: "A Grey Morning",
+    description: "With the grey weather, this section of the Camino kinda reminded me of England!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_14/grey_weather.jpg?raw=true",
+    coordinates: [42.310714, -4.066494]
+  },
+  {
+    day: 14,
+    title: "Convento de San Antón",
+    description: "Though the convent is in ruins, there is also an albergue here where pilgrims can stay!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_14/convent_san_anton.jpg?raw=true",
+    coordinates: [42.293433,-4.098375]
+  },
+  {
+    day: 14,
+    title: "A Resident of the Convent de San Antón",
+    description: "We wished we could take our new friend with us",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_14/cute_dog.jpg?raw=true",
+    coordinates: [42.292614, -4.098947]
+  },
+  {
+    day: 14,
+    title: "View from the Hill",
+    description: "One of the few bigger hills to climb on the Camino, but the views were more than worth it",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_14/hill_views.jpg?raw=true",
+    coordinates: [42.290500, -4.169814]
+  },
+  {
+    day: 14,
+    title: "The Meseta",
+    description: "Since Burgos and until León we would be walking on the Meseta, a notoriously flat section lacking in shade. This is exactly how I had imagined it!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_14/meseta.jpg?raw=true",
+    coordinates: [42.285933, -4.189247]
+  },
+  {
+    day: 14,
+    title: "Ermita de San Nicolás de Puente Fitero",
+    description: "I did not know it at the time but you can also stay in this 1000 year old building while walking the Camino!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_14/ermita_san_nicolas.jpg?raw=true",
+    coordinates: [42.279142, -4.242758]
+  },
+  {
+    day: 14,
+    title: "The Best Albergue of the Camino",
+    description: "We had a huge outhouse with beds, a bathroom and a lounge with a fire just to the four of us!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_14/lovely_albergue.jpg?raw=true",
+    coordinates: [42.258336, -4.346856]
+  },
 ];
