@@ -580,4 +580,39 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_14/lovely_albergue.jpg?raw=true",
     coordinates: [42.258336, -4.346856]
   },
+  {
+    day: 15,
+    title: "Sunrise in Boadilla del Camino",
+    description: "It was a lovely sunrise and the weather would go on to be amazing!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_15/sunrise.jpg?raw=true",
+    coordinates: [42.258636, -4.346447]
+  },
+  {
+    day: 15,
+    title: "The Locks of the Canal de Castilla",
+    description: "The river into Frómista was pleasantly different from anywhere we'd walked so far",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_15/canal_de_castilla.jpg?raw=true",
+    coordinates: [42.263794, -4.399061]
+  },
+  {
+    day: 15,
+    title: "A Stork's Nest",
+    description: "We saw lots of storks along the Camino that day",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_15/stork.jpg?raw=true",
+    coordinates: [42.266311, -4.403061]
+  },
+  {
+    day: 15,
+    title: "Frómista",
+    description: "Another beautiful town along the Camino",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_15/fromista.jpg?raw=true",
+    coordinates: [42.267239, -4.407258]
+  },
+  {
+    day: 15,
+    title: "Tucked in Bed",
+    description: "For the second night in a row we had good luck with our albergue, which had an amazing dinner and comfortable, clean showers",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_15/albergue.jpg?raw=true",
+    coordinates: [42.337769, -4.601556]
+  },
 ];
