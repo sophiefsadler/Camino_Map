@@ -405,4 +405,32 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_10/cute_house.jpg?raw=true",
     coordinates: [42.427356, -3.136631]
   },
+  {
+    day: 11,
+    title: "Rainy Views",
+    description: "It was a grey and rainy day, but nevertheless I was much happier walking through the forest than I had been by the main road",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_11/forest_view.jpg?raw=true",
+    coordinates: [42.386383, -3.322286]
+  },
+  {
+    day: 11,
+    title: "Walking in the Forest",
+    description: "This was the very first day where we encountered mud on the Camino",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_11/forest_mud.jpg?raw=true",
+    coordinates: [42.377981, -3.417981]
+  },
+  {
+    day: 11,
+    title: "Parking for Horses?",
+    description: "The Camino can be completed on horseback, but we never saw anyone riding during our journey!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_11/horse_parking.jpg?raw=true",
+    coordinates: [42.375731, -3.436925]
+  },
+  {
+    day: 11,
+    title: "The Worst Albergue of the Camino",
+    description: "I was the only one of the four of us who brought a warm sleeping bag instead of a liner. This was the one night I was so glad I did!!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_11/cold_albergue.jpg?raw=true",
+    coordinates: [42.376136, -3.437153]
+  },
 ];
