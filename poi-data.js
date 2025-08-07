@@ -615,4 +615,53 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_15/albergue.jpg?raw=true",
     coordinates: [42.337769, -4.601556]
   },
+  {
+    day: 16,
+    title: "Leaving Carrión de los Condes",
+    description: "The sign says that the town wishes us a Buen Camino!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_16/buen_camino.jpg?raw=true",
+    coordinates: [42.339789, -4.608533]
+  },
+  {
+    day: 16,
+    title: "The Fields of the Meseta",
+    description: "It was at this point along the Camino that my shoulders started getting really sore from carrying the backpack",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_16/meseta_fields.jpg?raw=true",
+    coordinates: [42.344117, -4.666706]
+  },
+  {
+    day: 16,
+    title: "Stopping for a Snack",
+    description: "There were no proper towns, so a food truck was set up in one of the fields",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_16/food_truck.jpg?raw=true",
+    coordinates: [42.342133, -4.687597]
+  },
+  {
+    day: 16,
+    title: "A Lone Tree",
+    description: "The Meseta sometimes looked just like the Windows Screensaver",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_16/lone_tree.jpg?raw=true",
+    coordinates: [42.337528, -4.722342]
+  },
+  {
+    day: 16,
+    title: "A Personal Sign",
+    description: "Someone had left some love for people called Sophie :)",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_16/sophie.jpg?raw=true",
+    coordinates: [42.340472, -4.834219]
+  },
+  {
+    day: 16,
+    title: "Woody Walking Alone",
+    description: "By this point we would happily split up and walk in pairs or on our own intuitively, sometimes reuniting at cafes or towns, always reuniting at our final stop for the day",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_16/woody_alone.jpg?raw=true",
+    coordinates: [42.358556, -4.888861]
+  },
+  {
+    day: 16,
+    title: "Pilgrims' Dinner",
+    description: "Sometimes pilgrims' dinners were had as a group with all those sleeping at the albergue. This one had a particularly large amount of alcohol involved",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_16/pilgrim_dinner.jpg?raw=true",
+    coordinates: [42.360472, -4.924919]
+  },
 ];
