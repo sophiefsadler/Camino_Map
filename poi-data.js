@@ -1049,4 +1049,46 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/villafranca_garden.jpg?raw=true",
     coordinates: [42.608803, -6.808408]
   },
+  {
+    day: 24,
+    title: "Keep Going :)",
+    description: "Some early morning encouragement!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_24/keep_going.jpg?raw=true",
+    coordinates: [42.621483, -6.835000]
+  },
+  {
+    day: 24,
+    title: "Sunrise by the Motorway",
+    description: "We left super early in the morning to try and avoid the forecast heat. The first part of the journey went by a major road",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_24/motorway.jpg?raw=true",
+    coordinates: [42.621014, -6.835858]
+  },
+  {
+    day: 24,
+    title: "Watched by Cows",
+    description: "I passed some rather large cows with horns while walking on my own!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_24/cows.jpg?raw=true",
+    coordinates: [42.656731, -6.894847]
+  },
+  {
+    day: 24,
+    title: "A Last Smile?!",
+    description: "As well as being one of our hottest days, we also had a very large hill to climb in the second half of the day. At this point, I hadn't made it to the hill yet, and was still smiling!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_24/selfie.jpg?raw=true",
+    coordinates: [42.671822, -6.964631]
+  },
+  {
+    day: 24,
+    title: "Hill Climbing",
+    description: "Although the hill was BRUTAL in the hot sun, the views were beautiful on the way up",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_24/hill_views.jpg?raw=true",
+    coordinates: [42.697631, -7.019836]
+  },
+  {
+    day: 24,
+    title: "Entering Galicia",
+    description: "That afternoon we crossed into the final region of Spain we'd be walking through, Galicia",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_24/galicia.jpg?raw=true",
+    coordinates: [42.705978, -7.031375]
+  },
 ];
