@@ -1023,13 +1023,6 @@ const poiData = [
   },
   {
     day: 23,
-    title: "Cantariña Vinos de Familia",
-    description: "Vineyards with the mountains in the distance! At this point it was almost unbearably hot",
-    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/vineyards.jpg?raw=true",
-    coordinates: [42.607511, -6.780758]
-  },
-  {
-    day: 23,
     title: "A Hat Exchange",
     description: "Lawrence took pity on me and took the stupid hat so I could wear his cap instead. I was relieved that he also looked like a magician in the terrible hat",
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/hat_exchange.jpg?raw=true",
