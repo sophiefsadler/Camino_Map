@@ -762,4 +762,88 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_19/albergue.jpg?raw=true",
     coordinates: [42.484764, -5.725139]
   },
+  {
+    day: 20,
+    title: "A Crisp Morning",
+    description: "Finally it was a nice sunny morning, though it was still cold",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/crisp_morning.jpg?raw=true",
+    coordinates: [42.478825, -5.742094]
+  },
+  {
+    day: 20,
+    title: "Mountains in the Distance",
+    description: "Now we could see mountains in the distance, which significantly lifted my mood",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/mountains.jpg?raw=true",
+    coordinates: [42.460092, -5.828311]
+  },
+  {
+    day: 20,
+    title: "More Mountain Views",
+    description: "I took a lot of photos of the mountains that day, so I will share only a few of them here!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/mountains_again.jpg?raw=true",
+    coordinates: [42.460331, -5.845003]
+  },
+  {
+    day: 20,
+    title: "Hospital de Órbigo",
+    description: "Although we had been walking separately, Lawrence, Nils and I all caught up to eachother at the entrance of the town, as we stopped to appreciate its pretty bridge",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/hospital_de_orbigo.jpg?raw=true",
+    coordinates: [42.463919, -5.877572]
+  },
+  {
+    day: 20,
+    title: "Camino Directions",
+    description: "Sometimes comical signs advised us of the best path ahead!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/directions.jpg?raw=true",
+    coordinates: [42.463067, -5.888031]
+  },
+  {
+    day: 20,
+    title: "Quiet Albergue Stop",
+    description: "We were hungry and thirsty, so walked into an albergue seeking refreshments, which we bought from a vending machine. The host then brought us more snacks for free! It was at this moment I realised I'd lost my cap, though :(",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/albergue_snacks.jpg?raw=true",
+    coordinates: [42.469000, -5.910433]
+  },
+  {
+    day: 20,
+    title: "A New Look...",
+    description: "Since I'd lost my hat, Lawrence lent me this one he'd bought earlier on the Camino. I looked quite ridiculous...",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/new_look.jpg?raw=true",
+    coordinates: [42.463892, -5.925725]
+  },
+  {
+    day: 20,
+    title: "Playful Cows",
+    description: "Lawrence and I played with a group of cows, who licked his walking stick",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/friendly_cows.jpg?raw=true",
+    coordinates: [42.459717, -5.933136]
+  },
+  {
+    day: 20,
+    title: "Skipping Stones",
+    description: "Lawrence impressed me by skipping rocks on this pond we found",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/skipping_stones.jpg?raw=true",
+    coordinates: [42.465756, -5.946539]
+  },
+  {
+    day: 20,
+    title: "Just under 300km to go!",
+    description: "The views of the mountains just continued to get better as we reached the end of the day",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/300k_to_go.jpg?raw=true",
+    coordinates: [42.458861, -5.991972]
+  },
+  {
+    day: 20,
+    title: "Approaching Astorga",
+    description: "Towards the end of the day, Lawrence and I had reunited with Woody & Nils and we approached Astorga together",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/300k_to_go.jpg?raw=true",
+    coordinates: [42.454297, -6.001689]
+  },
+  {
+    day: 20,
+    title: "Thirsty Pilgrims",
+    description: "Spirits were very high at the end of the day, which had been my favourite of the entire Camino (reflected by the number of photos!)",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/thirsty_pilgrims.jpg?raw=true",
+    coordinates: [42.454367, -6.006075]
+  },
 ];
