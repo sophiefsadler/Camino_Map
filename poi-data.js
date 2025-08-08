@@ -876,6 +876,13 @@ const poiData = [
   },
   {
     day: 21,
+    title: "Hideous Food Stop",
+    description: "The food was so bad that Lawrence had an emotional breakdown, but at least we were in the company of friends",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_21/bad_food.jpg?raw=true",
+    coordinates: [42.462761, -6.207331]
+  },
+  {
+    day: 21,
     title: "Baby Cows",
     description: "We were walking during Spring and saw some very cute baby animals!!",
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_21/baby_cows.jpg?raw=true",
@@ -901,5 +908,68 @@ const poiData = [
     description: "For the first time we were turned away by several albergues, but eventually found space in the municipal albergue",
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_21/foncebadon.jpg?raw=true",
     coordinates: [42.491358, -6.342789]
+  },
+  {
+    day: 22,
+    title: "Early Morning Light",
+    description: "We still had to ascend the last of the hill the next morning, bringing us more incredible views",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_22/early_morning.jpg?raw=true",
+    coordinates: [42.490122, -6.350481]
+  },
+  {
+    day: 22,
+    title: "Cruz de Ferro",
+    description: "I arrived at the cross before the guys and got some photos here on my own",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_22/early_morning.jpg?raw=true",
+    coordinates: [42.488919, -6.361331]
+  },
+  {
+    day: 22,
+    title: "A First Snack Break",
+    description: "Kas Limon and cake with a view, what could be better?",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_22/kas_and_cake.jpg?raw=true",
+    coordinates: [42.489500, -6.385117]
+  },
+  {
+    day: 22,
+    title: "Incredible Views",
+    description: "One of the most beautiful sections of trail on the whole Camino! I decided to stop and rest, with disastrous consequences",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_22/amazing_views.jpg?raw=true",
+    coordinates: [42.488708, -6.419014]
+  },
+  {
+    day: 22,
+    title: "Blood Spatter",
+    description: "Some of my blood spatter on the rocks 😂 The blood was falling in big blobs absolutely everywhere!!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_22/blood_spatter.jpg?raw=true",
+    coordinates: [42.488522, -6.419517]
+  },
+  {
+    day: 22,
+    title: "A Long Descent",
+    description: "Gaelle accompanied me down to the next town to find my friends",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_22/descent_views.jpg?raw=true",
+    coordinates: [42.491328, -6.439586]
+  },
+  {
+    day: 22,
+    title: "A Helpful Sign",
+    description: "I know which way I'd rather go!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_22/helpful_sign.jpg?raw=true",
+    coordinates: [42.521183, -6.478764]
+  },
+  {
+    day: 22,
+    title: "Molinaseca",
+    description: "The lovely town of Molinaseca, where we stopped for some rather expensive food",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_22/molinaseca.jpg?raw=true",
+    coordinates: [42.537406, -6.518108]
+  },
+  {
+    day: 22,
+    title: "Kas Chair",
+    description: "I have no idea where this photo was taken because it came from Lawrence's phone, so this is just a guess. Me and a chair dedicated to my love, Kas ❤️",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_22/kas_chair.jpg?raw=true",
+    coordinates: [42.538464, -6.521743]
   },
 ];
