@@ -836,7 +836,7 @@ const poiData = [
     day: 20,
     title: "Approaching Astorga",
     description: "Towards the end of the day, Lawrence and I had reunited with Woody & Nils and we approached Astorga together",
-    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/300k_to_go.jpg?raw=true",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/approaching_astorga.jpg?raw=true",
     coordinates: [42.454297, -6.001689]
   },
   {
@@ -845,5 +845,61 @@ const poiData = [
     description: "Spirits were very high at the end of the day, which had been my favourite of the entire Camino (reflected by the number of photos!)",
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_20/thirsty_pilgrims.jpg?raw=true",
     coordinates: [42.454367, -6.006075]
+  },
+  {
+    day: 21,
+    title: "Chocolatería La Cepedana",
+    description: "Breakfast at the chocolate shop in Astorga!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_21/breakfast.jpg?raw=true",
+    coordinates: [42.453657, -6.052011]
+  },
+  {
+    day: 21,
+    title: "The Cathedral of Santa María de Astorga",
+    description: "That morning Lawrence, Woody and I walked ahead without Nils",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_21/cathedral.jpg?raw=true",
+    coordinates: [42.457458, -6.057386]
+  },
+  {
+    day: 21,
+    title: "The Stupid Hat",
+    description: "I actually look like a magician",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_21/stupid_hat.jpg?raw=true",
+    coordinates: [42.454897, -6.134103]
+  },
+  {
+    day: 21,
+    title: "Woody's New Love",
+    description: "I really don't know what Woody was doing here",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_21/woody_love.jpg?raw=true",
+    coordinates: [42.455231, -6.158333]
+  },
+  {
+    day: 21,
+    title: "Baby Cows",
+    description: "We were walking during Spring and saw some very cute baby animals!!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_21/baby_cows.jpg?raw=true",
+    coordinates: [42.478739, -6.268056]
+  },
+  {
+    day: 21,
+    title: "Pink Flowers",
+    description: "We walked on beautiful hiking trails with pink flowers and mountain views that afternoon",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_21/pink_flowers.jpg?raw=true",
+    coordinates: [42.483142, -6.296808]
+  },
+  {
+    day: 21,
+    title: "View from the Top",
+    description: "We had to ascend a hill, but I felt full of energy and the views at the top made it worthwhile",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_21/views.jpg?raw=true",
+    coordinates: [42.490281, -6.322278]
+  },
+  {
+    day: 21,
+    title: "Foncebadón",
+    description: "For the first time we were turned away by several albergues, but eventually found space in the municipal albergue",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_21/foncebadon.jpg?raw=true",
+    coordinates: [42.491358, -6.342789]
   },
 ];
