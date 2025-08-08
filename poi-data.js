@@ -720,4 +720,46 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_18/leon.jpg?raw=true",
     coordinates: [42.575547, -5.540639]
   },
+  {
+    day: 19,
+    title: "León Cathedral",
+    description: "We were standing at almost exactly this spot when we reunited with Corey, Fynn and Mille!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_19/leon_cathedral.jpg?raw=true",
+    coordinates: [42.598772, -5.567506]
+  },
+  {
+    day: 19,
+    title: "Inside León Cathedral",
+    description: "The cathedral has 125 stained-glass windows and was built in the 1400s",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_19/inside_leon_cathedral.jpg?raw=true",
+    coordinates: [42.599203, -5.568119]
+  },
+  {
+    day: 19,
+    title: "An Uncanny Resemblance",
+    description: "Somehow these figures look just exactly like Nils, Lawrence and Woody",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_19/statues.jpg?raw=true",
+    coordinates: [42.598942, -5.567111]
+  },
+  {
+    day: 19,
+    title: "Changing Landscapes",
+    description: "Although it was grey and we were walking by a road, it was nice to be back in the countryside and away from the city",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_19/countryside.jpg?raw=true",
+    coordinates: [42.560553, -5.657747]
+  },
+  {
+    day: 19,
+    title: "Better Weather!",
+    description: "Finally after two grey and rainy days, the weather started to improve",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_19/better_weather.jpg?raw=true",
+    coordinates: [42.542156, -5.662700]
+  },
+  {
+    day: 19,
+    title: "Albergue El Refugio de Jesús",
+    description: "The albergue has a swimming pool, but since we were hiking early in the season, it was not filled",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_19/albergue.jpg?raw=true",
+    coordinates: [42.484764, -5.725139]
+  },
 ];
