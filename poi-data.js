@@ -699,4 +699,25 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_17/tasty_food.jpg?raw=true",
     coordinates: [42.388206, -5.141397]
   },
+  {
+    day: 18,
+    title: "Lots of Rain!!",
+    description: "This was probably our rainiest day on the Camino, and lots of effort had to be made to keep morale high",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_18/rain.jpg?raw=true",
+    coordinates: [42.496625, -5.412133]
+  },
+  {
+    day: 18,
+    title: "Bear-igrinos",
+    description: 'We stopped in a cafe for a snack to shelter from the rain. Morale was very low (especially Lawrence\'s), but these friendly bear-igrinos greeted us! (In Spanish, pilgrims are known as "perigrinos")',
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_18/bearigrinos.jpg?raw=true",
+    coordinates: [42.544333, -5.457203]
+  },
+  {
+    day: 18,
+    title: "León",
+    description: 'Finally we could see León, which meant our time on the Meseta was coming to an end!',
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_18/leon.jpg?raw=true",
+    coordinates: [42.575547, -5.540639]
+  },
 ];
