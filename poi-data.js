@@ -1091,4 +1091,46 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_24/galicia.jpg?raw=true",
     coordinates: [42.705978, -7.031375]
   },
+  {
+    day: 25,
+    title: "Feeling Grateful",
+    description: "We chatted about things we were grateful for that morning; I was certainly grateful to be on the Camino!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_25/grateful.jpg?raw=true",
+    coordinates: [42.705642, -7.106733]
+  },
+  {
+    day: 25,
+    title: "Cafe on a Hill",
+    description: "We had a small hill to climb, but were rewarded with good views and refreshments at the top",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_25/small_hill.jpg?raw=true",
+    coordinates: [42.712753, -7.125272]
+  },
+  {
+    day: 25,
+    title: "Strange Guy",
+    description: "I'm not sure who this guy was or what he was doing on the Camino",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_25/strange_guy.jpg?raw=true",
+    coordinates: [42.743864, -7.205189]
+  },
+  {
+    day: 25,
+    title: "Less than 150k to go!",
+    description: "The sign says that we had less than 150km to go until Santiago de Compostela",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_25/150_to_go.jpg?raw=true",
+    coordinates: [42.747394, -7.216350]
+  },
+  {
+    day: 25,
+    title: "Triacastela",
+    description: "That night we would stay in Triacastela, a village surrounded by rolling hills",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_25/triacastela.jpg?raw=true",
+    coordinates: [42.756097, -7.235011]
+  },
+  {
+    day: 25,
+    title: "Reuniting in Triacastela",
+    description: "We all arrived one by one at a cafe on the outskirts of town. Nils showed up last, having taken an accidental detour",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_25/reunited_triacastela.jpg?raw=true",
+    coordinates: [42.756147, -7.235475]
+  },
 ];
