@@ -920,7 +920,7 @@ const poiData = [
     day: 22,
     title: "Cruz de Ferro",
     description: "I arrived at the cross before the guys and got some photos here on my own",
-    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_22/early_morning.jpg?raw=true",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_22/cross_photo.jpg?raw=true",
     coordinates: [42.488919, -6.361331]
   },
   {
@@ -971,5 +971,89 @@ const poiData = [
     description: "I have no idea where this photo was taken because it came from Lawrence's phone, so this is just a guess. Me and a chair dedicated to my love, Kas ❤️",
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_22/kas_chair.jpg?raw=true",
     coordinates: [42.538464, -6.521743]
+  },
+  {
+    day: 23,
+    title: "A Rather Creepy Guy",
+    description: "I'm not sure what this guy's story is, but he was just chilling outside the castle",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/creepy_guy.jpg?raw=true",
+    coordinates: [42.543094, -6.593292]
+  },
+  {
+    day: 23,
+    title: "Ponferrada Castle",
+    description: "Ponferrada has a rather impressive castle!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/ponferrada_castle.jpg?raw=true",
+    coordinates: [42.543139, -6.593486]
+  },
+  {
+    day: 23,
+    title: "Ponferrada Artwork",
+    description: "It's so cool to see all the artwork along the Camino, demonstrating even its modern cultural importance",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/ponferrada_artwork.jpg?raw=true",
+    coordinates: [42.556578, -6.590994]
+  },
+  {
+    day: 23,
+    title: "Mountains & the Town",
+    description: "The snow on the mountains looked so pretty at this time of year",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/ponferrada_mountains.jpg?raw=true",
+    coordinates: [42.558397, -6.588258]
+  },
+  {
+    day: 23,
+    title: "Nils",
+    description: "Self-explanatory photo really",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/nils.jpg?raw=true",
+    coordinates: [42.566447, -6.598661]
+  },
+  {
+    day: 23,
+    title: "Swampy Trees",
+    description: "I thought the water and the trees here looked really cool, so I took a photo",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/swampy_trees.jpg?raw=true",
+    coordinates: [42.592428, -6.698389]
+  },
+  {
+    day: 23,
+    title: "Cantariña Vinos de Familia",
+    description: "Vineyards with the mountains in the distance! At this point it was almost unbearably hot",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/vineyards.jpg?raw=true",
+    coordinates: [42.607511, -6.780758]
+  },
+  {
+    day: 23,
+    title: "Cantariña Vinos de Familia",
+    description: "Vineyards with the mountains in the distance! At this point it was almost unbearably hot",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/vineyards.jpg?raw=true",
+    coordinates: [42.607511, -6.780758]
+  },
+  {
+    day: 23,
+    title: "A Hat Exchange",
+    description: "Lawrence took pity on me and took the stupid hat so I could wear his cap instead. I was relieved that he also looked like a magician in the terrible hat",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/hat_exchange.jpg?raw=true",
+    coordinates: [42.605014, -6.784500]
+  },
+  {
+    day: 23,
+    title: "New Hat!!",
+    description: "Thankfully I was finally able to buy a new hat in Villafranca del Bierzo",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/new_hat.jpg?raw=true",
+    coordinates: [42.606167, -6.809428]
+  },
+  {
+    day: 23,
+    title: "Villafranca del Bierzo",
+    description: "The view of Villafranca del Bierzo from our albergue",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/villafranca.jpg?raw=true",
+    coordinates: [42.604561, -6.806875]
+  },
+  {
+    day: 23,
+    title: "Xardín da Almeda",
+    description: "The garden in the centre of Villafranca del Bierzo",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_23/villafranca_garden.jpg?raw=true",
+    coordinates: [42.608803, -6.808408]
   },
 ];
