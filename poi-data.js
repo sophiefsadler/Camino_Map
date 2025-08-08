@@ -1133,4 +1133,32 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_25/reunited_triacastela.jpg?raw=true",
     coordinates: [42.756147, -7.235475]
   },
+  {
+    day: 26,
+    title: "A Quiet, Grey Morning",
+    description: "After some hot days, we had another grey morning, but it also felt peaceful and quiet",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_26/grey_morning.jpg?raw=true",
+    coordinates: [42.768300, -7.255719]
+  },
+  {
+    day: 26,
+    title: "The Sun Came Out",
+    description: "The grey weather didn't last very long in the end!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_26/sunny_again.jpg?raw=true",
+    coordinates: [42.772853, -7.327219]
+  },
+  {
+    day: 26,
+    title: "A Short Section in the Woods",
+    description: "Throughout the Camino, the section through Galicia reminded me the most of England",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_26/the_woods.jpg?raw=true",
+    coordinates: [42.773842, -7.351411]
+  },
+  {
+    day: 26,
+    title: "Albergue in Sarria",
+    description: "Sarria is where a lot of people start their Camino, but somehow our albergue still felt like a cute, quiet house",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_26/sarria.jpg?raw=true",
+    coordinates: [42.777056, -7.413225]
+  },
 ];
