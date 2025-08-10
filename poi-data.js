@@ -1161,4 +1161,60 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_26/sarria.jpg?raw=true",
     coordinates: [42.777056, -7.413225]
   },
+  {
+    day: 27,
+    title: "Sarria",
+    description: "People start their hike here because it's the last town which is greater than 100km from Santiago de Compostela, which is the distance you need to walk to receive a Compostela!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_27/sarria.jpg?raw=true",
+    coordinates: [42.776856, -7.417717]
+  },
+  {
+    day: 27,
+    title: "Camino Merchants!",
+    description: "Now that we were on the touristy part of the Camino, we started to encounter people selling souvenirs along the way",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_27/souvenirs.jpg?raw=true",
+    coordinates: [42.773542, -7.479886]
+  },
+  {
+    day: 27,
+    title: "100km To Go",
+    description: "We couldn't believe we'd be going down into double digits from here on!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_27/100k_to_go.jpg?raw=true",
+    coordinates: [42.784981, -7.541903]
+  },
+  {
+    day: 27,
+    title: "Refreshments with Corey and Fynn",
+    description: "This was the last day we'd see our Australian friends, Corey and Fynn :(",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_27/snacks_with_friends.jpg?raw=true",
+    coordinates: [42.794119, -7.587450]
+  },
+  {
+    day: 27,
+    title: "El Río Miño",
+    description: "Crossing the river into Portomarin",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_27/portomarin.jpg?raw=true",
+    coordinates: [42.803797, -7.616097]
+  },
+  {
+    day: 27,
+    title: "Portomarin Locals",
+    description: "The signs showed us directions of various major cities, but there's nowhere I'd rather have been :)",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_27/portomarin_locals.jpg?raw=true",
+    coordinates: [42.807044, -7.617150]
+  },
+  {
+    day: 27,
+    title: "Cosy Albergue",
+    description: "We were normally paired with Lawrence & Woody sharing a bunk bed, and me & Nils sharing another. Nils normally let me take the bottom bunk if the top one didn't have rails, so I only had to take the top when it was nice and comfortable like this :)",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_27/cosy_albergue.jpg?raw=true",
+    coordinates: [42.807200, -7.617103]
+  },
+  {
+    day: 27,
+    title: "Group Dinner",
+    description: "One last big night of socialising, we all ate carbonara and played games of cards together",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_27/group_dinner.jpg?raw=true",
+    coordinates: [42.807200, -7.617099]
+  },
 ];
