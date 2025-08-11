@@ -1329,4 +1329,60 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_30/20k_to_go.jpg?raw=true",
     coordinates: [42.910992, -8.359450]
   },
+  {
+    day: 31,
+    title: "Our Final Morning 😭",
+    description: "I could barely keep up with the guys that morning as they were basically charging towards Santiago de Compostela!!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_31/final_morning.jpg?raw=true",
+    coordinates: [42.903981, -8.376631]
+  },
+  {
+    day: 31,
+    title: "Only 10km Left!!",
+    description: "Such a monumentally small number warranted a special group photo",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_31/10k_to_go.jpg?raw=true",
+    coordinates: [42.898136, -8.444578]
+  },
+  {
+    day: 31,
+    title: "Swapping Hats",
+    description: "Still finding new ways to entertain ourselves, we all tried on eachother's hats",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_31/swapping_hats.jpg?raw=true",
+    coordinates: [42.890589, -8.479225]
+  },
+  {
+    day: 31,
+    title: "Cathedral in the Distance",
+    description: "We had entered Santiago de Compostela! Our final destination loomed in the distance",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_31/santiago.jpg?raw=true",
+    coordinates: [42.881739, -8.535517]
+  },
+  {
+    day: 31,
+    title: "San Martín Pinario",
+    description: "We were less than a minute from completing our month-long journey, but I still couldn't resist taking a picture of this 16th century monastery",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_31/monastery.jpg?raw=true",
+    coordinates: [42.881206, -8.543931]
+  },
+  {
+    day: 31,
+    title: "Camino de Santiago ✅",
+    description: "After 800km of walking over 31 days of walking and 2 rest days, we made it to the cathedral of Santiago de Compostela 🥹",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_31/santiago_cathedral.jpg?raw=true",
+    coordinates: [42.880467, -8.545569]
+  },
+  {
+    day: 31,
+    title: "And a Group Photo",
+    description: "My Camino experience would not have been the same without the three amazing friends I made who shared the whole journey with me!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_31/group_photo.jpg?raw=true",
+    coordinates: [42.880550, -8.545631]
+  },
+  {
+    day: 31,
+    title: "Pilgrim Registration",
+    description: "After completing the Camino, you take your passport to have it verified and receive your Compostela certificate",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_31/pilgrim_registration.jpg?raw=true",
+    coordinates: [42.882017, -8.547256]
+  },
 ];
