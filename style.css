@@ -86,3 +86,13 @@ body { font-family: 'Inter', sans-serif; }
 .grid path {
   stroke-width: 0;
 }
+
+.chart-indicator .indicator-line {
+  stroke-width: 1px;
+  stroke-dasharray: 3,3;
+}
+
+.chart-indicator .indicator-circle {
+  stroke: white;
+  stroke-width: 2px;
+}

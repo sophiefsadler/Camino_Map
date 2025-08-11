@@ -51,6 +51,15 @@ let currentDay = -1;
 let casingLayer, colorLayer;
 let isAnimatingFlyTo = false;
 let panelUpdateTimeoutId = null;
+let hoverMarker = null;
+let hideIndicatorsTimeout = null; 
+let activeChart = {
+    xScale: null,
+    yScale: null,
+    indicator: null,
+    width: 0,
+    height: 0
+};
 
 let poiMarkers = new L.MarkerClusterGroup({
     maxClusterRadius: 40, 
@@ -135,6 +144,38 @@ function styleCasing(feature) {
 function onEachFeature(feature, layer) {
     layer.on('click', function (e) {
         updateStory(feature.properties.day);
+    });
+
+    const dayNumber = feature.properties.day;
+
+    layer.on('mouseover', () => showIndicators(dayNumber));
+    layer.on('mouseout', () => hideIndicators());
+    layer.on('mousemove', function(e) {
+        // Ensure we have data for the current day
+        if (!pathDataCache[currentDay]) return;
+
+        const pathData = pathDataCache[currentDay];
+        let minDistance = Infinity;
+        let closestIndex = -1;
+
+        // Loop through all points in the day's full-resolution path
+        // to find the one closest to the mouse cursor.
+        pathData.path_full.forEach((point, index) => {
+            // Create a Leaflet LatLng object for the point
+            const latLng = L.latLng(point[1], point[0]);
+            
+            // Calculate the distance from the mouse to this point
+            const distance = e.latlng.distanceTo(latLng);
+
+            // If this point is the closest one found so far, record it
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestIndex = index;
+            }
+        });
+
+        // Update the indicators with the index of the closest point
+        updateIndicators(closestIndex, dayNumber);
     });
 }
 
@@ -233,6 +274,11 @@ function drawElevationProfile(dayNumber) {
         .domain([d3.min(elevationData, d => d[1]) - 50, d3.max(elevationData, d => d[1]) + 50])
         .range([height, 0]);
 
+    activeChart.xScale = xScale;
+    activeChart.yScale = yScale;
+    activeChart.width = width;
+    activeChart.height = height;
+
     // Horizontal grid lines
     svg.append("g")
         .attr("class", "grid")
@@ -286,6 +332,56 @@ function drawElevationProfile(dayNumber) {
         .attr("stroke", dayColor)
         .attr("stroke-width", 2)
         .attr("d", d3.line().x(d => xScale(d[0])).y(d => yScale(d[1])));
+
+    // Interactive linking with line segment
+    const chartIndicatorGroup = svg.append("g")
+        .attr("class", "chart-indicator")
+        .style("display", "none");
+
+    activeChart.indicator = chartIndicatorGroup;
+
+    chartIndicatorGroup.append("line")
+        .attr("class", "indicator-line") 
+        .attr("y1", 0)                  
+        .attr("y2", height)             
+        .attr("stroke", dayColor);      
+
+    chartIndicatorGroup.append("circle")
+        .attr("class", "indicator-circle") 
+        .attr("r", 5)                     
+        .attr("fill", dayColor);  
+
+    // Create a bisector function for efficiently finding data points
+    const bisectDistance = d3.bisector(d => d[0]).left;
+
+    // Create an invisible overlay to capture mouse events on the chart
+    // Create an invisible overlay to capture mouse events on the chart
+    svg.append("rect")
+        .attr("class", "overlay")
+        .attr("width", width)
+        .attr("height", height)
+        .style("fill", "none")
+        .style("pointer-events", "all")
+        .on("mouseover", () => showIndicators(dayNumber))
+        .on("mouseout", () => hideIndicators())
+        .on("mousemove", function(event) {
+            const mouseX = d3.pointer(event)[0];
+            const distance = xScale.invert(mouseX);
+
+            const index = bisectDistance(pathData.elevation_data, distance, 1);
+            
+            const d0 = pathData.elevation_data[index - 1];
+            const d1 = pathData.elevation_data[index];
+
+            let pointIndex;
+            if (d1) {
+                pointIndex = distance - d0[0] > d1[0] - distance ? index : index - 1;
+            } else {
+                pointIndex = index - 1;
+            }
+
+            updateIndicators(pointIndex, dayNumber);
+        });
 }
 
 function setInitialStoryPanel() {
@@ -493,6 +589,61 @@ function setInitialView() {
     });
     
     setInitialStoryPanel();
+}
+
+function showIndicators(dayNumber) {
+    // Cancel any pending timeout to hide the indicators
+    clearTimeout(hideIndicatorsTimeout);
+
+    const dayColor = colorScale(dayNumber);
+
+    // Create or update and show the map marker
+    if (!hoverMarker) {
+        hoverMarker = L.circleMarker([0, 0], {
+            radius: 8,
+            color: '#ffffff',
+            weight: 2,
+            fillOpacity: 1,
+        });
+    }
+    hoverMarker.setStyle({ fillColor: dayColor }).addTo(map);
+
+    // Show the chart indicator
+    if (activeChart.indicator) {
+        activeChart.indicator.style("display", null);
+    }
+}
+
+function hideIndicators() {
+    hideIndicatorsTimeout = setTimeout(() => {
+        if (hoverMarker) hoverMarker.remove();
+        if (activeChart.indicator) activeChart.indicator.style("display", "none");
+    }, 50); // A 50ms delay prevents flickering
+}
+
+function updateIndicators(index, dayNumber) {
+    if (index === -1 || !pathDataCache[dayNumber]) return;
+
+    const pathData = pathDataCache[dayNumber];
+    const geoPoint = pathData.path_full[index];
+    const elevationPoint = pathData.elevation_data[index];
+
+    // Update map marker
+    if (hoverMarker) {
+        hoverMarker.setLatLng([geoPoint[1], geoPoint[0]]);
+    }
+
+    // Update chart indicator
+    if (activeChart.xScale && activeChart.yScale && activeChart.indicator) {
+        const distance = elevationPoint[0];
+        const elevation = elevationPoint[1];
+        activeChart.indicator.select(".indicator-line")
+            .attr("x1", activeChart.xScale(distance))
+            .attr("x2", activeChart.xScale(distance));
+        activeChart.indicator.select(".indicator-circle")
+            .attr("cx", activeChart.xScale(distance))
+            .attr("cy", activeChart.yScale(elevation));
+    }
 }
 
 prevDayBtn.on("click", () => {
