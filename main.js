@@ -593,7 +593,7 @@ function setInitialView() {
     const storyPanelContainer = document.getElementById('story-panel-container');
     const panelWidth = storyPanelContainer.offsetWidth;
     
-    const walkingDaysMetadata = caminoMetadata.filter(d => d.day > 0);
+    const walkingDaysMetadata = caminoMetadata.filter(d => !d.center_coord);
     const promises = walkingDaysMetadata.map(d => getPathData(d.day));
 
     Promise.all(promises).then(allPaths => {
