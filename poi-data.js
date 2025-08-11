@@ -1217,4 +1217,46 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_27/group_dinner.jpg?raw=true",
     coordinates: [42.807200, -7.617099]
   },
+  {
+    day: 28,
+    title: "Early Morning Light",
+    description: "The town was quiet and peaceful, and the sunrise gave it a golden glow in the morning",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_28/early_morning.jpg?raw=true",
+    coordinates: [42.807267, -7.617153]
+  },
+  {
+    day: 28,
+    title: "Portomarin's Bridges",
+    description: "From this viewpoint, we could see several bridges providing ways in and out of the town",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_28/bridges.jpg?raw=true",
+    coordinates: [42.806322, -7.620894]
+  },
+  {
+    day: 28,
+    title: "Pigs!",
+    description: "So far on the Camino we had seen many cows, horses, goats, chickens and dogs, but these were our first pigs",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_28/pigs.jpg?raw=true",
+    coordinates: [42.825644, -7.697558]
+  },
+  {
+    day: 28,
+    title: "One of our Last Hills...",
+    description: "I was on the phone to Alex, but I looked back to see this amazing view behind Lawrence, Woody and Nils",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_28/hill_view.jpg?raw=true",
+    coordinates: [42.834183, -7.719142]
+  },
+  {
+    day: 28,
+    title: "Nearly at Santiago!",
+    description: "The numbers seemed to fall faster and faster the closer we got",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_28/nearly_there.jpg?raw=true",
+    coordinates: [42.841969, -7.735856]
+  },
+  {
+    day: 28,
+    title: "Pizza for Dinner",
+    description: "In stark contrast to the night before, we didn't run into any pilgrims we knew, and had dinner as the four of us in a pizza restaurant",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_28/pizza.jpg?raw=true",
+    coordinates: [42.875358, -7.866733]
+  },
 ];
