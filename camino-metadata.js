@@ -122,6 +122,17 @@ const caminoMetadata = [
     "photoCaption": "The Cruz (Cross) de Atapuerca",
   },
   {
+  "day": 12.5,
+  "start": "Rest Days in",
+  "end": "Madrid",
+  "distance": 0,
+  "diaryFile": "diaries/day_12_5.md",
+  "photo": "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Day_12_5.jpg?raw=true",
+  "photoCaption": "Sightseeing with my boyfriend, Alex",
+  "center_coord": [42.3406, -3.7045],
+  "zoom_level": 15
+  },
+  {
     "day": 13,
     "start": "Burgos",
     "end": "Hontanas",
@@ -291,5 +302,16 @@ const caminoMetadata = [
     "diaryFile": "diaries/day_31.md",
     "photo": "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Day_31.jpg?raw=true",
     "photoCaption": "Arriving in Santiago de Compostela",
+  },
+  {
+  "day": 32,
+  "start": "Post-Camino Days in",
+  "end": "Santiago de Compostela",
+  "distance": 0,
+  "diaryFile": "diaries/day_32.md",
+  "photo": "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Day_32.jpg?raw=true",
+  "photoCaption": "Relaxing and celebrating, joined by Nils's girlfriend, Laura",
+  "center_coord": [42.8806, -8.5456],
+  "zoom_level": 16
   }
 ];

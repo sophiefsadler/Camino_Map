@@ -415,6 +415,7 @@ function setInitialStoryPanel() {
     stagePhoto.attr("src", "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Overview.jpg?raw=true");
     stagePhotoContainer.classed('h-64', true).classed('h-48', false);
     stageDescription.text("Hi! I'm Sophie, and in March & April 2024 I walked the Camino Francés from Saint-Jean-Pied-de-Port to Santiago de Compostela. This is the story of my 31-day walk across northern Spain. Click 'Next' to begin the journey.");
+    dayCounter.classed("hidden", false);
     dayCounter.text(`Day 0 / ${TOTAL_DAYS}`);
     prevDayBtn.property("disabled", true);
     nextDayBtn.property("disabled", false);
@@ -438,7 +439,12 @@ function updateStory(dayNumber) {
     stagePhoto.attr("src", dayData.photo);
     stageCaption.text(dayData.photoCaption ? dayData.photoCaption : '');
     
-    dayCounter.text(`Day ${currentDay} / ${TOTAL_DAYS}`);
+    if (dayNumber === 12.5 || dayNumber === 32) {
+        dayCounter.classed("hidden", true);
+    } else {
+        dayCounter.classed("hidden", false);
+        dayCounter.text(`Day ${currentDay} / ${TOTAL_DAYS}`);
+    }
     
     if (dayData.diaryFile) {
         stageDescription.text("Loading diary...");
@@ -461,8 +467,9 @@ function updateStory(dayNumber) {
         colorLayer.setStyle(stylePath);
     }
 
-    prevDayBtn.property("disabled", currentDay <= 0); 
-    nextDayBtn.property("disabled", currentDay >= TOTAL_DAYS || !caminoMetadata.find(d => d.day === currentDay + 1));
+    const currentIndex = caminoMetadata.findIndex(d => d.day === dayNumber);
+    prevDayBtn.property("disabled", currentIndex <= 0);
+    nextDayBtn.property("disabled", currentIndex >= caminoMetadata.length - 1);
 
     zoomToDay(dayData);
 }
@@ -669,16 +676,23 @@ function updateIndicators(index, dayNumber) {
 }
 
 prevDayBtn.on("click", () => {
-    if (currentDay === 0) {
-        setInitialView();
-    } else if (currentDay > 0) { 
-        updateStory(currentDay - 1);
+    const currentIndex = caminoMetadata.findIndex(d => d.day === currentDay);
+    if (currentIndex > 0) {
+        const prevDayData = caminoMetadata[currentIndex - 1];
+        updateStory(prevDayData.day);
     }
 });
 
 nextDayBtn.on("click", () => {
-    if (currentDay < TOTAL_DAYS) {
-            updateStory(currentDay + 1);
+    if (currentDay === -1) {
+        updateStory(caminoMetadata[0].day);
+        return;
+    }
+    
+    const currentIndex = caminoMetadata.findIndex(d => d.day === currentDay);
+    if (currentIndex > -1 && currentIndex < caminoMetadata.length - 1) {
+        const nextDayData = caminoMetadata[currentIndex + 1];
+        updateStory(nextDayData.day);
     }
 });
 
