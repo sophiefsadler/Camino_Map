@@ -1259,4 +1259,46 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_28/pizza.jpg?raw=true",
     coordinates: [42.875358, -7.866733]
   },
+  {
+    day: 29,
+    title: "So Many Dogs",
+    description: "We met so many dogs that day, waiting on the path for scratches and cuddles",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_29/dog.jpg?raw=true",
+    coordinates: [42.883664, -7.956469]
+  },
+  {
+    day: 29,
+    title: "Furelos",
+    description: "Entering the town of Furelos, there is an impressive bridge",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_29/furelos.jpg?raw=true",
+    coordinates: [42.908217, -7.998122]
+  },
+  {
+    day: 29,
+    title: "Refreshments in Melide",
+    description: "We stopped in the larger town of Melide for drinks and snacks. I'm not quite sure why Woody was so proud of his drink",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_29/melide_drinks.jpg?raw=true",
+    coordinates: [42.913425, -8.011586]
+  },
+  {
+    day: 29,
+    title: "Less than 50k to go!!",
+    description: "The numbers were getting frighteningly small! I wanted to savour every last moment",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_29/50k_to_go.jpg?raw=true",
+    coordinates: [42.916325, -8.042672]
+  },
+  {
+    day: 29,
+    title: "A Cosy Bed",
+    description: "This cow looked extremely comfortable in his bed of hay",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_29/comfortable_cow.jpg?raw=true",
+    coordinates: [42.918611, -8.086150]
+  },
+  {
+    day: 29,
+    title: "Ice Cream",
+    description: "To Lawrence & Woody's delight, I had not one but two ice creams at this shop! They had been averaging about 3 each per day and these were my first (and last) of the entire Camino",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_29/ice_cream.jpg?raw=true",
+    coordinates: [42.931244, -8.127050]
+  },
 ];
