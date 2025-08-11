@@ -1301,4 +1301,32 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_29/ice_cream.jpg?raw=true",
     coordinates: [42.931244, -8.127050]
   },
+  {
+    day: 30,
+    title: "Penultimate Morning",
+    description: "It was our penultimate morning on the Camino and the scenery & weather reminded me of summer in the UK",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_30/penultimate_morning.jpg?raw=true",
+    coordinates: [42.922250, -8.256906]
+  },
+  {
+    day: 30,
+    title: "Pretty Flowers",
+    description: "I saw lots of nice flowers along the side of the path that day",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_30/pretty_flowers.jpg?raw=true",
+    coordinates: [42.919319, -8.299925]
+  },
+  {
+    day: 30,
+    title: "Ancient Pilgrim Map",
+    description: "The sign encourages pilgrims to consider staying at the albergues in the tiny village of Santa Irene",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_30/santa_irene.jpg?raw=true",
+    coordinates: [42.917481, -8.330503]
+  },
+  {
+    day: 30,
+    title: "Less than 20km to go!",
+    description: "The tangible evidence that we only had one day's walking left until Santiago de Compostela",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_30/20k_to_go.jpg?raw=true",
+    coordinates: [42.910992, -8.359450]
+  },
 ];

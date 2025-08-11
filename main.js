@@ -208,14 +208,36 @@ function drawPoisForDay(dayNumber) {
             poi: poi
         });
 
-        // When hovering over a marker, show its details in the panel.
         marker.on('mouseover', function (e) {
             showPoiInPanel(poi);
+
+            // Find the closest point on the path to this POI
+            const pathData = pathDataCache[dayNumber];
+            if (!pathData || !pathData.path_full) return;
+
+            let minDistance = Infinity;
+            let closestIndex = -1;
+            const poiLatLng = L.latLng(poi.coordinates[0], poi.coordinates[1]);
+
+            pathData.path_full.forEach((point, index) => {
+                const pathLatLng = L.latLng(point[1], point[0]);
+                const distance = poiLatLng.distanceTo(pathLatLng);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestIndex = index;
+                }
+            });
+
+            // Show and update the indicators at that closest point
+            if (closestIndex !== -1) {
+                showIndicators(dayNumber);
+                updateIndicators(closestIndex, dayNumber);
+            }
         });
 
-        // When the mouse leaves, restore the panel to the current day's details.
         marker.on('mouseout', function (e) {
             restoreDayInPanel(currentDay);
+            hideIndicators();
         });
 
         poiMarkers.addLayer(marker);
