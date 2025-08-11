@@ -7,6 +7,7 @@ const stagePhoto = d3.select("#stage-photo img");
 const stagePhotoContainer = d3.select("#stage-photo");
 const stageCaption = d3.select("#stage-caption");
 const stageDescription = d3.select("#stage-description");
+const elevationPanel = d3.select("#elevation-panel");
 const dayCounter = d3.select("#day-counter");
 const prevDayBtn = d3.select("#prev-day");
 const nextDayBtn = d3.select("#next-day");
@@ -200,9 +201,97 @@ async function getPathData(dayNumber) {
 casingLayer = L.geoJSON(null, { style: styleCasing, onEachFeature: onEachFeature }).addTo(map);
 colorLayer = L.geoJSON(null, { style: stylePath, onEachFeature: onEachFeature }).addTo(map);
 
+
+function drawElevationProfile(dayNumber) {
+    const chartContainer = d3.select("#elevation-chart-container");
+    chartContainer.html("");
+
+    const pathData = pathDataCache[dayNumber];
+    if (!pathData || !pathData.elevation_data || pathData.elevation_data.length === 0) {
+        return;
+    }
+
+    const elevationData = pathData.elevation_data;
+
+    // D3 Setup
+    const margin = { top: 10, right: 10, bottom: 25, left: 40 };
+    const width = chartContainer.node().getBoundingClientRect().width - margin.left - margin.right;
+    const height = chartContainer.node().getBoundingClientRect().height - margin.top - margin.bottom;
+
+    const svg = chartContainer.append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Define Scales
+    const xScale = d3.scaleLinear()
+        .domain(d3.extent(elevationData, d => d[0]))
+        .range([0, width]);
+
+    const yScale = d3.scaleLinear()
+        .domain([d3.min(elevationData, d => d[1]) - 50, d3.max(elevationData, d => d[1]) + 50])
+        .range([height, 0]);
+
+    // Horizontal grid lines
+    svg.append("g")
+        .attr("class", "grid")
+        .call(d3.axisLeft(yScale)
+            .tickSize(-width)
+            .tickFormat("")
+        );
+
+    // Vertical grid lines
+    svg.append("g")
+        .attr("class", "grid")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(xScale)
+            .tickSize(-height)
+            .tickFormat("")
+        );
+
+    // Define Axes
+    const xAxis = d3.axisBottom(xScale).ticks(5).tickFormat(d => `${d} km`);
+    const yAxis = d3.axisLeft(yScale).ticks(4).tickFormat(d => `${d} m`);
+    
+    svg.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(xAxis)
+        .select(".domain").remove();
+
+    svg.append("g")
+        .call(yAxis)
+        .select(".domain").remove();
+
+    // Get the color for the current day
+    const dayColor = colorScale(dayNumber);
+
+    // Define the Area generator
+    const area = d3.area()
+        .x(d => xScale(d[0]))
+        .y0(height)
+        .y1(d => yScale(d[1]));
+
+    // Draw the area
+    svg.append("path")
+        .datum(elevationData)
+        .attr("fill", dayColor)
+        .attr("fill-opacity", 0.4)
+        .attr("d", area);
+    
+    // Draw the top line of the area
+    svg.append("path")
+        .datum(elevationData)
+        .attr("fill", "none")
+        .attr("stroke", dayColor)
+        .attr("stroke-width", 2)
+        .attr("d", d3.line().x(d => xScale(d[0])).y(d => yScale(d[1])));
+}
+
 function setInitialStoryPanel() {
     currentDay = -1;
     poiMarkers.clearLayers();
+    elevationPanel.classed("hidden", true);
     stageTitle.text("My Camino Francés");
     stageInfo.text("An 800km journey across Spain");
     stagePhoto.attr("src", "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Overview.jpg?raw=true");
@@ -346,10 +435,25 @@ async function zoomToDay(dayData) {
     const panelWidth = storyPanelContainer.offsetWidth;
 
     if (dayData.center_coord) {
+        elevationPanel.classed("hidden", true);
         return map.flyTo(dayData.center_coord, dayData.zoom_level, { duration: 1.5 });
     }
     
     const pathData = await getPathData(dayData.day);
+
+    if (pathData && pathData.elevation_data && pathData.elevation_data.length > 0) {
+        if (dayData.day === 18) {
+            elevationPanel.classed("top-6", false).classed("bottom-6", true);
+        } else {
+            elevationPanel.classed("bottom-6", false).classed("top-6", true);
+        }
+
+        elevationPanel.classed("hidden", false);
+        drawElevationProfile(dayData.day);
+    } else {
+        elevationPanel.classed("hidden", true);
+    }
+
     if (!pathData) return;
 
     const geoJsonLayerForZoom = L.geoJSON({ type: "LineString", coordinates: pathData.path_simple });

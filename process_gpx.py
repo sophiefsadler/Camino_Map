@@ -5,12 +5,28 @@ import gpxpy
 import gpxpy.gpx
 import re
 import json
+from math import sin, cos, sqrt, atan2, radians
 
 # --- Configuration ---
 GPX_DIRECTORY = 'gpx_files' 
 OUTPUT_DATA_DIR = 'data'
 OUTPUT_METADATA_FILE = 'camino-metadata.js'
 SIMPLIFICATION_FACTOR = 10
+
+def haversine_distance(p1, p2):
+    """Calculate the distance between two lat/lon points in kilometers."""
+    R = 6371.0  # Radius of Earth in kilometers
+
+    lat1, lon1 = radians(p1.latitude), radians(p1.longitude)
+    lat2, lon2 = radians(p2.latitude), radians(p2.longitude)
+
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+    
+    return R * c
 
 def parse_gpx_files(directory):
     all_tracks = []
@@ -45,11 +61,24 @@ def parse_gpx_files(directory):
             distance_km = round(gpx.length_3d() / 1000, 1)
 
             points_full = []
+            elevation_data = [] # New: To store [distance, elevation] pairs
+            cumulative_distance = 0.0
+            last_point = None
+
             for track in gpx.tracks:
                 for segment in track.segments:
                     for point in segment.points:
                         points_full.append([round(point.longitude, 6), round(point.latitude, 6)])
-            
+
+                        if last_point:
+                            cumulative_distance += haversine_distance(last_point, point)
+                        
+                        # Add data point for the elevation chart
+                        if point.elevation is not None:
+                            elevation_data.append([round(cumulative_distance, 3), round(point.elevation)])
+                        
+                        last_point = point
+
             points_simple = points_full[::SIMPLIFICATION_FACTOR]
             if points_full and points_full[-1] != points_simple[-1]:
                 points_simple.append(points_full[-1])
@@ -60,9 +89,10 @@ def parse_gpx_files(directory):
                 'end': end_location,
                 'distance': distance_km,
                 'points_full': points_full,
-                'points_simple': points_simple
+                'points_simple': points_simple,
+                'elevation_data': elevation_data # New: Add elevation data to the track object
             })
-            print(f"  - Processed Day {day_index}: {start_location} to {end_location} ({distance_km} km)")
+            print(f"  - Processed Day {day_index}: {start_location} to {end_location} ({distance_km} km), found {len(elevation_data)} elevation points.")
 
     return all_tracks
 
@@ -103,7 +133,8 @@ def write_data_files(tracks):
         # Create the JSON file for the path data
         path_data = {
             'path_full': track['points_full'],
-            'path_simple': track['points_simple']
+            'path_simple': track['points_simple'],
+            'elevation_data': track['elevation_data'] # New: Add elevation data to the JSON file
         }
         json_filename = f"day_{track['day']:02d}.json"
         json_filepath = os.path.join(OUTPUT_DATA_DIR, json_filename)
