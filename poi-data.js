@@ -1427,4 +1427,46 @@ const poiData = [
     photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_31/pilgrim_registration.jpg?raw=true",
     coordinates: [42.882017, -8.547256]
   },
+  {
+    day: 32,
+    title: "Our Hotel Room",
+    description: "Lawrence, Woody and I booked a hotel room with 3 single beds to stay in for the two nights after the Camino",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_32/hotel_room.jpg?raw=true",
+    coordinates: [42.879914, -8.540972]
+  },
+  {
+    day: 32,
+    title: "Pilgrim's Mass",
+    description: "The day after completing the Camino, we attended pilgrim's mass at the cathedral",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_32/pilgrim_mass.jpg?raw=true",
+    coordinates: [42.880556, -8.544442]
+  },
+  {
+    day: 32,
+    title: "Convento de Belvís",
+    description: "A view of the convent I saw while sightseeing!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_32/convent_view.jpg?raw=true",
+    coordinates: [42.879192, -8.541300]
+  },
+  {
+    day: 32,
+    title: "Proper Ice Cream",
+    description: "Most of the ice cream Lawrence & Woody ate on the Camino came in packaging from a freezer. In Santiago, I got proper, scooped gelato 😋",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_32/ice_cream.jpg?raw=true",
+    coordinates: [42.881239, -8.542978]
+  },
+  {
+    day: 32,
+    title: "Post-Camino Shave",
+    description: "All three of the guys had gone the whole Camino without shaving, to see how much facial hair they would grow. The time had come to shave it",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_32/shaving.jpg?raw=true",
+    coordinates: [42.881947, -8.536592]
+  },
+  {
+    day: 32,
+    title: "Evening View of the Cathedral",
+    description: "This was the view of the cathedral Lawrence, Woody and I had as we walked back to our hotel from Nils and Laura's Airbnb. Unfortunately, as we made this walk, the first signs of Lawrence's severe food poisoning were just arriving",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_32/evening_cathedral.jpg?raw=true",
+    coordinates: [42.881939, -8.536633]
+  },
 ];
