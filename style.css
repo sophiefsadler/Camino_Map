@@ -1,3 +1,13 @@
+/* ==========================================================================
+   1. Global, Base Styles & Variables
+   ========================================================================== */
+:root {
+    --font-primary: 'Inter', sans-serif;
+    --font-secondary: 'Lora', serif;
+    --panel-scrollbar-thumb: rgba(0, 0, 0, 0.2);
+    --panel-scrollbar-thumb-hover: rgba(0, 0, 0, 0.4);
+}
+
 html, body {
     height: 100%;
     width: 100%;
@@ -5,56 +15,37 @@ html, body {
     padding: 0;
     overflow: hidden; /* Prevent scrolling on the page */
 }
-body { font-family: 'Inter', sans-serif; }
-.prose-font { font-family: 'Lora', serif; }
 
+body {
+    font-family: var(--font-primary);
+}
+
+.prose-font {
+    font-family: var(--font-secondary);
+}
+
+/* ==========================================================================
+   2. Layout & Main Panels
+   ========================================================================== */
 #map {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    z-index: 10; /* Map is on the bottom */
+    z-index: 10;
 }
+
+/* ==========================================================================
+   3. Component Styles
+   ========================================================================== */
+
+/* --- Map & Leaflet --- */
 .leaflet-interactive {
     cursor: pointer;
 }
 .leaflet-tile-pane {
     filter: saturate(85%) grayscale(15%) sepia(20%);
-}
-
-/* Custom scrollbar for the diary panel */
-.custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.4);
-}
-#stage-description p + p {
-    margin-top: 1em;
-}
-
-#stage-photo {
-    height: auto;
-}
-#stage-photo img {
-    max-height: 300px;
-    width: 100%;
-    height: auto;
-}
-
-#story-content {
-    transition: opacity 0.2s ease-in-out;
-}
-#story-content.content-fading {
-    opacity: 0;
 }
 
 .marker-cluster {
@@ -73,26 +64,58 @@ body { font-family: 'Inter', sans-serif; }
     transition: all 0.2s ease-in-out;
 }
 
-.marker-cluster::before {
-    background-color: transparent !important;
+/* --- Story Panel --- */
+#stage-photo {
+    height: auto;
+}
+#stage-photo img {
+    max-height: 300px;
+    width: 100%;
+    height: auto;
+}
+#stage-description p + p {
+    margin-top: 1em;
 }
 
+/* --- Elevation Chart --- */
 .grid line {
   stroke: lightgray;
   stroke-opacity: 0.7;
   shape-rendering: crispEdges;
 }
-
 .grid path {
   stroke-width: 0;
 }
-
 .chart-indicator .indicator-line {
   stroke-width: 1px;
   stroke-dasharray: 3,3;
 }
-
 .chart-indicator .indicator-circle {
   stroke: white;
   stroke-width: 2px;
+}
+
+/* --- Custom Scrollbar --- */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--panel-scrollbar-thumb);
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--panel-scrollbar-thumb-hover);
+}
+
+/* ==========================================================================
+   4. State & Utility Classes
+   ========================================================================== */
+
+/* Used for fading story panel content on change */
+#story-content.content-fading {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
 }
