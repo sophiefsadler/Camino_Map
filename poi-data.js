@@ -490,6 +490,27 @@ const poiData = [
     coordinates: [42.363953, -3.616467]
   },
   {
+    day: 12.5,
+    title: "Where I Left the Camino",
+    description: "I said goodbye to Lawrence, Woody and Nils here and turned right towards the station",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_12_5/leave_camino.jpg?raw=true",
+    coordinates: [42.356972, -3.656528]
+  },
+  {
+    day: 12.5,
+    title: "Burgos Train Station",
+    description: "I waited here for a few hours until my scheduled train to Madrid",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_12_5/train_station.jpg?raw=true",
+    coordinates: [42.370611, -3.665944]
+  },
+  {
+    day: 12.5,
+    title: "Where I rejoined the Camino",
+    description: "This is where I rejoined the Camino, after walking half an hour from the train station",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_12_5/rejoin_camino.jpg?raw=true",
+    coordinates: [42.345333, -3.687028]
+  },
+  {
     day: 13,
     title: "Rejoining the Camino",
     description: "I had already been walking for over an hour from the train station by the time I rejoined the Camino!",
