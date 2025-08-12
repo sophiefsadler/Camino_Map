@@ -428,8 +428,12 @@ function updateStory(dayNumber) {
     const dayData = caminoMetadata.find(d => d.day === dayNumber);
     if (!dayData) return;
 
-    if (dayData.day === 0) {
+    if (dayData.day === 12.5 || dayData.day === 32) {
+        stageTitle.text(`${dayData.start} ${dayData.end}`);
+
+    } else if (dayData.day === 0) {
         stageTitle.text(`Day ${dayData.day}: ${dayData.start} ${dayData.end}`);
+
     } else {
         stageTitle.text(`Day ${dayData.day}: ${dayData.start} to ${dayData.end}`);
     }
@@ -487,8 +491,12 @@ function restoreDayInPanel(dayNumber) {
     storyContent.classed('content-fading', true);
 
     panelUpdateTimeoutId = setTimeout(() => { 
-        if (dayData.day === 0) {
+        if (dayData.day === 12.5 || dayData.day === 32) {
+            stageTitle.text(`${dayData.start} ${dayData.end}`);
+
+        } else if (dayData.day === 0) {
             stageTitle.text(`Day ${dayData.day}: ${dayData.start} ${dayData.end}`);
+
         } else {
             stageTitle.text(`Day ${dayData.day}: ${dayData.start} to ${dayData.end}`);
         }
