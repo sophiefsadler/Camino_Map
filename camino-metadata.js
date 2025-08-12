@@ -21,6 +21,10 @@ const caminoMetadata = [
     "diaryFile": "diaries/day_01.md",
     "photo": "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Day_1.jpg?raw=true",
     "photoCaption": "A view of the Pyrenees",
+    "youtube": {
+      "videoId": "LLQ4-OmeRKM",
+      "title": "My FIRST DAY on the Camino de Santiago! | Valcarlos Route"
+    }
   },
   {
     "day": 2,
@@ -30,6 +34,10 @@ const caminoMetadata = [
     "diaryFile": "diaries/day_02.md",
     "photo": "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Day_2.jpg?raw=true",
     "photoCaption": "Making friends on the Camino",
+    "youtube": {
+      "videoId": "-hHjJLZkGJ4",
+      "title": "What I Learnt in my FIRST WEEK on the Camino! | Days 2-7"
+    }
   },
   {
     "day": 3,
@@ -84,6 +92,10 @@ const caminoMetadata = [
     "diaryFile": "diaries/day_08.md",
     "photo": "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Day_8.jpg?raw=true",
     "photoCaption": "Joined by my friend Masha on the Camino!",
+    "youtube": {
+      "videoId": "31UJ8isegFI",
+      "title": "Community on the Camino as a SOLO Hiker | Days 8-12"
+    }
   },
   {
     "day": 9,
@@ -140,6 +152,10 @@ const caminoMetadata = [
     "diaryFile": "diaries/day_13.md",
     "photo": "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Day_13.jpg?raw=true",
     "photoCaption": "Visiting Burgos Cathedral on my own!",
+    "youtube": {
+      "videoId": "1k0W8Enb_E0",
+      "title": "Is the Meseta the Hardest Part of the Camino de Santiago?? | Days 13-18"
+    }
   },
   {
     "day": 14,
@@ -194,6 +210,10 @@ const caminoMetadata = [
     "diaryFile": "diaries/day_19.md",
     "photo": "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Day_19.jpg?raw=true",
     "photoCaption": "The Convento de San Marcos in León",
+    "youtube": {
+      "videoId": "wtfWS8xqcEc",
+      "title": "The Most BEAUTIFUL Section of the Camino Frances | Days 19-26"
+    }
   },
   {
     "day": 20,
@@ -266,6 +286,10 @@ const caminoMetadata = [
     "diaryFile": "diaries/day_27.md",
     "photo": "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Day_27.jpg?raw=true",
     "photoCaption": "El Río Miño",
+    "youtube": {
+      "videoId": "q7qAe6iyHqQ",
+      "title": "The FINAL 100km of the Camino Frances | Days 27-31"
+    }
   },
   {
     "day": 28,
@@ -312,6 +336,10 @@ const caminoMetadata = [
     "photo": "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Day_32.jpg?raw=true",
     "photoCaption": "Relaxing and celebrating, joined by Nils's girlfriend, Laura",
     "center_coord": [42.8806, -8.5456],
-    "zoom_level": 15
+    "zoom_level": 15,
+    "youtube": {
+      "videoId": "D8adcxZ9_Nk",
+      "title": "Travelling 600 Miles Solo in Spain's Most Underrated Region"
+    }
   }
 ];

@@ -11,6 +11,10 @@ const elevationPanel = d3.select("#elevation-panel");
 const dayCounter = d3.select("#day-counter");
 const prevDayBtn = d3.select("#prev-day");
 const nextDayBtn = d3.select("#next-day");
+const youtubePanel = d3.select("#youtube-panel");
+const youtubeLink = d3.select("#youtube-link");
+const youtubeThumb = d3.select("#youtube-thumb");
+const youtubeTitle = d3.select("#youtube-title");
 
 const photoElement = stagePhoto.node(); 
 photoElement.addEventListener('load', () => {
@@ -410,6 +414,7 @@ function setInitialStoryPanel() {
     currentDay = -1;
     poiMarkers.clearLayers();
     elevationPanel.classed("hidden", true);
+    youtubePanel.classed("hidden", true);
     stageTitle.text("My Camino Francés");
     stageInfo.text("An 800km journey across Spain");
     stagePhoto.attr("src", "https://github.com/sophiefsadler/Camino_Map/blob/main/images/story_panel/Overview.jpg?raw=true");
@@ -469,6 +474,24 @@ function updateStory(dayNumber) {
     } else {
         casingLayer.setStyle(styleCasing);
         colorLayer.setStyle(stylePath);
+    }
+
+    // Show or hide the YouTube panel based on metadata
+    if (dayData.youtube && dayData.youtube.videoId) {
+        // Construct the necessary URLs from the video ID
+        const videoUrl = `https://www.youtube.com/watch?v=${dayData.youtube.videoId}`;
+        const thumbUrl = `https://i.ytimg.com/vi/${dayData.youtube.videoId}/hqdefault.jpg`;
+
+        // Populate the panel's content
+        youtubeLink.attr("href", videoUrl);
+        youtubeThumb.attr("src", thumbUrl);
+        youtubeTitle.text(dayData.youtube.title);
+
+        // Make the panel visible
+        youtubePanel.classed("hidden", false);
+    } else {
+        // Hide the panel if there's no video for the day
+        youtubePanel.classed("hidden", true);
     }
 
     const currentIndex = caminoMetadata.findIndex(d => d.day === dayNumber);
