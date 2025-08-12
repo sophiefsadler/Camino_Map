@@ -1,5 +1,26 @@
 const poiData = [
   {
+    day: 0,
+    title: "Pilgrims in SJPDP",
+    description: "This representation of a pilgrim greets you as you get off the train in SJPDP!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_0/pilgrim_statue.jpg?raw=true",
+    coordinates: [43.167428, -1.237569]
+  },
+  {
+    day: 0,
+    title: "Entering the Town",
+    description: "From the station, this sign directs you to the pilgrims office where you can register your Camino. I was heading to my albergue first though, to check in and find my bed. This was the first time I saw the Camino shell symbol; I thought it was some kind of explosion!",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_0/camino_signs.jpg?raw=true",
+    coordinates: [43.163756, -1.236992]
+  },
+  {
+    day: 0,
+    title: "The Streets of SJPDP",
+    description: "The town looked so pretty in the evening, with the Pyrenees visible in the distance",
+    photoUrl: "https://github.com/sophiefsadler/Camino_Map/blob/main/images/poi/day_0/sjpdp.jpg?raw=true",
+    coordinates: [43.163375, -1.235839]
+  },
+  {
     day: 1,
     title: "The Start of the Camino",
     description: "About to set off on my big adventure!",
