@@ -530,29 +530,7 @@ function restoreDayInPanel(dayNumber) {
     storyContent.classed('content-fading', true);
 
     AppState.panelUpdateTimeoutId = setTimeout(() => { 
-        if (dayData.day === 12.5 || dayData.day === 32) {
-            stageTitle.text(`${dayData.start} ${dayData.end}`);
-
-        } else if (dayData.day === 0) {
-            stageTitle.text(`Day ${dayData.day}: ${dayData.start} ${dayData.end}`);
-
-        } else {
-            stageTitle.text(`Day ${dayData.day}: ${dayData.start} to ${dayData.end}`);
-        }
-        stageInfo.text(dayData.distance > 0 ? `Distance: ${dayData.distance} km` : '');
-        stagePhoto.classed('opacity-0', true);
-        stagePhoto.attr("src", dayData.photo);
-        stageCaption.text(dayData.photoCaption || '');
-
-        if (dayData.diaryFile) {
-            fetch(dayData.diaryFile)
-                .then(response => response.ok ? response.text() : Promise.reject('File not found'))
-                .then(text => { stageDescription.html(marked.parse(text)); })
-                .catch(error => { stageDescription.text("Could not load diary entry."); });
-        } else {
-            stageDescription.text(dayData.description);
-        }
-
+        updatePanelContent(dayData);
         storyContent.classed('content-fading', false);
     }, 200);
 }
@@ -637,34 +615,45 @@ async function zoomToDay(dayData) {
     });
 }
 
-function setInitialView() {
-    const storyPanelContainer = document.getElementById('story-panel-container');
-    const panelWidth = storyPanelContainer.offsetWidth;
-    
+async function fetchAllPathData() {
     const walkingDaysMetadata = caminoMetadata.filter(d => !d.center_coord);
     const promises = walkingDaysMetadata.map(d => getPathData(d.day));
+    const allPaths = await Promise.all(promises);
 
-    Promise.all(promises).then(allPaths => {
-        const features = walkingDaysMetadata.map((dayMeta, i) => {
-            return {
-                type: "Feature",
-                properties: dayMeta,
-                geometry: { type: "LineString", coordinates: allPaths[i].path_simple }
-            };
-        });
+    const features = walkingDaysMetadata.map((dayMeta, i) => {
+        const pathData = allPaths[i];
+        if (!pathData || !pathData.path_simple) return null;
         
-        casingLayer.addData(features);
-        colorLayer.addData(features);
+        return {
+            type: "Feature",
+            properties: dayMeta,
+            geometry: { type: "LineString", coordinates: pathData.path_simple }
+        };
+    }).filter(feature => feature !== null);
 
-        const fullBounds = colorLayer.getBounds();
-        if (fullBounds.isValid()) {
-            map.fitBounds(fullBounds, { 
-                paddingTopLeft: L.point(panelWidth + 20, 20),
-                paddingBottomRight: L.point(20, 20)
-            });
-        }
-    });
-    
+    return features;
+}
+
+function initializeMapLayers(features) {
+    casingLayer.addData(features);
+    colorLayer.addData(features);
+
+    const fullBounds = colorLayer.getBounds();
+    if (fullBounds.isValid()) {
+        const panelWidth = document.getElementById('story-panel-container').offsetWidth;
+        map.fitBounds(fullBounds, { 
+            paddingTopLeft: L.point(panelWidth + 20, 20),
+            paddingBottomRight: L.point(20, 20)
+        });
+    }
+}
+
+async function setInitialView() {
+    const features = await fetchAllPathData();
+    if (features) {
+        initializeMapLayers(features);
+    }
+
     setInitialStoryPanel();
 }
 
