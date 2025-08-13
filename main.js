@@ -581,24 +581,23 @@ map.on('zoom', function() {
     colorLayer.setStyle(stylePath);
 });
 
-async function zoomToDay(dayData) {
-    const storyPanelContainer = document.getElementById('story-panel-container');
-    const panelWidth = storyPanelContainer.offsetWidth;
 
-    if (dayData.center_coord) {
-        elevationPanel.classed("hidden", true);
-        return map.flyTo(dayData.center_coord, dayData.zoom_level, { duration: 1.5 });
-    }
-    
+function flyToCenteredView(dayData) {
+    elevationPanel.classed("hidden", true);
+    map.flyTo(dayData.center_coord, dayData.zoom_level, { duration: 1.5 });
+}
+
+
+async function flyToPathView(dayData) {
     const pathData = await getPathData(dayData.day);
-
+    
+    // Manage elevation panel visibility and position
     if (pathData && pathData.elevation_data && pathData.elevation_data.length > 0) {
         if (dayData.day === 18) {
             elevationPanel.classed("top-6", false).classed("bottom-6", true);
         } else {
             elevationPanel.classed("bottom-6", false).classed("top-6", true);
         }
-
         elevationPanel.classed("hidden", false);
         drawElevationProfile(dayData.day);
     } else {
@@ -607,12 +606,22 @@ async function zoomToDay(dayData) {
 
     if (!pathData) return;
 
+    // Fly to the path's bounds
     const geoJsonLayerForZoom = L.geoJSON({ type: "LineString", coordinates: pathData.path_simple });
+    const panelWidth = document.getElementById('story-panel-container').offsetWidth;
     map.flyToBounds(geoJsonLayerForZoom.getBounds(), { 
         paddingTopLeft: L.point(panelWidth + 50, 50),
         paddingBottomRight: L.point(50, 50),
         duration: 0.75 
     });
+}
+
+function zoomToDay(dayData) {
+    if (dayData.center_coord) {
+        flyToCenteredView(dayData);
+    } else {
+        flyToPathView(dayData);
+    }
 }
 
 async function fetchAllPathData() {
