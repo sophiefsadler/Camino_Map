@@ -593,7 +593,7 @@ async function flyToPathView(dayData) {
     
     // Manage elevation panel visibility and position
     if (pathData && pathData.elevation_data && pathData.elevation_data.length > 0) {
-        if (dayData.day === 18) {
+        if (dayData.day === 18 || dayData.day === 24) {
             elevationPanel.classed("top-6", false).classed("bottom-6", true);
         } else {
             elevationPanel.classed("bottom-6", false).classed("top-6", true);
