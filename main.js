@@ -269,19 +269,9 @@ async function getPathData(dayNumber) {
 casingLayer = L.geoJSON(null, { style: styleCasing, onEachFeature: onEachFeature }).addTo(map);
 colorLayer = L.geoJSON(null, { style: stylePath, onEachFeature: onEachFeature }).addTo(map);
 
-
-function drawElevationProfile(dayNumber) {
-    const chartContainer = d3.select("#elevation-chart-container");
+function setupElevationChartArea(chartContainer) {
     chartContainer.html("");
 
-    const pathData = pathDataCache[dayNumber];
-    if (!pathData || !pathData.elevation_data || pathData.elevation_data.length === 0) {
-        return;
-    }
-
-    const elevationData = pathData.elevation_data;
-
-    // D3 Setup
     const margin = { top: 10, right: 10, bottom: 25, left: 40 };
     const width = chartContainer.node().getBoundingClientRect().width - margin.left - margin.right;
     const height = chartContainer.node().getBoundingClientRect().height - margin.top - margin.bottom;
@@ -289,10 +279,15 @@ function drawElevationProfile(dayNumber) {
     const svg = chartContainer.append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
-      .append("g")
+        .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Define Scales
+    return { svg, width, height };
+}
+
+function createElevationChartScales(elevationData) {
+    const { width, height } = AppState.activeChart;
+
     const xScale = d3.scaleLinear()
         .domain(d3.extent(elevationData, d => d[0]))
         .range([0, width]);
@@ -301,20 +296,19 @@ function drawElevationProfile(dayNumber) {
         .domain([d3.min(elevationData, d => d[1]) - 50, d3.max(elevationData, d => d[1]) + 50])
         .range([height, 0]);
 
-    AppState.activeChart.xScale = xScale;
-    AppState.activeChart.yScale = yScale;
-    AppState.activeChart.width = width;
-    AppState.activeChart.height = height;
+    return { xScale, yScale };
+}
 
-    // Horizontal grid lines
+function drawElevationChartAxesAndGrid(svg) {
+    const { width, height, xScale, yScale } = AppState.activeChart;
+
+    // Grid Lines
     svg.append("g")
         .attr("class", "grid")
         .call(d3.axisLeft(yScale)
             .tickSize(-width)
             .tickFormat("")
         );
-
-    // Vertical grid lines
     svg.append("g")
         .attr("class", "grid")
         .attr("transform", `translate(0,${height})`)
@@ -323,21 +317,20 @@ function drawElevationProfile(dayNumber) {
             .tickFormat("")
         );
 
-    // Define Axes
+    // Axes
     const xAxis = d3.axisBottom(xScale).ticks(5).tickFormat(d => `${d} km`);
     const yAxis = d3.axisLeft(yScale).ticks(4).tickFormat(d => `${d} m`);
-    
     svg.append("g")
         .attr("transform", `translate(0, ${height})`)
         .call(xAxis)
         .select(".domain").remove();
-
     svg.append("g")
         .call(yAxis)
         .select(".domain").remove();
+}
 
-    // Get the color for the current day
-    const dayColor = colorScale(dayNumber);
+function drawElevationChartPaths(svg, elevationData, dayColor) {
+    const { height, xScale, yScale } = AppState.activeChart;
 
     // Define the Area generator
     const area = d3.area()
@@ -359,30 +352,32 @@ function drawElevationProfile(dayNumber) {
         .attr("stroke", dayColor)
         .attr("stroke-width", 2)
         .attr("d", d3.line().x(d => xScale(d[0])).y(d => yScale(d[1])));
+}
 
-    // Interactive linking with line segment
+function setupElevationChartInteractivity(svg, dayNumber, pathData) {
+    const { width, height, xScale } = AppState.activeChart;
+    const dayColor = colorScale(dayNumber);
+
+    // Create the indicator elements and store them in the AppState
     const chartIndicatorGroup = svg.append("g")
         .attr("class", "chart-indicator")
         .style("display", "none");
-
     AppState.activeChart.indicator = chartIndicatorGroup;
 
     chartIndicatorGroup.append("line")
-        .attr("class", "indicator-line") 
-        .attr("y1", 0)                  
-        .attr("y2", height)             
-        .attr("stroke", dayColor);      
+        .attr("class", "indicator-line")
+        .attr("y1", 0)
+        .attr("y2", height)
+        .attr("stroke", dayColor);
 
     chartIndicatorGroup.append("circle")
-        .attr("class", "indicator-circle") 
-        .attr("r", 5)                     
-        .attr("fill", dayColor);  
+        .attr("class", "indicator-circle")
+        .attr("r", 5)
+        .attr("fill", dayColor);
 
-    // Create a bisector function for efficiently finding data points
+    // Set up the mouse listener overlay
     const bisectDistance = d3.bisector(d => d[0]).left;
 
-    // Create an invisible overlay to capture mouse events on the chart
-    // Create an invisible overlay to capture mouse events on the chart
     svg.append("rect")
         .attr("class", "overlay")
         .attr("width", width)
@@ -394,21 +389,40 @@ function drawElevationProfile(dayNumber) {
         .on("mousemove", function(event) {
             const mouseX = d3.pointer(event)[0];
             const distance = xScale.invert(mouseX);
-
             const index = bisectDistance(pathData.elevation_data, distance, 1);
-            
             const d0 = pathData.elevation_data[index - 1];
             const d1 = pathData.elevation_data[index];
-
-            let pointIndex;
-            if (d1) {
-                pointIndex = distance - d0[0] > d1[0] - distance ? index : index - 1;
-            } else {
-                pointIndex = index - 1;
-            }
-
+            let pointIndex = d1 && (distance - d0[0] > d1[0] - distance) ? index : index - 1;
             updateIndicators(pointIndex, dayNumber);
         });
+}
+
+function drawElevationProfile(dayNumber) {
+    const chartContainer = d3.select("#elevation-chart-container");
+    const pathData = pathDataCache[dayNumber];
+    if (!pathData || !pathData.elevation_data || pathData.elevation_data.length === 0) {
+        return;
+    }
+
+    // Set up the canvas and dimensions
+    const { svg, width, height } = setupElevationChartArea(chartContainer);
+    AppState.activeChart.width = width;
+    AppState.activeChart.height = height;
+
+    // Create the scales
+    const { xScale, yScale } = createElevationChartScales(pathData.elevation_data);
+    AppState.activeChart.xScale = xScale;
+    AppState.activeChart.yScale = yScale;
+
+    // Draw the static parts of the chart
+    drawElevationChartAxesAndGrid(svg);
+
+    // Draw the data
+    const dayColor = colorScale(dayNumber);
+    drawElevationChartPaths(svg, pathData.elevation_data, dayColor);
+
+    // Set up the mouse listeners for the interactive blobs
+    setupElevationChartInteractivity(svg, dayNumber, pathData);
 }
 
 function setInitialStoryPanel() {
