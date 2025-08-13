@@ -429,33 +429,23 @@ function setInitialStoryPanel() {
     colorLayer.setStyle(stylePath);
 }
 
-function updateStory(dayNumber) {
-    AppState.currentDay = dayNumber;
-    const dayData = caminoMetadata.find(d => d.day === dayNumber);
-    if (!dayData) return;
-
+function updatePanelContent(dayData) {
+    // Set title format based on current day
     if (dayData.day === 12.5 || dayData.day === 32) {
         stageTitle.text(`${dayData.start} ${dayData.end}`);
-
     } else if (dayData.day === 0) {
         stageTitle.text(`Day ${dayData.day}: ${dayData.start} ${dayData.end}`);
-
     } else {
         stageTitle.text(`Day ${dayData.day}: ${dayData.start} to ${dayData.end}`);
     }
 
+    // Set the panel content
     stageInfo.text(dayData.distance > 0 ? `Distance: ${dayData.distance} km` : '');
     stagePhoto.classed('opacity-0', true);
     stagePhoto.attr("src", dayData.photo);
     stageCaption.text(dayData.photoCaption ? dayData.photoCaption : '');
-    
-    if (dayNumber === 12.5 || dayNumber === 32) {
-        dayCounter.classed("hidden", true);
-    } else {
-        dayCounter.classed("hidden", false);
-        dayCounter.text(`Day ${AppState.currentDay} / ${TOTAL_DAYS}`);
-    }
-    
+
+    // Fetch and render the diary file
     if (dayData.diaryFile) {
         stageDescription.text("Loading diary...");
         fetch(dayData.diaryFile)
@@ -468,36 +458,47 @@ function updateStory(dayNumber) {
     } else {
         stageDescription.text(dayData.description);
     }
-    
-    if (dayNumber === 0) {
-        casingLayer.setStyle({ opacity: 0 });
-        colorLayer.setStyle({ opacity: 0 });
+}
+
+function updateUIVisibility(dayData) {
+    // Show or hide the day counter
+    if (dayData.day === 12.5 || dayData.day === 32) {
+        dayCounter.classed("hidden", true);
     } else {
-        casingLayer.setStyle(styleCasing);
-        colorLayer.setStyle(stylePath);
+        dayCounter.classed("hidden", false);
+        dayCounter.text(`Day ${AppState.currentDay} / ${TOTAL_DAYS}`);
     }
 
-    // Show or hide the YouTube panel based on metadata
+    // Show or hide the YouTube panel
     if (dayData.youtube && dayData.youtube.videoId) {
-        // Construct the necessary URLs from the video ID
         const videoUrl = `https://www.youtube.com/watch?v=${dayData.youtube.videoId}`;
         const thumbUrl = `https://i.ytimg.com/vi/${dayData.youtube.videoId}/hqdefault.jpg`;
 
-        // Populate the panel's content
         youtubeLink.attr("href", videoUrl);
         youtubeThumb.attr("src", thumbUrl);
         youtubeTitle.text(dayData.youtube.title);
 
-        // Make the panel visible
         youtubePanel.classed("hidden", false);
     } else {
-        // Hide the panel if there's no video for the day
         youtubePanel.classed("hidden", true);
     }
+}
 
+function updateButtonStates(dayNumber) {
     const currentIndex = caminoMetadata.findIndex(d => d.day === dayNumber);
     prevDayBtn.property("disabled", currentIndex <= 0);
     nextDayBtn.property("disabled", currentIndex >= caminoMetadata.length - 1);
+}
+
+function updateStory(dayNumber) {
+    // Update the application's current state
+    AppState.currentDay = dayNumber;
+    const dayData = caminoMetadata.find(d => d.day === dayNumber);
+    if (!dayData) return;
+
+    updatePanelContent(dayData);
+    updateUIVisibility(dayData);
+    updateButtonStates(dayNumber);
 
     zoomToDay(dayData);
 }
@@ -545,11 +546,12 @@ function restoreDayInPanel(dayNumber) {
 map.on('zoomstart', function() {
     poiMarkers.clearLayers();
 
-    if (AppState.currentDay > 0) { 
+    if (AppState.currentDay >= 0) { 
         AppState.isAnimatingFlyTo = true;
         casingLayer.setStyle({ opacity: 0 });
         colorLayer.setStyle({ opacity: 0 });
     }
+    
 });
 
 map.on('zoomend', function() {
@@ -572,7 +574,7 @@ map.on('zoomend', function() {
     casingLayer.eachLayer(updateLayerCoords);
     colorLayer.eachLayer(updateLayerCoords);
 
-    if (AppState.currentDay > 0) {
+    if (AppState.currentDay >= 0) {
         casingLayer.setStyle(styleCasing);
         colorLayer.setStyle(stylePath);
     }
