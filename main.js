@@ -51,18 +51,19 @@ const caminoFeatures = caminoMetadata
         geometry: { type: "LineString", coordinates: [] } 
     }));
 
-let currentDay = -1;
-let casingLayer, colorLayer;
-let isAnimatingFlyTo = false;
-let panelUpdateTimeoutId = null;
-let hoverMarker = null;
-let hideIndicatorsTimeout = null; 
-let activeChart = {
-    xScale: null,
-    yScale: null,
-    indicator: null,
-    width: 0,
-    height: 0
+const AppState = {
+    currentDay: -1,
+    isAnimatingFlyTo: false,
+    panelUpdateTimeoutId: null,
+    hoverMarker: null,
+    hideIndicatorsTimeout: null,
+    activeChart: {
+        xScale: null,
+        yScale: null,
+        indicator: null,
+        width: 0,
+        height: 0
+    }
 };
 
 let poiMarkers = new L.MarkerClusterGroup({
@@ -126,7 +127,7 @@ function createPoiIcon(color) {
 
 function stylePath(feature) {
     const day = feature.properties.day;
-    const isActive = day === currentDay;
+    const isActive = day === AppState.currentDay;
     const { baseWeight, activeWeight } = getWeights();
     return {
         color: isActive ? d3.color(colorScale(day)).brighter(0.5) : colorScale(day),
@@ -136,7 +137,7 @@ function stylePath(feature) {
 }
 
 function styleCasing(feature) {
-    const isActive = feature.properties.day === currentDay;
+    const isActive = feature.properties.day === AppState.currentDay;
     const { baseWeight, activeWeight } = getWeights();
     return {
         color: '#FFFFFF',
@@ -156,9 +157,9 @@ function onEachFeature(feature, layer) {
     layer.on('mouseout', () => hideIndicators());
     layer.on('mousemove', function(e) {
         // Ensure we have data for the current day
-        if (!pathDataCache[currentDay]) return;
+        if (!pathDataCache[AppState.currentDay]) return;
 
-        const pathData = pathDataCache[currentDay];
+        const pathData = pathDataCache[AppState.currentDay];
         let minDistance = Infinity;
         let closestIndex = -1;
 
@@ -184,11 +185,11 @@ function onEachFeature(feature, layer) {
 }
 
 function showPoiInPanel(poi) {
-    clearTimeout(panelUpdateTimeoutId);
+    clearTimeout(AppState.panelUpdateTimeoutId);
     const storyContent = d3.select("#story-content");
     storyContent.classed('content-fading', true);
 
-    panelUpdateTimeoutId = setTimeout(() => {
+    AppState.panelUpdateTimeoutId = setTimeout(() => {
         stageTitle.text(poi.title);
         stageInfo.text('');
         stagePhoto.classed('opacity-0', true);
@@ -240,7 +241,7 @@ function drawPoisForDay(dayNumber) {
         });
 
         marker.on('mouseout', function (e) {
-            restoreDayInPanel(currentDay);
+            restoreDayInPanel(AppState.currentDay);
             hideIndicators();
         });
 
@@ -300,10 +301,10 @@ function drawElevationProfile(dayNumber) {
         .domain([d3.min(elevationData, d => d[1]) - 50, d3.max(elevationData, d => d[1]) + 50])
         .range([height, 0]);
 
-    activeChart.xScale = xScale;
-    activeChart.yScale = yScale;
-    activeChart.width = width;
-    activeChart.height = height;
+    AppState.activeChart.xScale = xScale;
+    AppState.activeChart.yScale = yScale;
+    AppState.activeChart.width = width;
+    AppState.activeChart.height = height;
 
     // Horizontal grid lines
     svg.append("g")
@@ -364,7 +365,7 @@ function drawElevationProfile(dayNumber) {
         .attr("class", "chart-indicator")
         .style("display", "none");
 
-    activeChart.indicator = chartIndicatorGroup;
+    AppState.activeChart.indicator = chartIndicatorGroup;
 
     chartIndicatorGroup.append("line")
         .attr("class", "indicator-line") 
@@ -411,7 +412,7 @@ function drawElevationProfile(dayNumber) {
 }
 
 function setInitialStoryPanel() {
-    currentDay = -1;
+    AppState.currentDay = -1;
     poiMarkers.clearLayers();
     elevationPanel.classed("hidden", true);
     youtubePanel.classed("hidden", true);
@@ -429,7 +430,7 @@ function setInitialStoryPanel() {
 }
 
 function updateStory(dayNumber) {
-    currentDay = dayNumber;
+    AppState.currentDay = dayNumber;
     const dayData = caminoMetadata.find(d => d.day === dayNumber);
     if (!dayData) return;
 
@@ -452,7 +453,7 @@ function updateStory(dayNumber) {
         dayCounter.classed("hidden", true);
     } else {
         dayCounter.classed("hidden", false);
-        dayCounter.text(`Day ${currentDay} / ${TOTAL_DAYS}`);
+        dayCounter.text(`Day ${AppState.currentDay} / ${TOTAL_DAYS}`);
     }
     
     if (dayData.diaryFile) {
@@ -502,7 +503,7 @@ function updateStory(dayNumber) {
 }
 
 function restoreDayInPanel(dayNumber) {
-    clearTimeout(panelUpdateTimeoutId);
+    clearTimeout(AppState.panelUpdateTimeoutId);
     const storyContent = d3.select("#story-content");
     const dayData = caminoMetadata.find(d => d.day === dayNumber);
 
@@ -513,7 +514,7 @@ function restoreDayInPanel(dayNumber) {
     
     storyContent.classed('content-fading', true);
 
-    panelUpdateTimeoutId = setTimeout(() => { 
+    AppState.panelUpdateTimeoutId = setTimeout(() => { 
         if (dayData.day === 12.5 || dayData.day === 32) {
             stageTitle.text(`${dayData.start} ${dayData.end}`);
 
@@ -544,8 +545,8 @@ function restoreDayInPanel(dayNumber) {
 map.on('zoomstart', function() {
     poiMarkers.clearLayers();
 
-    if (currentDay > 0) { 
-        isAnimatingFlyTo = true;
+    if (AppState.currentDay > 0) { 
+        AppState.isAnimatingFlyTo = true;
         casingLayer.setStyle({ opacity: 0 });
         colorLayer.setStyle({ opacity: 0 });
     }
@@ -571,17 +572,17 @@ map.on('zoomend', function() {
     casingLayer.eachLayer(updateLayerCoords);
     colorLayer.eachLayer(updateLayerCoords);
 
-    if (currentDay > 0) {
+    if (AppState.currentDay > 0) {
         casingLayer.setStyle(styleCasing);
         colorLayer.setStyle(stylePath);
     }
 
-    drawPoisForDay(currentDay);
-    isAnimatingFlyTo = false;
+    drawPoisForDay(AppState.currentDay);
+    AppState.isAnimatingFlyTo = false;
 });
 
 map.on('zoom', function() {
-    if (isAnimatingFlyTo || currentDay === 0) return;
+    if (AppState.isAnimatingFlyTo || AppState.currentDay === 0) return;
     casingLayer.setStyle(styleCasing);
     colorLayer.setStyle(stylePath);
 });
@@ -653,31 +654,31 @@ function setInitialView() {
 
 function showIndicators(dayNumber) {
     // Cancel any pending timeout to hide the indicators
-    clearTimeout(hideIndicatorsTimeout);
+    clearTimeout(AppState.hideIndicatorsTimeout);
 
     const dayColor = colorScale(dayNumber);
 
     // Create or update and show the map marker
-    if (!hoverMarker) {
-        hoverMarker = L.circleMarker([0, 0], {
+    if (!AppState.hoverMarker) {
+        AppState.hoverMarker = L.circleMarker([0, 0], {
             radius: 8,
             color: '#ffffff',
             weight: 2,
             fillOpacity: 1,
         });
     }
-    hoverMarker.setStyle({ fillColor: dayColor }).addTo(map);
+    AppState.hoverMarker.setStyle({ fillColor: dayColor }).addTo(map);
 
     // Show the chart indicator
-    if (activeChart.indicator) {
-        activeChart.indicator.style("display", null);
+    if (AppState.activeChart.indicator) {
+        AppState.activeChart.indicator.style("display", null);
     }
 }
 
 function hideIndicators() {
-    hideIndicatorsTimeout = setTimeout(() => {
-        if (hoverMarker) hoverMarker.remove();
-        if (activeChart.indicator) activeChart.indicator.style("display", "none");
+    AppState.hideIndicatorsTimeout = setTimeout(() => {
+        if (AppState.hoverMarker) AppState.hoverMarker.remove();
+        if (AppState.activeChart.indicator) AppState.activeChart.indicator.style("display", "none");
     }, 50); // A 50ms delay prevents flickering
 }
 
@@ -689,25 +690,25 @@ function updateIndicators(index, dayNumber) {
     const elevationPoint = pathData.elevation_data[index];
 
     // Update map marker
-    if (hoverMarker) {
-        hoverMarker.setLatLng([geoPoint[1], geoPoint[0]]);
+    if (AppState.hoverMarker) {
+        AppState.hoverMarker.setLatLng([geoPoint[1], geoPoint[0]]);
     }
 
     // Update chart indicator
-    if (activeChart.xScale && activeChart.yScale && activeChart.indicator) {
+    if (AppState.activeChart.xScale && AppState.activeChart.yScale && AppState.activeChart.indicator) {
         const distance = elevationPoint[0];
         const elevation = elevationPoint[1];
-        activeChart.indicator.select(".indicator-line")
-            .attr("x1", activeChart.xScale(distance))
-            .attr("x2", activeChart.xScale(distance));
-        activeChart.indicator.select(".indicator-circle")
-            .attr("cx", activeChart.xScale(distance))
-            .attr("cy", activeChart.yScale(elevation));
+        AppState.activeChart.indicator.select(".indicator-line")
+            .attr("x1", AppState.activeChart.xScale(distance))
+            .attr("x2", AppState.activeChart.xScale(distance));
+        AppState.activeChart.indicator.select(".indicator-circle")
+            .attr("cx", AppState.activeChart.xScale(distance))
+            .attr("cy", AppState.activeChart.yScale(elevation));
     }
 }
 
 prevDayBtn.on("click", () => {
-    const currentIndex = caminoMetadata.findIndex(d => d.day === currentDay);
+    const currentIndex = caminoMetadata.findIndex(d => d.day === AppState.currentDay);
     if (currentIndex > 0) {
         const prevDayData = caminoMetadata[currentIndex - 1];
         updateStory(prevDayData.day);
@@ -715,12 +716,12 @@ prevDayBtn.on("click", () => {
 });
 
 nextDayBtn.on("click", () => {
-    if (currentDay === -1) {
+    if (AppState.currentDay === -1) {
         updateStory(caminoMetadata[0].day);
         return;
     }
     
-    const currentIndex = caminoMetadata.findIndex(d => d.day === currentDay);
+    const currentIndex = caminoMetadata.findIndex(d => d.day === AppState.currentDay);
     if (currentIndex > -1 && currentIndex < caminoMetadata.length - 1) {
         const nextDayData = caminoMetadata[currentIndex + 1];
         updateStory(nextDayData.day);
