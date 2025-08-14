@@ -21,6 +21,27 @@ import { poiData } from './poi-data.js';
 import { updateStory } from './main.js';
 
 // ==========================================================================
+// CONFIGS
+// ==========================================================================
+
+const pathStyles = {
+    weightTiers: [
+        { zoom: 0,  base: 3,   active: 5 },
+        { zoom: 13, base: 2.5, active: 4.5 },
+        { zoom: 15, base: 2,   active: 4 }
+    ],
+    casingOffset: 2
+};
+
+const markerClusterOptions = {
+    maxClusterRadius: 40,
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    zoomToBoundsOnClick: true,
+    disableClusteringAtZoom: 16
+};
+
+// ==========================================================================
 // MODULE-LEVEL VARIABLES & MAP INITIALIZATION
 // ==========================================================================
 
@@ -35,11 +56,7 @@ L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/tiles/{z}/{x}/
 }).addTo(map);
 
 export const poiMarkers = new L.MarkerClusterGroup({
-    maxClusterRadius: 40, 
-    spiderfyOnMaxZoom: true,
-    showCoverageOnHover: false,
-    zoomToBoundsOnClick: true,
-    disableClusteringAtZoom: 16,
+    ...markerClusterOptions,
     
     iconCreateFunction: function(cluster) {
         const count = cluster.getChildCount();
@@ -76,11 +93,18 @@ export const colorLayer = L.geoJSON(null, { style: stylePath, onEachFeature: onE
 
 function getWeights() {
     const currentZoom = map.getZoom();
-    let baseWeight = 3;
-    let activeWeight = 5;
-    if (currentZoom > 13) { baseWeight = 2.5; activeWeight = 4.5; }
-    if (currentZoom > 15) { baseWeight = 2; activeWeight = 4; }
-    return { baseWeight, activeWeight };
+    let chosenTier = pathStyles.weightTiers[0];
+
+    for (const tier of pathStyles.weightTiers) {
+        if (currentZoom > tier.zoom) {
+            chosenTier = tier;
+        }
+    }
+
+    return {
+        baseWeight: chosenTier.base,
+        activeWeight: chosenTier.active
+    };
 }
 
 function createPoiIcon(color) {
@@ -117,7 +141,7 @@ function onEachFeature(feature, layer) {
     layer.on('mousemove', function(e) {
         // Only update indicators for the currently selected day
         if (dayNumber !== AppState.currentDay) return;
-        
+
         // Ensure we have data for the current day
         if (!pathDataCache[AppState.currentDay]) return;
 
