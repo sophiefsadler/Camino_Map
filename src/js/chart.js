@@ -7,6 +7,20 @@ import { colorScale } from './config.js';
 import { showIndicators, hideIndicators, updateIndicators } from './ui-logic.js';
 
 // ==========================================================================
+// CONFIG
+// ==========================================================================
+
+const chartConfig = {
+    margin: { top: 10, right: 10, bottom: 25, left: 40 },
+    yAxisPadding: 50,
+    xAxisTicks: 5,
+    yAxisTicks: 4,
+    indicatorRadius: 5,
+    areaOpacity: 0.4,
+    strokeWidth: 2
+};
+
+// ==========================================================================
 // MAIN ORCHESTRATOR FOR ELEVATION PROFILE CHART
 // ==========================================================================
 
@@ -45,15 +59,14 @@ export function drawElevationProfile(dayNumber) {
 function setupElevationChartArea(chartContainer) {
     chartContainer.html("");
 
-    const margin = { top: 10, right: 10, bottom: 25, left: 40 };
-    const width = chartContainer.node().getBoundingClientRect().width - margin.left - margin.right;
-    const height = chartContainer.node().getBoundingClientRect().height - margin.top - margin.bottom;
+    const width = chartContainer.node().getBoundingClientRect().width - chartConfig.margin.left - chartConfig.margin.right;
+    const height = chartContainer.node().getBoundingClientRect().height - chartConfig.margin.top - chartConfig.margin.bottom;
 
     const svg = chartContainer.append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width + chartConfig.margin.left + chartConfig.margin.right)
+        .attr("height", height + chartConfig.margin.top + chartConfig.margin.bottom)
         .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
+        .attr("transform", `translate(${chartConfig.margin.left},${chartConfig.margin.top})`);
 
     return { svg, width, height };
 }
@@ -66,7 +79,7 @@ function createElevationChartScales(elevationData) {
         .range([0, width]);
 
     const yScale = d3.scaleLinear()
-        .domain([d3.min(elevationData, d => d[1]) - 50, d3.max(elevationData, d => d[1]) + 50])
+        .domain([d3.min(elevationData, d => d[1]) - chartConfig.yAxisPadding, d3.max(elevationData, d => d[1]) + chartConfig.yAxisPadding])
         .range([height, 0]);
 
     return { xScale, yScale };
@@ -91,8 +104,8 @@ function drawElevationChartAxesAndGrid(svg) {
         );
 
     // Axes
-    const xAxis = d3.axisBottom(xScale).ticks(5).tickFormat(d => `${d} km`);
-    const yAxis = d3.axisLeft(yScale).ticks(4).tickFormat(d => `${d} m`);
+    const xAxis = d3.axisBottom(xScale).ticks(chartConfig.xAxisTicks).tickFormat(d => `${d} km`);
+    const yAxis = d3.axisLeft(yScale).ticks(chartConfig.yAxisTicks).tickFormat(d => `${d} m`);
     svg.append("g")
         .attr("transform", `translate(0, ${height})`)
         .call(xAxis)
@@ -115,7 +128,7 @@ function drawElevationChartPaths(svg, elevationData, dayColor) {
     svg.append("path")
         .datum(elevationData)
         .attr("fill", dayColor)
-        .attr("fill-opacity", 0.4)
+        .attr("fill-opacity", chartConfig.areaOpacity)
         .attr("d", area);
     
     // Draw the top line of the area
@@ -123,7 +136,7 @@ function drawElevationChartPaths(svg, elevationData, dayColor) {
         .datum(elevationData)
         .attr("fill", "none")
         .attr("stroke", dayColor)
-        .attr("stroke-width", 2)
+        .attr("stroke-width", chartConfig.strokeWidth)
         .attr("d", d3.line().x(d => xScale(d[0])).y(d => yScale(d[1])));
 }
 
@@ -145,7 +158,7 @@ function setupElevationChartInteractivity(svg, dayNumber, pathData) {
 
     chartIndicatorGroup.append("circle")
         .attr("class", "indicator-circle")
-        .attr("r", 5)
+        .attr("r", chartConfig.indicatorRadius)
         .attr("fill", dayColor);
 
     // Set up the mouse listener overlay
