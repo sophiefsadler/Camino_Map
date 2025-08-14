@@ -16,6 +16,22 @@ import {
 import { updateStory } from './main.js';
 
 // ==========================================================================
+// CONFIGS
+// ==========================================================================
+
+const UITimings = {
+    panelFade: 200, // ms
+    indicatorHideDelay: 50 // ms
+};
+
+const hoverMarkerOptions = {
+    radius: 8,
+    color: '#ffffff',
+    weight: 2,
+    fillOpacity: 1
+};
+
+// ==========================================================================
 // DOM ELEMENT SELECTORS
 // ==========================================================================
 
@@ -132,7 +148,7 @@ export function restoreDayInPanel(dayNumber) {
     AppState.panelUpdateTimeoutId = setTimeout(() => { 
         updatePanelContent(dayData);
         storyContent.classed('content-fading', false);
-    }, 200);
+    }, UITimings.panelFade);
 }
 
 export function showPoiInPanel(poi) {
@@ -148,7 +164,7 @@ export function showPoiInPanel(poi) {
         stageCaption.text(poi.photoCaption || '');
         stageDescription.text(poi.description);
         storyContent.classed('content-fading', false);
-    }, 200);
+    }, UITimings.panelFade);
 }
 
 export function showIndicators(dayNumber) {
@@ -159,12 +175,7 @@ export function showIndicators(dayNumber) {
 
     // Create or update and show the map marker
     if (!AppState.hoverMarker) {
-        AppState.hoverMarker = L.circleMarker([0, 0], {
-            radius: 8,
-            color: '#ffffff',
-            weight: 2,
-            fillOpacity: 1,
-        });
+            AppState.hoverMarker = L.circleMarker([0, 0], hoverMarkerOptions);
     }
     AppState.hoverMarker.setStyle({ fillColor: dayColor }).addTo(map);
 
@@ -178,7 +189,7 @@ export function hideIndicators() {
     AppState.hideIndicatorsTimeout = setTimeout(() => {
         if (AppState.hoverMarker) AppState.hoverMarker.remove();
         if (AppState.activeChart.indicator) AppState.activeChart.indicator.style("display", "none");
-    }, 50); // A 50ms delay prevents flickering
+    }, UITimings.indicatorHideDelay); // A 50ms delay prevents flickering
 }
 
 export function updateIndicators(index, dayNumber) {
