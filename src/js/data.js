@@ -14,7 +14,7 @@ export async function getPathData(dayNumber) {
     if (pathDataCache[dayNumber]) {
         return pathDataCache[dayNumber];
     }
-    const path = `../../assets/data/day_${String(dayNumber).padStart(2, '0')}.json`;
+    const path = `assets/data/day_${String(dayNumber).padStart(2, '0')}.json`;
     try {
         const response = await fetch(path);
         if (!response.ok) throw new Error('Path file not found');
