@@ -8,7 +8,7 @@ import json
 from math import sin, cos, sqrt, atan2, radians
 
 # --- Configuration ---
-GPX_DIRECTORY = 'gpx_files' 
+GPX_DIRECTORY = 'assets/gpx_files' 
 OUTPUT_DATA_DIR = 'data'
 OUTPUT_METADATA_FILE = 'camino-metadata.js'
 SIMPLIFICATION_FACTOR = 10

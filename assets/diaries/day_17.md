@@ -1,0 +1,13 @@
+I was surprised by the others' denial that they had a hangover. The day started grey but I was in hugely high spirits, feeling for the first time that I was really excited to walk again, as if the novelty had returned. At the first town we found a cute café where I had amazing tortilla and cheesecake.
+
+Once we got going we saw long lines of caterpillars again. Lawrence blew on them and they all curled up, hindering their ability to follow eachother. We talked about whether there's an afterlife and what we think happens when we die. We also talked about whether we fear death. The way eventually brought us to the outskirts of Sahagun, where we reached the halfway markers of the Camino! At this point we knew we had gone further than halfway as it marks halfway from Roncesvalles only. We took plenty of photos and then the guys behaved like yobs throwing rocks at large fungi on the trees. Sahagun itself was kind of ugly, and we stopped at another café briefly. My shoulders were hurting once again.
+
+When leaving Sahagun, we found a playground which occupied us for a good while. We all flew down the zip wire. It was quite high up and I felt scared watching Lawrence and Woody who both commented on the height, but it was actually a lot less scary than I expected. I attempted the monkey bars and was able to do about four. We then wrestled on the balance beams. An older lady came and flew down the zip wire while we cheered, which was incredibly wholesome.
+
+We left singing harvest festival songs, before eventually joining one of the most boring sections of the Camino so far, where the endless footpath ran alongside a quiet road between infinite fields. After some time we separated and I listened to High School Musical and emotional love songs and breakup songs, thinking once again about my future. We passed by a final café where I got the most amazing burger and chocolate mousse, before finally arriving in El Burgo Ranero. We saw a herd of goats and bumped into the same woman from the playground!! It turned out she was actually one of the volunteers at the albergue.
+
+Having eaten so much at the last café, we bought only yoghurt, nuts, chocolate and bananas for our dinner, which actually went down very well. My shower went cold very quickly and it gave me one of my lowest emotional moments of the whole Camino.
+
+I found myself wondering whether these "adventures" are worth it, if the days become samey and I'm subjected to cold showers and missing the people I love.
+
+Thankfully, we had a room to ourselves and I got my best sleep of the entire Camino.
