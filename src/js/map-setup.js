@@ -106,9 +106,18 @@ function onEachFeature(feature, layer) {
 
     const dayNumber = feature.properties.day;
 
-    layer.on('mouseover', () => showIndicators(dayNumber));
+    layer.on('mouseover', () => {
+        // Only show indicators if hovering over the currently selected day
+        if (dayNumber !== AppState.currentDay) return;
+        showIndicators(dayNumber);
+    });
+
     layer.on('mouseout', () => hideIndicators());
+
     layer.on('mousemove', function(e) {
+        // Only update indicators for the currently selected day
+        if (dayNumber !== AppState.currentDay) return;
+        
         // Ensure we have data for the current day
         if (!pathDataCache[AppState.currentDay]) return;
 
