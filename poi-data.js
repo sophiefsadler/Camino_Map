@@ -1,4 +1,4 @@
-const poiData = [
+export const poiData = [
   {
     day: 0,
     title: "Pilgrims in SJPDP",

@@ -1,4 +1,4 @@
-const caminoMetadata = [
+export const caminoMetadata = [
   {
     "day": 0,
     "start": "Arrival in",
