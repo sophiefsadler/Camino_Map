@@ -18,6 +18,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="src/css/style.css">
 </head>
@@ -64,6 +67,11 @@
             <h3 id="youtube-title" class="font-bold text-gray-900 text-base leading-tight mb-2"></h3>
             <p class="text-sm text-blue-600 font-semibold">Click to watch the YouTube video!</p>
         </a>
+    </div>
+
+    <div id="timeline-container" class="fixed bottom-0 h-16 p-2 z-20 flex items-center justify-center pointer-events-none">
+        <div id="timeline" class="bg-white/60 backdrop-blur-md rounded-xl shadow-lg h-full p-2 flex items-center gap-2 overflow-x-auto custom-scrollbar pointer-events-auto">
+        </div>
     </div>
 
     <script type="module" src="src/js/main.js"></script>

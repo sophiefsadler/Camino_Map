@@ -31,6 +31,12 @@ const hoverMarkerOptions = {
     fillOpacity: 1
 };
 
+const timelineLabels = {
+    0: "SJPDP",
+    12.5: "Madrid",
+    32: "Santiago"
+};
+
 // ==========================================================================
 // DOM ELEMENT SELECTORS
 // ==========================================================================
@@ -214,6 +220,59 @@ export function updateIndicators(index, dayNumber) {
         AppState.activeChart.indicator.select(".indicator-circle")
             .attr("cx", AppState.activeChart.xScale(distance))
             .attr("cy", AppState.activeChart.yScale(elevation));
+    }
+}
+
+export function createTimeline() {
+    const timeline = d3.select("#timeline");
+
+    // Clear any existing buttons
+    timeline.html("");
+
+    // Create a button for each day in the metadata
+    caminoMetadata.forEach(day => {
+        // Get the original color from the scale
+        const hslColor = d3.hsl(colorScale(day.day));
+
+        // Now, modify the saturation and lightness to make a pastel
+        hslColor.s = 0.9;
+        hslColor.l = 0.77;
+
+        const button = timeline.append("button")
+            .attr("class", "timeline-btn")
+            .attr("data-day", day.day)
+            .style("background-color", hslColor)
+            .on("click", () => updateStory(day.day));
+
+        button.text(timelineLabels[day.day] || `Day ${day.day}`);
+    });
+}
+
+export function updateActiveButton(dayNumber) {
+    const buttons = d3.selectAll(".timeline-btn");
+
+    // Reset all buttons to their inactive, pastel state
+    buttons.each(function() {
+        const button = d3.select(this);
+        const day = button.attr("data-day");
+
+        // Remove the 'active' class
+        button.classed("active", false);
+
+        // Recalculate and apply the pastel color
+        const hslColor = d3.hsl(colorScale(day));
+        hslColor.s = 0.6; // Saturation
+        hslColor.l = 0.75; // Lightness
+        button.style("background-color", hslColor);
+    });
+
+    // Find the specific button that is now active
+    const activeButton = d3.select(`.timeline-btn[data-day='${dayNumber}']`);
+
+    if (!activeButton.empty()) {
+        // Add the 'active' class for the border and shadow effect
+        activeButton.classed("active", true);
+        activeButton.style("background-color", colorScale(dayNumber));
     }
 }
 

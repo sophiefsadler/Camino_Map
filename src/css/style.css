@@ -110,6 +110,42 @@ body {
     background-color: var(--panel-scrollbar-thumb-hover);
 }
 
+/* --- Timeline --- */
+#timeline-container {
+    /* Position the container between the other panels */
+    left: 22rem;  /* Start after the story panel (20rem width + padding) */
+    right: 21rem; /* End before the YouTube panel (18rem width + padding) */
+}
+
+.timeline-btn {
+    flex-shrink: 0;
+    width: 3rem; /* 48px */
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: 0.5rem; /* 8px */
+    font-weight: 700;
+    color: white;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+
+    font-family: 'Dancing Script', cursive;
+    font-size: 0.65rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.timeline-btn:hover {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.timeline-btn.active {
+    border-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
 /* ==========================================================================
    4. State & Utility Classes
    ========================================================================== */

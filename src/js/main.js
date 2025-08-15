@@ -17,7 +17,9 @@ import {
     setInitialStoryPanel, 
     updatePanelContent, 
     updateUIVisibility, 
-    updateButtonStates 
+    updateButtonStates,
+    createTimeline,
+    updateActiveButton
 } from './ui-logic.js';
 
 // ==========================================================================
@@ -33,6 +35,7 @@ export function updateStory(dayNumber) {
     updatePanelContent(dayData);
     updateUIVisibility(dayData);
     updateButtonStates(dayNumber);
+    updateActiveButton(dayNumber);
 
     if (AppState.currentDay === 0) {
         casingLayer.setStyle({ opacity: 0 });
@@ -52,6 +55,7 @@ async function setInitialView() {
     }
 
     setInitialStoryPanel();
+    createTimeline();
 }
 
 // ==========================================================================
