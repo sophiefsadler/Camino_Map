@@ -64,7 +64,7 @@ export const poiMarkers = new L.MarkerClusterGroup({
 
         // Find the day of the first marker in the cluster to determine the color
         const firstPoiData = childMarkers[0].options.poi;
-        const dayColor = colorScale(firstPoiData.day);
+        const dayColor = colorScale(String(firstPoiData.day));
 
         // Determine if the background color is light or dark
         const lightness = d3.lab(dayColor).l;
@@ -175,7 +175,7 @@ function drawPoisForDay(dayNumber) {
     const poisForDay = poiData.filter(poi => poi.day === dayNumber);
 
     poisForDay.forEach(poi => {
-        const dayColor = colorScale(poi.day);
+        const dayColor = colorScale(String(poi.day));
         const customIcon = createPoiIcon(dayColor); 
         
         const marker = L.marker(poi.coordinates, { 
@@ -261,7 +261,7 @@ export function stylePath(feature) {
     const isActive = day === AppState.currentDay;
     const { baseWeight, activeWeight } = getWeights();
     return {
-        color: isActive ? d3.color(colorScale(day)).brighter(0.5) : colorScale(day),
+        color: isActive ? d3.color(colorScale(String(day))).brighter(0.5) : colorScale(String(day)),
         weight: isActive ? activeWeight : baseWeight,
         opacity: 0.9
     };

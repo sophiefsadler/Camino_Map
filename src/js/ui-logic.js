@@ -232,7 +232,7 @@ export function createTimeline() {
     // Create a button for each day in the metadata
     caminoMetadata.forEach(day => {
         // Get the original color from the scale
-        const hslColor = d3.hsl(colorScale(day.day));
+        const hslColor = d3.hsl(colorScale(String(day.day)));
 
         // Now, modify the saturation and lightness to make a pastel
         hslColor.s = 0.9;
@@ -272,7 +272,7 @@ export function updateActiveButton(dayNumber) {
     if (!activeButton.empty()) {
         // Add the 'active' class for the border and shadow effect
         activeButton.classed("active", true);
-        activeButton.style("background-color", colorScale(dayNumber));
+        activeButton.style("background-color", colorScale(String(dayNumber)));
     }
 }
 

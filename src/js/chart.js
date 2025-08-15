@@ -45,7 +45,7 @@ export function drawElevationProfile(dayNumber) {
     drawElevationChartAxesAndGrid(svg);
 
     // Draw the data
-    const dayColor = colorScale(dayNumber);
+    const dayColor = colorScale(String(dayNumber));
     drawElevationChartPaths(svg, pathData.elevation_data, dayColor);
 
     // Set up the mouse listeners for the interactive blobs
@@ -142,7 +142,7 @@ function drawElevationChartPaths(svg, elevationData, dayColor) {
 
 function setupElevationChartInteractivity(svg, dayNumber, pathData) {
     const { width, height, xScale } = AppState.activeChart;
-    const dayColor = colorScale(dayNumber);
+    const dayColor = colorScale(String(dayNumber));
 
     // Create the indicator elements and store them in the AppState
     const chartIndicatorGroup = svg.append("g")
