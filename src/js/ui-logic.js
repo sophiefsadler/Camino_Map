@@ -177,7 +177,7 @@ export function showIndicators(dayNumber) {
     // Cancel any pending timeout to hide the indicators
     clearTimeout(AppState.hideIndicatorsTimeout);
 
-    const dayColor = colorScale(dayNumber);
+    const dayColor = colorScale(String(dayNumber));
 
     // Create or update and show the map marker
     if (!AppState.hoverMarker) {
