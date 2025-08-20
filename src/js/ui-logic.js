@@ -236,13 +236,11 @@ export function createTimeline() {
 
     const timelineNode = timeline.node();
 
-    // Add an event listener for the mouse wheel
+    // Add an event listener for scrolling
     timelineNode.addEventListener('wheel', (event) => {
-        // Prevent the default vertical page scroll
         event.preventDefault();
-        
-        // Scroll the timeline horizontally by the vertical scroll amount
-        timelineNode.scrollLeft += event.deltaY;
+        // Prioritize horizontal swipe (deltaX), but fall back to vertical scroll (deltaY)
+        timelineNode.scrollLeft += event.deltaX || event.deltaY;
     });
     
     // Clear any existing buttons
