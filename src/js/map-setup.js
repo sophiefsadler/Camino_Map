@@ -222,35 +222,48 @@ function drawPoisForDay(dayNumber) {
 
 function flyToCenteredView(dayData) {
     elevationPanel.classed("hidden", true);
-    map.flyTo(dayData.center_coord, dayData.zoom_level, { duration: 1.5 });
+    const zoomLevel = isMobile() ? dayData.zoom_level - 1 : dayData.zoom_level;
+    map.flyTo(dayData.center_coord, zoomLevel, { duration: 1.5 });
 }
 
 async function flyToPathView(dayData) {
     const pathData = await getPathData(dayData.day);
     
-    // Manage elevation panel visibility and position
-    if (pathData && pathData.elevation_data && pathData.elevation_data.length > 0) {
-        if (dayData.day === 18 || dayData.day === 24) {
-            elevationPanel.classed("top-6", false).classed("bottom-20", true);
+    if (!isMobile()) {
+        if (pathData && pathData.elevation_data && pathData.elevation_data.length > 0) {
+            if (dayData.day === 18 || dayData.day === 24) {
+                elevationPanel.classed("top-6", false).classed("bottom-20", true);
+            } else {
+                elevationPanel.classed("bottom-20", false).classed("top-6", true);
+            }
+            elevationPanel.classed("hidden", false);
+            drawElevationProfile(dayData.day);
         } else {
-            elevationPanel.classed("bottom-20", false).classed("top-6", true);
+            elevationPanel.classed("hidden", true);
         }
-        elevationPanel.classed("hidden", false);
-        drawElevationProfile(dayData.day);
-    } else {
-        elevationPanel.classed("hidden", true);
     }
 
     if (!pathData) return;
 
-    // Fly to the path's bounds
     const geoJsonLayerForZoom = L.geoJSON({ type: "LineString", coordinates: pathData.path_simple });
     const panelWidth = document.getElementById('story-panel-container').offsetWidth;
-    map.flyToBounds(geoJsonLayerForZoom.getBounds(), { 
-        paddingTopLeft: L.point(panelWidth + 50, 50),
-        paddingBottomRight: L.point(50, 50),
-        duration: 0.75 
-    });
+
+    let flyToBoundsOptions;
+
+    if (isMobile()) {
+        flyToBoundsOptions = {
+            padding: L.point(30, 30),
+            duration: 0.75
+        };
+    } else {
+        flyToBoundsOptions = {
+            paddingTopLeft: L.point(panelWidth + 50, 50),
+            paddingBottomRight: L.point(50, 50),
+            duration: 0.75
+        };
+    }
+
+    map.flyToBounds(geoJsonLayerForZoom.getBounds(), flyToBoundsOptions);
 }
 
 // ==========================================================================
@@ -287,7 +300,7 @@ export function initializeMapLayers(features) {
     if (fullBounds.isValid()) {
         const panelWidth = document.getElementById('story-panel-container').offsetWidth;
         if (isMobile()) {
-            map.fitBounds(fullBounds, { padding: L.point(40, 40) });
+            map.fitBounds(fullBounds, { padding: L.point(20, 20) });
         } else {
             map.fitBounds(fullBounds, { 
                 paddingTopLeft: L.point(panelWidth + 20, 20),
