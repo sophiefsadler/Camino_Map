@@ -20,7 +20,8 @@ import {
     updateButtonStates,
     createTimeline,
     updateActiveButton,
-    setupMobileTabs
+    setupMobileTabs,
+    isMobile
 } from './ui-logic.js';
 
 // ==========================================================================
@@ -58,6 +59,10 @@ async function setInitialView() {
     setInitialStoryPanel();
     createTimeline();
     setupMobileTabs();
+
+    if (isMobile()) {
+        d3.select("#story-tab").classed("pulse-animation", true);
+    }
 }
 
 // ==========================================================================

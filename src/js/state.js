@@ -4,6 +4,7 @@ export const AppState = {
     panelUpdateTimeoutId: null,
     hoverMarker: null,
     hideIndicatorsTimeout: null,
+    isFirstTimeStoryOpen: true,
     activeChart: {
         xScale: null,
         yScale: null,

@@ -262,6 +262,27 @@ body {
     transition: opacity 0.2s ease-in-out;
 }
 
+/* Define animation frames for element pulse */
+@keyframes pulse-glow {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(29, 78, 216, 0.7);
+    }
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(29, 78, 216, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(29, 78, 216, 0);
+    }
+}
+
+/* A reusable class to apply the animation */
+.pulse-animation {
+    animation: pulse-glow 2s infinite;
+}
+
 /* ==========================================================================
    6. Responsive Styles
    ========================================================================== */

@@ -313,6 +313,12 @@ export function setupMobileTabs() {
                 storyPanel.classed("is-open", false);
             });
         }
+        if (AppState.isFirstTimeStoryOpen && !isOpen) {
+            storyTab.classed("pulse-animation", false);
+            // Add the pulse to the 'Next' buttons
+            d3.selectAll(".next-day-btn").classed("pulse-animation", true);
+            AppState.isFirstTimeStoryOpen = false;
+        }
     });
 }
 
@@ -334,6 +340,7 @@ d3.selectAll(".prev-day-btn").on("click", () => {
 });
 
 d3.selectAll(".next-day-btn").on("click", () => { 
+    d3.selectAll(".next-day-btn").classed("pulse-animation", false);
     if (AppState.currentDay === -1) {
         updateStory(caminoMetadata[0].day);
         return;
