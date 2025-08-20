@@ -89,6 +89,10 @@ body {
     font-size: 0.9rem;
 }
 
+#story-panel .story-panel-close-btn {
+    display: none;
+}
+
 /* --- Elevation Chart --- */
 .grid line {
   stroke: lightgray;
@@ -252,6 +256,37 @@ body {
     border-top: 1px solid rgba(0,0,0,0.1);
 }
 
+#story-panel, #poi-modal-content {
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.close-btn svg {
+    width: 1rem;
+    height: 1rem;
+    stroke: #333;
+    stroke-width: 3;
+}
+
 /* ==========================================================================
    5. State & Utility Classes
    ========================================================================== */
@@ -303,13 +338,22 @@ body {
     }
 
     #story-panel-container {
+        width: 100%;
         transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
         z-index: 40; /* Make sure it's above the tabs */
     }
 
+    #story-panel {
+        width: 100%;
+    }
+
     #story-panel-container.is-open {
         transform: translateX(0);
+    }
+
+    #story-panel .story-panel-close-btn {
+        display: flex;
     }
 
     #mobile-tabs-container {

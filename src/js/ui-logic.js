@@ -299,32 +299,25 @@ export function setupMobileTabs() {
     const storyTab = d3.select("#story-tab");
     const storyPanel = d3.select("#story-panel-container");
     const storyPanelNode = storyPanel.node(); // Get the raw HTML element
+    const closeBtn = d3.select(".story-panel-close-btn");
 
     // Stop clicks inside the panel from bubbling up to the map
     L.DomEvent.on(storyPanelNode, 'click', L.DomEvent.stopPropagation);
 
-    storyTab.on("click", () => {
-        const isOpen = storyPanel.classed("is-open");
-        storyPanel.classed("is-open", !isOpen);
+    const closePanel = () => storyPanel.classed("is-open", false);
 
-        // If the panel is being opened, listen for the next map click to close it
-        if (!isOpen) {
-            map.once('click', () => {
-                storyPanel.classed("is-open", false);
-            });
-        }
-        if (AppState.isFirstTimeStoryOpen && !isOpen) {
-            storyTab.classed("pulse-animation", false);
-            // Add the pulse to the 'Next' buttons
-            d3.selectAll(".next-day-btn").classed("pulse-animation", true);
-            AppState.isFirstTimeStoryOpen = false;
-        }
+    storyTab.on("click", () => {
+        storyPanel.classed("is-open", true);
+        map.once('click', closePanel);
     });
+
+    closeBtn.on("click", closePanel);
 }
 
 export function showPoiModal(poi) {
     const modalOverlay = d3.select("#poi-modal-overlay");
     const modalContent = d3.select("#poi-modal-content");
+    const closeBtn = d3.select(".poi-modal-close-btn");
 
     d3.select("#poi-modal-img").attr("src", poi.photoUrl);
     d3.select("#poi-modal-title").text(poi.title);
@@ -334,6 +327,7 @@ export function showPoiModal(poi) {
     modalOverlay.style("display", "flex");
 
     modalOverlay.on("click", hidePoiModal);
+    closeBtn.on("click", hidePoiModal);
 
     modalContent.on("click", (event) => {
         event.stopPropagation();
@@ -361,11 +355,17 @@ d3.selectAll(".prev-day-btn").on("click", () => {
     if (currentIndex > 0) {
         const prevDayData = caminoMetadata[currentIndex - 1];
         updateStory(prevDayData.day);
+        if (isMobile()) {
+            d3.select("#story-panel-container").classed("is-open", false);
+        }
     }
 });
 
 d3.selectAll(".next-day-btn").on("click", () => { 
     d3.selectAll(".next-day-btn").classed("pulse-animation", false);
+    if (isMobile()) {
+        d3.select("#story-panel-container").classed("is-open", false);
+    }
     if (AppState.currentDay === -1) {
         updateStory(caminoMetadata[0].day);
         return;
@@ -375,5 +375,8 @@ d3.selectAll(".next-day-btn").on("click", () => {
     if (currentIndex > -1 && currentIndex < caminoMetadata.length - 1) {
         const nextDayData = caminoMetadata[currentIndex + 1];
         updateStory(nextDayData.day);
+        if (isMobile()) {
+            d3.select("#story-panel-container").classed("is-open", false);
+        }
     }
 });
