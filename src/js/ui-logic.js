@@ -226,6 +226,17 @@ export function updateIndicators(index, dayNumber) {
 export function createTimeline() {
     const timeline = d3.select("#timeline");
 
+    const timelineNode = timeline.node();
+
+    // Add an event listener for the mouse wheel
+    timelineNode.addEventListener('wheel', (event) => {
+        // Prevent the default vertical page scroll
+        event.preventDefault();
+        
+        // Scroll the timeline horizontally by the vertical scroll amount
+        timelineNode.scrollLeft += event.deltaY;
+    });
+    
     // Clear any existing buttons
     timeline.html("");
 
