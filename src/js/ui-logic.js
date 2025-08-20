@@ -314,21 +314,32 @@ export function setupMobileTabs() {
     closeBtn.on("click", closePanel);
 }
 
+// In ui-logic.js
+
 export function showPoiModal(poi) {
     const modalOverlay = d3.select("#poi-modal-overlay");
     const modalContent = d3.select("#poi-modal-content");
     const closeBtn = d3.select(".poi-modal-close-btn");
 
-    d3.select("#poi-modal-img").attr("src", poi.photoUrl);
-    d3.select("#poi-modal-title").text(poi.title);
-    d3.select("#poi-modal-description").text(poi.description);
-
+    modalContent.classed("is-loading", true);
     modalOverlay.classed("hidden", false);
     modalOverlay.style("display", "flex");
 
+    // Preload the image in the background
+    const img = new Image();
+    img.src = poi.photoUrl;
+
+    // Once the image is successfully loaded, show content
+    img.onload = () => {
+        d3.select("#poi-modal-img").attr("src", poi.photoUrl);
+        d3.select("#poi-modal-title").text(poi.title);
+        d3.select("#poi-modal-description").text(poi.description);
+
+        modalContent.classed("is-loading", false);
+    };
+
     modalOverlay.on("click", hidePoiModal);
     closeBtn.on("click", hidePoiModal);
-
     modalContent.on("click", (event) => {
         event.stopPropagation();
     });
