@@ -45,6 +45,7 @@ body {
 .leaflet-interactive {
     cursor: pointer;
 }
+
 .leaflet-tile-pane {
     filter: saturate(85%) grayscale(15%) sepia(20%);
 }
@@ -69,18 +70,22 @@ body {
 #stage-photo {
     height: auto;
 }
+
 #stage-photo img {
     max-height: 300px;
     width: 100%;
     height: auto;
 }
+
 #stage-description {
     font-size: 1.0rem;
 }
+
 #stage-description p + p {
     margin-top: 1em;
 }
-#prev-day, #next-day, #day-counter {
+
+.prev-day-btn, .next-day-btn, .day-counter {
     font-size: 0.9rem;
 }
 
@@ -90,13 +95,16 @@ body {
   stroke-opacity: 0.7;
   shape-rendering: crispEdges;
 }
+
 .grid path {
   stroke-width: 0;
 }
+
 .chart-indicator .indicator-line {
   stroke-width: 1px;
   stroke-dasharray: 3,3;
 }
+
 .chart-indicator .indicator-circle {
   stroke: white;
   stroke-width: 2px;
@@ -106,13 +114,16 @@ body {
 .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: var(--panel-scrollbar-thumb);
     border-radius: 4px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background-color: var(--panel-scrollbar-thumb-hover);
 }
@@ -164,6 +175,7 @@ body {
     transform: translateY(-50%);
     z-index: 30;
     display: none; /* Hidden on desktop by default */
+    transition: opacity 0.3s ease-in-out;
 }
 
 .mobile-tab {
@@ -221,6 +233,24 @@ body {
     margin-bottom: 0.5rem;
 }
 
+/* --- Mobile Nav Bar --- */
+#mobile-nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50; /* High z-index to be on top */
+    
+    display: none; /* Hidden on desktop by default */
+    justify-content: space-around;
+    align-items: center;
+
+    padding: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
 /* ==========================================================================
    5. State & Utility Classes
    ========================================================================== */
@@ -262,5 +292,18 @@ body {
 
     #mobile-tabs-container {
         display: block;
+    }
+
+    #story-panel-container.is-open ~ #mobile-tabs-container {
+        opacity: 0;
+        pointer-events: none; 
+    }
+
+    .nav-buttons {
+        display: none;
+    }
+
+    #mobile-nav-bar {
+        display: flex;
     }
 }

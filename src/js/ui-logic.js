@@ -56,9 +56,9 @@ export const stagePhotoContainer = d3.select("#stage-photo");
 export const stageCaption = d3.select("#stage-caption");
 export const stageDescription = d3.select("#stage-description");
 export const elevationPanel = d3.select("#elevation-panel");
-export const dayCounter = d3.select("#day-counter");
-export const prevDayBtn = d3.select("#prev-day");
-export const nextDayBtn = d3.select("#next-day");
+export const dayCounter = d3.selectAll(".day-counter");
+export const prevDayBtn = d3.selectAll(".prev-day-btn");
+export const nextDayBtn = d3.selectAll(".next-day-btn");
 export const youtubePanel = d3.select("#youtube-panel");
 export const youtubeLink = d3.select("#youtube-link");
 export const youtubeThumb = d3.select("#youtube-thumb");
@@ -327,7 +327,7 @@ photoElement.addEventListener('load', () => {
     stagePhoto.classed('opacity-0', false);
 });
 
-prevDayBtn.on("click", () => {
+d3.selectAll(".prev-day-btn").on("click", () => { 
     const currentIndex = caminoMetadata.findIndex(d => d.day === AppState.currentDay);
     if (currentIndex > 0) {
         const prevDayData = caminoMetadata[currentIndex - 1];
@@ -335,7 +335,7 @@ prevDayBtn.on("click", () => {
     }
 });
 
-nextDayBtn.on("click", () => {
+d3.selectAll(".next-day-btn").on("click", () => { 
     if (AppState.currentDay === -1) {
         updateStory(caminoMetadata[0].day);
         return;
