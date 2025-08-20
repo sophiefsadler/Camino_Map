@@ -13,7 +13,8 @@ import {
     showIndicators, 
     hideIndicators, 
     updateIndicators,
-    elevationPanel 
+    elevationPanel,
+    isMobile 
 } from './ui-logic.js';
 import { drawElevationProfile } from './chart.js';
 import { getPathData } from './data.js';
@@ -285,10 +286,14 @@ export function initializeMapLayers(features) {
     const fullBounds = colorLayer.getBounds();
     if (fullBounds.isValid()) {
         const panelWidth = document.getElementById('story-panel-container').offsetWidth;
-        map.fitBounds(fullBounds, { 
-            paddingTopLeft: L.point(panelWidth + 20, 20),
-            paddingBottomRight: L.point(20, 20)
-        });
+        if (isMobile()) {
+            map.fitBounds(fullBounds, { padding: L.point(40, 40) });
+        } else {
+            map.fitBounds(fullBounds, { 
+                paddingTopLeft: L.point(panelWidth + 20, 20),
+                paddingBottomRight: L.point(20, 20)
+            });
+        }
     }
 }
 

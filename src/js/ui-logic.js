@@ -1,4 +1,12 @@
 // ==========================================================================
+// MOBILE COMPATIBILITY
+// ==========================================================================
+
+export function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+// ==========================================================================
 // IMPORTS
 // ==========================================================================
 
@@ -285,6 +293,29 @@ export function updateActiveButton(dayNumber) {
         activeButton.classed("active", true);
         activeButton.style("background-color", colorScale(String(dayNumber)));
     }
+}
+
+export function setupMobileTabs() {
+    if (!isMobile()) return;
+
+    const storyTab = d3.select("#story-tab");
+    const storyPanel = d3.select("#story-panel-container");
+    const storyPanelNode = storyPanel.node(); // Get the raw HTML element
+
+    // Stop clicks inside the panel from bubbling up to the map
+    L.DomEvent.on(storyPanelNode, 'click', L.DomEvent.stopPropagation);
+
+    storyTab.on("click", () => {
+        const isOpen = storyPanel.classed("is-open");
+        storyPanel.classed("is-open", !isOpen);
+
+        // If the panel is being opened, listen for the next map click to close it
+        if (!isOpen) {
+            map.once('click', () => {
+                storyPanel.classed("is-open", false);
+            });
+        }
+    });
 }
 
 // ==========================================================================

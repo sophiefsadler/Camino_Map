@@ -19,7 +19,8 @@ import {
     updateUIVisibility, 
     updateButtonStates,
     createTimeline,
-    updateActiveButton
+    updateActiveButton,
+    setupMobileTabs
 } from './ui-logic.js';
 
 // ==========================================================================
@@ -56,6 +57,7 @@ async function setInitialView() {
 
     setInitialStoryPanel();
     createTimeline();
+    setupMobileTabs();
 }
 
 // ==========================================================================
