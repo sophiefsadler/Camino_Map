@@ -322,6 +322,31 @@ export function setupMobileTabs() {
     });
 }
 
+export function showPoiModal(poi) {
+    const modalOverlay = d3.select("#poi-modal-overlay");
+    const modalContent = d3.select("#poi-modal-content");
+
+    d3.select("#poi-modal-img").attr("src", poi.photoUrl);
+    d3.select("#poi-modal-title").text(poi.title);
+    d3.select("#poi-modal-description").text(poi.description);
+
+    modalOverlay.classed("hidden", false);
+    modalOverlay.style("display", "flex");
+
+    modalOverlay.on("click", hidePoiModal);
+
+    modalContent.on("click", (event) => {
+        event.stopPropagation();
+    });
+}
+
+function hidePoiModal() {
+    const modalOverlay = d3.select("#poi-modal-overlay");
+    modalOverlay.classed("hidden", true);
+    modalOverlay.style("display", "none");
+    modalOverlay.on("click", null);
+}
+
 // ==========================================================================
 // EVENT LISTENERS
 // ==========================================================================
