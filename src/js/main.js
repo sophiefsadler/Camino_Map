@@ -29,6 +29,8 @@ import {
 // ==========================================================================
 
 export function updateStory(dayNumber) {
+    d3.selectAll(".next-day-btn").classed("pulse-animation", false);
+    
     // Update the application's current state
     AppState.currentDay = dayNumber;
     const dayData = caminoMetadata.find(d => d.day === dayNumber);

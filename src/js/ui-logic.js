@@ -298,7 +298,7 @@ export function setupMobileTabs() {
 
     const storyTab = d3.select("#story-tab");
     const storyPanel = d3.select("#story-panel-container");
-    const storyPanelNode = storyPanel.node(); // Get the raw HTML element
+    const storyPanelNode = storyPanel.node();
     const closeBtn = d3.select(".story-panel-close-btn");
 
     // Stop clicks inside the panel from bubbling up to the map
@@ -307,6 +307,11 @@ export function setupMobileTabs() {
     const closePanel = () => storyPanel.classed("is-open", false);
 
     storyTab.on("click", () => {
+        storyTab.classed("pulse-animation", false);
+
+        if (AppState.currentDay === -1) {
+            d3.selectAll(".next-day-btn").classed("pulse-animation", true);
+        }
         storyPanel.classed("is-open", true);
         map.once('click', closePanel);
     });
