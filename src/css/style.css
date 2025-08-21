@@ -223,13 +223,24 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-#poi-modal-img {
+#poi-modal-img-container {
+    position: relative;
     width: 100%;
-    height: auto;
-    max-height: 50vh;
-    object-fit: cover;
+    height: 50vh;
+    background-color: #f3f3f3;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#poi-modal-img {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
 }
 
 #poi-modal-title {
@@ -254,22 +265,16 @@ body {
     display: none;
 }
 
-#poi-modal-content.is-loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 200px;
-}
-
-#poi-modal-content.is-loading .loader {
+#poi-modal-img-container.is-loading .loader {
     display: block;
 }
 
-#poi-modal-content.is-loading #poi-modal-img,
-#poi-modal-content.is-loading #poi-modal-title,
-#poi-modal-content.is-loading #poi-modal-description,
-#poi-modal-content.is-loading .close-btn {
+#poi-modal-img-container:not(.is-loading) .loader {
     display: none;
+}
+
+#poi-modal-img-container:not(.is-loading) #poi-modal-img {
+    display: block;
 }
 
 /* --- Mobile Nav Bar --- */

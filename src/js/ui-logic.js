@@ -314,28 +314,32 @@ export function setupMobileTabs() {
     closeBtn.on("click", closePanel);
 }
 
-// In ui-logic.js
-
 export function showPoiModal(poi) {
     const modalOverlay = d3.select("#poi-modal-overlay");
     const modalContent = d3.select("#poi-modal-content");
     const closeBtn = d3.select(".poi-modal-close-btn");
+    const imgContainer = d3.select("#poi-modal-img-container");
 
-    modalContent.classed("is-loading", true);
-    modalOverlay.classed("hidden", false);
-    modalOverlay.style("display", "flex");
+    modalOverlay.classed("hidden", false).style("display", "flex");
+    d3.select("#poi-modal-title").text(poi.title);
+    d3.select("#poi-modal-description").text(poi.description);
 
-    // Preload the image in the background
+    // Put the image container into its 'loading' state
+    imgContainer.classed("is-loading", true);
+    d3.select("#poi-modal-img").attr("src", "");
+
+    // Preload the new image
     const img = new Image();
     img.src = poi.photoUrl;
 
-    // Once the image is successfully loaded, show content
     img.onload = () => {
         d3.select("#poi-modal-img").attr("src", poi.photoUrl);
-        d3.select("#poi-modal-title").text(poi.title);
-        d3.select("#poi-modal-description").text(poi.description);
+        imgContainer.classed("is-loading", false);
+    };
 
-        modalContent.classed("is-loading", false);
+    img.onerror = () => {
+        console.error("Modal image could not be loaded.");
+        imgContainer.classed("is-loading", false);
     };
 
     modalOverlay.on("click", hidePoiModal);
