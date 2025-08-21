@@ -226,20 +226,21 @@ body {
 #poi-modal-img-container {
     position: relative;
     width: 100%;
-    height: 50vh;
     background-color: #f3f3f3;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 200px;
 }
 
 #poi-modal-img {
     display: none;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
     border-radius: 0.5rem;
 }
 
@@ -305,6 +306,7 @@ body {
     right: 0.5rem;
     width: 2rem;
     height: 2rem;
+    z-index: 10;
     background-color: rgba(0, 0, 0, 0.1);
     border: none;
     border-radius: 50%;
@@ -378,6 +380,9 @@ body {
 
     #story-panel-container {
         width: 100%;
+        height: auto;
+        top: 0;
+        bottom: 3.5rem;
         transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
         z-index: 40; /* Make sure it's above the tabs */
