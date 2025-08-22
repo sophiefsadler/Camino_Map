@@ -93,6 +93,10 @@ body {
     display: none;
 }
 
+#elevation-panel .elevation-panel-close-btn {
+    display: none;
+}
+
 /* --- Elevation Chart --- */
 .grid line {
   stroke: lightgray;
@@ -135,9 +139,8 @@ body {
 
 /* --- Timeline --- */
 #timeline-container {
-    /* Position the container between the other panels */
-    left: 22rem;  /* Start after the story panel (20rem width + padding) */
-    right: 21rem; /* End before the YouTube panel (18rem width + padding) */
+    left: 22rem;  
+    right: 21rem;
 }
 
 .timeline-btn {
@@ -173,13 +176,23 @@ body {
     4. Mobile Component Styles
     ========================================================================== */
 
-#mobile-tabs-container {
+#mobile-story-tab-container {
     position: fixed;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
     z-index: 30;
-    display: none; /* Hidden on desktop by default */
+    display: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#mobile-elevation-tab-container {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: none;
     transition: opacity 0.3s ease-in-out;
 }
 
@@ -194,6 +207,16 @@ body {
     font-weight: bold;
     font-size: 0.9rem;
     transition: background-color 0.2s ease;
+}
+
+#story-tab.mobile-tab {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+#elevation-tab.mobile-tab {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 }
 
 .mobile-tab:hover {
@@ -378,6 +401,7 @@ body {
         display: none !important;
     }
 
+    /* --- Story Panel Mobile --- */
     #story-panel-container {
         width: 100%;
         height: auto;
@@ -400,11 +424,39 @@ body {
         display: flex;
     }
 
-    #mobile-tabs-container {
+    /* --- Elevation Panel Mobile --- */
+    #elevation-panel {
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 40% !important;
+        width: 75vw !important;
+        height: 10rem !important;
+        border-radius: 0 0 0.75rem 0.75rem !important;
+        transform: translate(-50%, -100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 40;
+    }
+
+    #elevation-panel.is-open {
+        transform: translate(-50%, 1rem);
+    }
+
+    #elevation-panel .elevation-panel-close-btn {
+        display: flex;
+    }
+
+    /* --- Mobile Tabs --- */
+    #mobile-story-tab-container,
+    #mobile-elevation-tab-container {
         display: block;
     }
 
-    #story-panel-container.is-open ~ #mobile-tabs-container {
+    /* Hide both tabs when any panel is open */
+    #story-panel-container.is-open ~ #mobile-story-tab-container,
+    #story-panel-container.is-open ~ #mobile-elevation-tab-container,
+    #elevation-panel.is-open ~ #mobile-story-tab-container,
+    #elevation-panel.is-open ~ #mobile-elevation-tab-container {
         opacity: 0;
         pointer-events: none; 
     }

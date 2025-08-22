@@ -5,6 +5,7 @@ export const AppState = {
     hoverMarker: null,
     hideIndicatorsTimeout: null,
     isFirstTimeStoryOpen: true,
+    isFirstTimeElevationOpen: true,
     activeChart: {
         xScale: null,
         yScale: null,

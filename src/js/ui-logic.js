@@ -22,6 +22,7 @@ import {
     stylePath,
 } from './map-setup.js';
 import { updateStory } from './main.js';
+import { drawElevationProfile } from './chart.js';
 
 // ==========================================================================
 // CONFIGS
@@ -63,6 +64,39 @@ export const youtubePanel = d3.select("#youtube-panel");
 export const youtubeLink = d3.select("#youtube-link");
 export const youtubeThumb = d3.select("#youtube-thumb");
 export const youtubeTitle = d3.select("#youtube-title");
+export const storyTabContainer = d3.select("#mobile-story-tab-container");
+export const elevationTabContainer = d3.select("#mobile-elevation-tab-container");
+export const storyTab = d3.select("#story-tab");
+export const elevationTab = d3.select("#elevation-tab");
+export const storyPanel = d3.select("#story-panel-container");
+export const storyCloseBtn = d3.select(".story-panel-close-btn");
+export const elevationCloseBtn = d3.select(".elevation-panel-close-btn");
+
+// ==========================================================================
+// "PRIVATE" HELPER FUNCTIONS (for mobile UI)
+// ==========================================================================
+
+function showMobileTabs() {
+    d3.select("#mobile-story-tab-container").style("opacity", 1).style("pointer-events", "auto");
+    const elevationTab = d3.select("#mobile-elevation-tab-container");
+    // Only show the elevation tab if its display is not 'none'
+    if (elevationTab.style("display") !== "none") {
+        elevationTab.style("opacity", 1).style("pointer-events", "auto");
+    }
+}
+
+function hideMobileTabs() {
+    d3.select("#mobile-story-tab-container").style("opacity", 0).style("pointer-events", "none");
+    d3.select("#mobile-elevation-tab-container").style("opacity", 0).style("pointer-events", "none");
+}
+
+function closeAllMobilePanels() {
+    if (!isMobile()) return;
+    d3.select("#story-panel-container").classed("is-open", false);
+    d3.select("#elevation-panel").classed("is-open", false);
+    showMobileTabs();
+    map.off('click', closeAllMobilePanels);
+}
 
 // ==========================================================================
 // EXPORTED UI FUNCTIONS
@@ -73,6 +107,9 @@ export function setInitialStoryPanel() {
     poiMarkers.clearLayers();
     elevationPanel.classed("hidden", true);
     youtubePanel.classed("hidden", true);
+    if(isMobile()) {
+        d3.select("#mobile-elevation-tab-container").style("display", "none");
+    }
     stageTitle.text("My Camino Francés");
     stageInfo.text("An 800km journey across Spain");
     stagePhoto.attr("src", "https://github.com/sophiefsadler/Camino_Map/blob/main/assets/images/story_panel/Overview.jpg?raw=true");
@@ -138,6 +175,18 @@ export function updateUIVisibility(dayData) {
         youtubePanel.classed("hidden", false);
     } else {
         youtubePanel.classed("hidden", true);
+    }
+
+    // Show or hide the elevation tab on mobile
+    if (isMobile()) {
+        const elevationTab = d3.select("#mobile-elevation-tab-container");
+        const daysWithoutElevation = [-1, 0, 12.5, 32];
+        
+        if (daysWithoutElevation.includes(dayData.day)) {
+            elevationTab.style("display", "none");
+        } else {
+            elevationTab.style("display", "block");
+        }
     }
 }
 
@@ -296,27 +345,49 @@ export function updateActiveButton(dayNumber) {
 export function setupMobileTabs() {
     if (!isMobile()) return;
 
-    const storyTab = d3.select("#story-tab");
-    const storyPanel = d3.select("#story-panel-container");
-    const storyPanelNode = storyPanel.node();
-    const closeBtn = d3.select(".story-panel-close-btn");
+    // Stop clicks inside panels from bubbling up to the map
+    L.DomEvent.on(storyPanel.node(), 'click', L.DomEvent.stopPropagation);
+    L.DomEvent.on(elevationPanel.node(), 'click', L.DomEvent.stopPropagation);
 
-    // Stop clicks inside the panel from bubbling up to the map
-    L.DomEvent.on(storyPanelNode, 'click', L.DomEvent.stopPropagation);
-
-    const closePanel = () => storyPanel.classed("is-open", false);
-
+    // Story Tab Click
     storyTab.on("click", () => {
-        storyTab.classed("pulse-animation", false);
-
-        if (AppState.currentDay === -1) {
-            d3.selectAll(".next-day-btn").classed("pulse-animation", true);
-        }
+        elevationPanel.classed("is-open", false); // Close other panels
         storyPanel.classed("is-open", true);
-        map.once('click', closePanel);
+        hideMobileTabs();
+
+        if (AppState.isFirstTimeStoryOpen) {
+            storyTab.classed("pulse-animation", false);
+            if (AppState.currentDay === -1) {
+                d3.selectAll(".next-day-btn").classed("pulse-animation", true);
+            }
+            AppState.isFirstTimeStoryOpen = false;
+        }
+        
+        map.once('click', closeAllMobilePanels); // Close panel on map click
     });
 
-    closeBtn.on("click", closePanel);
+    // Elevation Tab Click
+    elevationTab.on("click", () => {
+        storyPanel.classed("is-open", false); // Close other panels
+        elevationPanel.classed("is-open", true);
+        hideMobileTabs();
+
+        if (AppState.isFirstTimeElevationOpen) {
+            elevationTab.classed("pulse-animation", false);
+            AppState.isFirstTimeElevationOpen = false;
+        }
+
+        // Re-draw the elevation profile if a day is selected
+        if (AppState.currentDay > -1) {
+            drawElevationProfile(AppState.currentDay);
+        }
+
+        map.once('click', closeAllMobilePanels); // Close panel on map click
+    });
+
+    // Close Buttons Click
+    storyCloseBtn.on("click", closeAllMobilePanels);
+    elevationCloseBtn.on("click", closeAllMobilePanels);
 }
 
 export function showPoiModal(poi) {
@@ -376,27 +447,24 @@ d3.selectAll(".prev-day-btn").on("click", () => {
         const prevDayData = caminoMetadata[currentIndex - 1];
         updateStory(prevDayData.day);
         if (isMobile()) {
-            d3.select("#story-panel-container").classed("is-open", false);
+            closeAllMobilePanels();
         }
     }
 });
 
 d3.selectAll(".next-day-btn").on("click", () => { 
     d3.selectAll(".next-day-btn").classed("pulse-animation", false);
-    if (isMobile()) {
-        d3.select("#story-panel-container").classed("is-open", false);
-    }
     if (AppState.currentDay === -1) {
         updateStory(caminoMetadata[0].day);
-        return;
-    }
-    
-    const currentIndex = caminoMetadata.findIndex(d => d.day === AppState.currentDay);
-    if (currentIndex > -1 && currentIndex < caminoMetadata.length - 1) {
-        const nextDayData = caminoMetadata[currentIndex + 1];
-        updateStory(nextDayData.day);
-        if (isMobile()) {
-            d3.select("#story-panel-container").classed("is-open", false);
+    } else {
+        const currentIndex = caminoMetadata.findIndex(d => d.day === AppState.currentDay);
+        if (currentIndex > -1 && currentIndex < caminoMetadata.length - 1) {
+            const nextDayData = caminoMetadata[currentIndex + 1];
+            updateStory(nextDayData.day);
         }
+    }
+
+    if (isMobile()) {
+        closeAllMobilePanels();
     }
 });

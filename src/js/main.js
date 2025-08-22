@@ -64,6 +64,7 @@ async function setInitialView() {
 
     if (isMobile()) {
         d3.select("#story-tab").classed("pulse-animation", true);
+        d3.select("#elevation-tab").classed("pulse-animation", true);
     }
 }
 
