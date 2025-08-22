@@ -173,42 +173,43 @@ function onEachFeature(feature, layer) {
     });
 
     // --- Mobile Touch Events ---
-    layer.on('touchstart', function(e) {
-        if (isMobile() && d3.select("#elevation-panel").classed("is-open")) {
-            map.dragging.disable();
-            // Stop the event from bubbling up to the map
-            L.DomEvent.stopPropagation(e);
-        }
-    });
-
-    layer.on('touchmove', function(e) {
-        if (!isMobile() || !d3.select("#elevation-panel").classed("is-open")) {
-            return;
-        }
-        showIndicators(dayNumber);
-        if (dayNumber !== AppState.currentDay) return;
-        if (!pathDataCache[AppState.currentDay]) return;
-        const pathData = pathDataCache[AppState.currentDay];
-        let minDistance = Infinity;
-        let closestIndex = -1;
-        pathData.path_full.forEach((point, index) => {
-            const latLng = L.latLng(point[1], point[0]);
-            const distance = e.latlng.distanceTo(latLng);
-            if (distance < minDistance) {
-                minDistance = distance;
-                closestIndex = index;
+    const pathElement = layer.getElement();
+    if (pathElement) {
+        L.DomEvent.on(pathElement, 'touchstart', (e) => {
+            if (isMobile() && d3.select("#elevation-panel").classed("is-open")) {
+                map.dragging.disable();
+                L.DomEvent.stopPropagation(e);
+                L.DomEvent.preventDefault(e);
             }
         });
-        updateIndicators(closestIndex, dayNumber);
-    });
 
-    layer.on('touchend', () => {
-        // When the touch ends, hide the indicators and re-enable map dragging
-        if (isMobile()) {
-            hideIndicators();
-            map.dragging.enable();
-        }
-    });
+        L.DomEvent.on(pathElement, 'touchmove', (e) => {
+            if (!isMobile() || !d3.select("#elevation-panel").classed("is-open")) return;
+            
+            // Convert touch event to Leaflet LatLng
+            const latlng = map.mouseEventToLatLng(e.touches[0]);
+
+            showIndicators(dayNumber);
+            if (dayNumber !== AppState.currentDay || !pathDataCache[AppState.currentDay]) return;
+            const pathData = pathDataCache[AppState.currentDay];
+            let minDistance = Infinity, closestIndex = -1;
+            pathData.path_full.forEach((point, index) => {
+                const distance = latlng.distanceTo(L.latLng(point[1], point[0]));
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestIndex = index;
+                }
+            });
+            updateIndicators(closestIndex, dayNumber);
+        });
+
+        L.DomEvent.on(pathElement, 'touchend', () => {
+            if (isMobile()) {
+                hideIndicators();
+                map.dragging.enable();
+            }
+        });
+    }
 }
 
 function drawPoisForDay(dayNumber) {
