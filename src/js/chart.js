@@ -164,6 +164,24 @@ function setupElevationChartInteractivity(svg, dayNumber, pathData) {
     // Set up the mouse listener overlay
     const bisectDistance = d3.bisector(d => d[0]).left;
 
+    const handleInteraction = function(event) {
+        // For touch events, we need to get the touch coordinates
+        const pointer = d3.pointer(event, this);
+        const mouseX = pointer[0];
+
+        const distance = xScale.invert(mouseX);
+        const index = bisectDistance(pathData.elevation_data, distance, 1);
+        const d0 = pathData.elevation_data[index - 1];
+        const d1 = pathData.elevation_data[index];
+        let pointIndex = (d1 && (distance - d0[0] > d1[0] - distance)) ? index : index - 1;
+        
+        // Ensure pointIndex is within valid bounds
+        if (pointIndex < 0) pointIndex = 0;
+        if (pointIndex >= pathData.elevation_data.length) pointIndex = pathData.elevation_data.length - 1;
+        
+        updateIndicators(pointIndex, dayNumber);
+    };
+
     svg.append("rect")
         .attr("class", "overlay")
         .attr("width", width)
@@ -172,13 +190,8 @@ function setupElevationChartInteractivity(svg, dayNumber, pathData) {
         .style("pointer-events", "all")
         .on("mouseover", () => showIndicators(dayNumber))
         .on("mouseout", () => hideIndicators())
-        .on("mousemove", function(event) {
-            const mouseX = d3.pointer(event)[0];
-            const distance = xScale.invert(mouseX);
-            const index = bisectDistance(pathData.elevation_data, distance, 1);
-            const d0 = pathData.elevation_data[index - 1];
-            const d1 = pathData.elevation_data[index];
-            let pointIndex = d1 && (distance - d0[0] > d1[0] - distance) ? index : index - 1;
-            updateIndicators(pointIndex, dayNumber);
-        });
+        .on("mousemove", handleInteraction)
+        .on("touchstart", () => showIndicators(dayNumber))
+        .on("touchend", () => hideIndicators())
+        .on("touchmove", handleInteraction);
 }

@@ -132,6 +132,7 @@ function onEachFeature(feature, layer) {
 
     const dayNumber = feature.properties.day;
 
+    // --- Desktop Mouse Events ---
     layer.on('mouseover', () => {
         // Only show indicators if hovering over the currently selected day
         if (dayNumber !== AppState.currentDay) return;
@@ -169,6 +170,37 @@ function onEachFeature(feature, layer) {
 
         // Update the indicators with the index of the closest point
         updateIndicators(closestIndex, dayNumber);
+    });
+
+    // --- Mobile Touch Events ---
+    layer.on('touchmove', function(e) {
+        // Only engage if the elevation panel is open on mobile
+        if (!isMobile() || !d3.select("#elevation-panel").classed("is-open")) {
+            return;
+        }
+        
+        showIndicators(dayNumber); // Show indicators on first touch
+        
+        if (dayNumber !== AppState.currentDay) return;
+        if (!pathDataCache[AppState.currentDay]) return;
+        const pathData = pathDataCache[AppState.currentDay];
+        let minDistance = Infinity;
+        let closestIndex = -1;
+        pathData.path_full.forEach((point, index) => {
+            const latLng = L.latLng(point[1], point[0]);
+            const distance = e.latlng.distanceTo(latLng);
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestIndex = index;
+            }
+        });
+        updateIndicators(closestIndex, dayNumber);
+    });
+
+    layer.on('touchend', () => {
+        if (isMobile()) {
+            hideIndicators();
+        }
     });
 }
 
