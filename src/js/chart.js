@@ -165,17 +165,17 @@ function setupElevationChartInteractivity(svg, dayNumber, pathData) {
     const bisectDistance = d3.bisector(d => d[0]).left;
 
     const handleInteraction = function(event) {
-        // For touch events, we need to get the touch coordinates
+        // Prevent the browser from trying to scroll the page
+        event.preventDefault();
+        
         const pointer = d3.pointer(event, this);
         const mouseX = pointer[0];
-
         const distance = xScale.invert(mouseX);
         const index = bisectDistance(pathData.elevation_data, distance, 1);
         const d0 = pathData.elevation_data[index - 1];
         const d1 = pathData.elevation_data[index];
         let pointIndex = (d1 && (distance - d0[0] > d1[0] - distance)) ? index : index - 1;
         
-        // Ensure pointIndex is within valid bounds
         if (pointIndex < 0) pointIndex = 0;
         if (pointIndex >= pathData.elevation_data.length) pointIndex = pathData.elevation_data.length - 1;
         
@@ -188,10 +188,15 @@ function setupElevationChartInteractivity(svg, dayNumber, pathData) {
         .attr("height", height)
         .style("fill", "none")
         .style("pointer-events", "all")
+        // Desktop events
         .on("mouseover", () => showIndicators(dayNumber))
         .on("mouseout", () => hideIndicators())
         .on("mousemove", handleInteraction)
-        .on("touchstart", () => showIndicators(dayNumber))
+        // Mobile events
+        .on("touchstart", (event) => {
+            event.preventDefault(); 
+            showIndicators(dayNumber);
+        })
         .on("touchend", () => hideIndicators())
         .on("touchmove", handleInteraction);
 }

@@ -173,14 +173,19 @@ function onEachFeature(feature, layer) {
     });
 
     // --- Mobile Touch Events ---
+    layer.on('touchstart', function(e) {
+        if (isMobile() && d3.select("#elevation-panel").classed("is-open")) {
+            map.dragging.disable();
+            // Stop the event from bubbling up to the map
+            L.DomEvent.stopPropagation(e);
+        }
+    });
+
     layer.on('touchmove', function(e) {
-        // Only engage if the elevation panel is open on mobile
         if (!isMobile() || !d3.select("#elevation-panel").classed("is-open")) {
             return;
         }
-        
-        showIndicators(dayNumber); // Show indicators on first touch
-        
+        showIndicators(dayNumber);
         if (dayNumber !== AppState.currentDay) return;
         if (!pathDataCache[AppState.currentDay]) return;
         const pathData = pathDataCache[AppState.currentDay];
@@ -198,8 +203,10 @@ function onEachFeature(feature, layer) {
     });
 
     layer.on('touchend', () => {
+        // When the touch ends, hide the indicators and re-enable map dragging
         if (isMobile()) {
             hideIndicators();
+            map.dragging.enable();
         }
     });
 }
