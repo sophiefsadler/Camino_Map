@@ -432,6 +432,19 @@ function hidePoiModal() {
     modalOverlay.on("click", null);
 }
 
+export function setupResizeObserver() {
+    const elevationPanelNode = d3.select("#elevation-panel").node();
+
+    const resizeObserver = new ResizeObserver(() => {
+        // Only redraw if a day is selected and the panel is visible
+        if (AppState.currentDay > -1 && elevationPanel.classed("is-open")) {
+            drawElevationProfile(AppState.currentDay);
+        }
+    });
+
+    resizeObserver.observe(elevationPanelNode);
+}
+
 // ==========================================================================
 // EVENT LISTENERS
 // ==========================================================================

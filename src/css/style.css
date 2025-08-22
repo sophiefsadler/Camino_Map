@@ -447,8 +447,7 @@ body {
     }
 
     /* --- Mobile Tabs --- */
-    #mobile-story-tab-container,
-    #mobile-elevation-tab-container {
+    #mobile-story-tab-container {
         display: block;
     }
 
