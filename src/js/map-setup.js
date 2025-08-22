@@ -132,7 +132,6 @@ function onEachFeature(feature, layer) {
 
     const dayNumber = feature.properties.day;
 
-    // --- Desktop Mouse Events ---
     layer.on('mouseover', () => {
         // Only show indicators if hovering over the currently selected day
         if (dayNumber !== AppState.currentDay) return;
@@ -171,45 +170,6 @@ function onEachFeature(feature, layer) {
         // Update the indicators with the index of the closest point
         updateIndicators(closestIndex, dayNumber);
     });
-
-    // --- Mobile Touch Events ---
-    const pathElement = layer.getElement();
-    if (pathElement) {
-        L.DomEvent.on(pathElement, 'touchstart', (e) => {
-            if (isMobile() && d3.select("#elevation-panel").classed("is-open")) {
-                map.dragging.disable();
-                L.DomEvent.stopPropagation(e);
-                L.DomEvent.preventDefault(e);
-            }
-        });
-
-        L.DomEvent.on(pathElement, 'touchmove', (e) => {
-            if (!isMobile() || !d3.select("#elevation-panel").classed("is-open")) return;
-            
-            // Convert touch event to Leaflet LatLng
-            const latlng = map.mouseEventToLatLng(e.touches[0]);
-
-            showIndicators(dayNumber);
-            if (dayNumber !== AppState.currentDay || !pathDataCache[AppState.currentDay]) return;
-            const pathData = pathDataCache[AppState.currentDay];
-            let minDistance = Infinity, closestIndex = -1;
-            pathData.path_full.forEach((point, index) => {
-                const distance = latlng.distanceTo(L.latLng(point[1], point[0]));
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    closestIndex = index;
-                }
-            });
-            updateIndicators(closestIndex, dayNumber);
-        });
-
-        L.DomEvent.on(pathElement, 'touchend', () => {
-            if (isMobile()) {
-                hideIndicators();
-                map.dragging.enable();
-            }
-        });
-    }
 }
 
 function drawPoisForDay(dayNumber) {

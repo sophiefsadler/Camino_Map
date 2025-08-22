@@ -64,37 +64,27 @@ export const youtubePanel = d3.select("#youtube-panel");
 export const youtubeLink = d3.select("#youtube-link");
 export const youtubeThumb = d3.select("#youtube-thumb");
 export const youtubeTitle = d3.select("#youtube-title");
-export const storyTabContainer = d3.select("#mobile-story-tab-container");
-export const elevationTabContainer = d3.select("#mobile-elevation-tab-container");
-export const storyTab = d3.select("#story-tab");
-export const elevationTab = d3.select("#elevation-tab");
-export const storyPanel = d3.select("#story-panel-container");
-export const storyCloseBtn = d3.select(".story-panel-close-btn");
-export const elevationCloseBtn = d3.select(".elevation-panel-close-btn");
 
 // ==========================================================================
 // "PRIVATE" HELPER FUNCTIONS (for mobile UI)
 // ==========================================================================
 
-function showMobileTabs() {
-    d3.select("#mobile-story-tab-container").style("opacity", 1).style("pointer-events", "auto");
-    const elevationTab = d3.select("#mobile-elevation-tab-container");
-    // Only show the elevation tab if its display is not 'none'
-    if (elevationTab.style("display") !== "none") {
-        elevationTab.style("opacity", 1).style("pointer-events", "auto");
-    }
-}
-
-function hideMobileTabs() {
-    d3.select("#mobile-story-tab-container").style("opacity", 0).style("pointer-events", "none");
-    d3.select("#mobile-elevation-tab-container").style("opacity", 0).style("pointer-events", "none");
-}
-
 function closeAllMobilePanels() {
     if (!isMobile()) return;
+    
+    // Close both panels
     d3.select("#story-panel-container").classed("is-open", false);
     d3.select("#elevation-panel").classed("is-open", false);
-    showMobileTabs();
+
+    // Reset tab visibility
+    const tabsContainer = d3.select("#mobile-tabs-container");
+    tabsContainer.classed("hide-story", false).classed("hide-elevation", false);
+
+    // After closing, immediately re-run the logic to see which tabs should be visible for the current day
+    const dayData = caminoMetadata.find(d => d.day === AppState.currentDay) || caminoMetadata[0];
+    updateUIVisibility(dayData);
+
+    // Clean up the map listener
     map.off('click', closeAllMobilePanels);
 }
 
@@ -108,7 +98,7 @@ export function setInitialStoryPanel() {
     elevationPanel.classed("hidden", true);
     youtubePanel.classed("hidden", true);
     if(isMobile()) {
-        d3.select("#mobile-elevation-tab-container").style("display", "none");
+        d3.select("#mobile-tabs-container").classed("hide-elevation", true);
     }
     stageTitle.text("My Camino Francés");
     stageInfo.text("An 800km journey across Spain");
@@ -179,13 +169,12 @@ export function updateUIVisibility(dayData) {
 
     // Show or hide the elevation tab on mobile
     if (isMobile()) {
-        const elevationTab = d3.select("#mobile-elevation-tab-container");
+        const elevationTab = d3.select("#elevation-tab");
         const daysWithoutElevation = [-1, 0, 12.5, 32];
-        
         if (daysWithoutElevation.includes(dayData.day)) {
-            elevationTab.style("display", "none");
+            elevationTab.style("opacity", 0).style("pointer-events", "none");
         } else {
-            elevationTab.style("display", "block");
+            elevationTab.style("opacity", 1).style("pointer-events", "auto");
         }
     }
 }
@@ -345,49 +334,71 @@ export function updateActiveButton(dayNumber) {
 export function setupMobileTabs() {
     if (!isMobile()) return;
 
-    // Stop clicks inside panels from bubbling up to the map
+    const tabsContainer = d3.select("#mobile-tabs-container");
+    const storyTab = d3.select("#story-tab");
+    const elevationTab = d3.select("#elevation-tab");
+    const storyPanel = d3.select("#story-panel-container");
+    const elevationPanel = d3.select("#elevation-panel");
+    const storyCloseBtn = d3.select(".story-panel-close-btn");
+    const elevationCloseBtn = d3.select(".elevation-panel-close-btn");
+
+    // --- Helper to close everything and reset tabs ---
+    const closeAllPanelsAndResetTabs = () => {
+        storyPanel.classed("is-open", false);
+        elevationPanel.classed("is-open", false);
+        tabsContainer.classed("hide-story", false).classed("hide-elevation", false);
+        updateUIVisibility(caminoMetadata.find(d => d.day === AppState.currentDay) || caminoMetadata[0]);
+        map.off('click', closeAllPanelsAndResetTabs);
+    };
+
+    // --- Stop clicks inside panels from bubbling up ---
     L.DomEvent.on(storyPanel.node(), 'click', L.DomEvent.stopPropagation);
     L.DomEvent.on(elevationPanel.node(), 'click', L.DomEvent.stopPropagation);
 
-    // Story Tab Click
-    storyTab.on("click", () => {
-        elevationPanel.classed("is-open", false); // Close other panels
-        storyPanel.classed("is-open", true);
-        hideMobileTabs();
+    // --- Attach closing logic to buttons ---
+    storyCloseBtn.on("click", closeAllPanelsAndResetTabs);
+    elevationCloseBtn.on("click", closeAllPanelsAndResetTabs);
 
-        if (AppState.isFirstTimeStoryOpen) {
-            storyTab.classed("pulse-animation", false);
-            if (AppState.currentDay === -1) {
-                d3.selectAll(".next-day-btn").classed("pulse-animation", true);
-            }
-            AppState.isFirstTimeStoryOpen = false;
-        }
-        
-        map.once('click', closeAllMobilePanels); // Close panel on map click
-    });
-
-    // Elevation Tab Click
+    // --- Elevation Tab Click  ---
     elevationTab.on("click", () => {
-        storyPanel.classed("is-open", false); // Close other panels
+        // If panel is already open, clicking the tab again closes it.
+        if (elevationPanel.classed("is-open")) {
+            closeAllPanelsAndResetTabs();
+            return;
+        }
+
+        storyPanel.classed("is-open", false);
         elevationPanel.classed("is-open", true);
-        hideMobileTabs();
+        tabsContainer.classed("hide-story", false);
 
         if (AppState.isFirstTimeElevationOpen) {
             elevationTab.classed("pulse-animation", false);
             AppState.isFirstTimeElevationOpen = false;
         }
-
-        // Re-draw the elevation profile if a day is selected
-        if (AppState.currentDay > -1) {
-            drawElevationProfile(AppState.currentDay);
-        }
-
-        map.once('click', closeAllMobilePanels); // Close panel on map click
+        drawElevationProfile(AppState.currentDay);
+        map.once('click', closeAllPanelsAndResetTabs);
     });
 
-    // Close Buttons Click
-    storyCloseBtn.on("click", closeAllMobilePanels);
-    elevationCloseBtn.on("click", closeAllMobilePanels);
+    // --- Story Tab Click ---
+    storyTab.on("click", () => {
+        const isElevationOpen = elevationPanel.classed("is-open");
+        const openStory = () => {
+            storyPanel.classed("is-open", true);
+            tabsContainer.classed("hide-story", true).classed("hide-elevation", true);
+            if (AppState.isFirstTimeStoryOpen) {
+                storyTab.classed("pulse-animation", false);
+                AppState.isFirstTimeStoryOpen = false;
+            }
+            map.once('click', closeAllPanelsAndResetTabs);
+        };
+
+        if (isElevationOpen) {
+            closeAllPanelsAndResetTabs();
+            setTimeout(openStory, 300);
+        } else {
+            openStory();
+        }
+    });
 }
 
 export function showPoiModal(poi) {
