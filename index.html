@@ -75,18 +75,20 @@
         </a>
     </div>
 
-    <div id="timeline-container" class="fixed bottom-0 h-16 p-2 z-20 flex items-center justify-center pointer-events-none">
-        <div id="timeline" class="bg-white/60 backdrop-blur-md rounded-xl shadow-lg h-full p-2 flex items-center gap-2 overflow-x-auto custom-scrollbar pointer-events-auto">
-        </div>
-    </div>
-
     <div id="mobile-nav-bar">
         <button class="prev-day-btn bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg shadow hover:bg-gray-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-            Previous
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 1rem; height: 1rem;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
         </button>
-        <span class="day-counter font-mono text-gray-600 flex-shrink-0"></span>
+        <div id="timeline-container" class="fixed bottom-0 h-16 p-2 z-20 flex items-center justify-center pointer-events-none">
+            <div id="timeline" class="bg-white/60 backdrop-blur-md rounded-xl shadow-lg h-full p-2 flex items-center gap-2 overflow-x-auto custom-scrollbar pointer-events-auto">
+            </div>
+        </div>
         <button class="next-day-btn bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-            Next
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 1rem; height: 1rem;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
         </button>
     </div>
 
