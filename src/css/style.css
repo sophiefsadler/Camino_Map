@@ -534,6 +534,29 @@ body {
         text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     }
 
+    /* Custom styles for the timeline's scrollbar */
+    #timeline {
+        overflow-y: hidden;
+    }
+
+    #timeline::-webkit-scrollbar {
+        height: 5px;
+    }
+
+    #timeline::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 3px;
+    }
+
+    #timeline::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 3px;
+    }
+
+    #timeline::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
     /* --- Style Variations & States --- */
 
     #mobile-nav-bar .prev-day-btn:hover,
