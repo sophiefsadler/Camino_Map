@@ -150,7 +150,8 @@ export function updateUIVisibility(dayData) {
         dayCounter.classed("hidden", true);
     } else {
         dayCounter.classed("hidden", false);
-        dayCounter.text(`Day ${AppState.currentDay} / ${TOTAL_DAYS}`);
+        const dayDisplayText = AppState.currentDay === -1 ? 0 : AppState.currentDay;
+        dayCounter.text(`Day ${dayDisplayText} / ${TOTAL_DAYS}`);
     }
 
     // Show or hide the YouTube panel

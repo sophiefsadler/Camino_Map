@@ -410,11 +410,11 @@ body {
         display: block !important;
         position: fixed !important;
         top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 12rem !important; /* Set a fixed height */
-        border-radius: 0 !important;
-        transform: translateX(-100%);
+        left: 12.5vw !important;
+        width: 75vw !important;
+        height: 8rem !important;
+        border-radius: 0 0 0.75rem 0.75rem !important;
+        transform: translateX(calc(-100% - 12.5vw));
         transition: transform 0.3s ease-in-out;
         z-index: 40;
     }
