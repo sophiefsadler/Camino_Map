@@ -329,6 +329,7 @@ export function updateActiveButton(dayNumber) {
         // Add the 'active' class for the border and shadow effect
         activeButton.classed("active", true);
         activeButton.style("background-color", colorScale(String(dayNumber)));
+        activeButton.node().scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
     }
 }
 
