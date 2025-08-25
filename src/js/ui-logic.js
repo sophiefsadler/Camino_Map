@@ -298,7 +298,12 @@ export function createTimeline() {
             .attr("class", "timeline-btn")
             .attr("data-day", day.day)
             .style("background-color", hslColor)
-            .on("click", () => updateStory(day.day));
+            .on("click", () => {
+                updateStory(day.day);
+                if (isMobile()) {
+                    closeAllMobilePanels();
+                }
+            });
 
         button.text(timelineLabels[day.day] || `Day ${day.day}`);
     });
