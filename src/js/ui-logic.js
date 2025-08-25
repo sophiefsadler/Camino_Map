@@ -104,7 +104,7 @@ export function setInitialStoryPanel() {
     stageInfo.text("An 800km journey across Spain");
     stagePhoto.attr("src", "https://github.com/sophiefsadler/Camino_Map/blob/main/assets/images/story_panel/Overview.jpg?raw=true");
     stagePhotoContainer.classed('h-64', true).classed('h-48', false);
-    stageDescription.text("Hi! I'm Sophie, and in March & April 2024 I walked the Camino Francés from Saint-Jean-Pied-de-Port to Santiago de Compostela. This is the story of my 31-day walk across northern Spain. Click 'Next' to begin the journey.");
+    stageDescription.text("Hi! I'm Sophie, and in March & April 2024 I walked the Camino Francés from Saint-Jean-Pied-de-Port to Santiago de Compostela. This is the story of my 31-day walk across northern Spain. Click on the 'Next' button to begin the journey.");
     dayCounter.classed("hidden", false);
     dayCounter.text(`Day 0 / ${TOTAL_DAYS}`);
     prevDayBtn.property("disabled", true);
@@ -389,6 +389,7 @@ export function setupMobileTabs() {
             if (AppState.isFirstTimeStoryOpen) {
                 storyTab.classed("pulse-animation", false);
                 AppState.isFirstTimeStoryOpen = false;
+                d3.selectAll(".next-day-btn").classed("pulse-animation", true);
             }
             map.once('click', closeAllPanelsAndResetTabs);
         };
