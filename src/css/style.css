@@ -574,8 +574,27 @@ body {
         transform: scale(1.05);
     }
 
+    #youtube-panel {
+        position: fixed;
+        bottom: 4.5rem;
+        right: 0.5rem;
+        width: 13rem;
+        z-index: 30;
+
+        transform: translateX(0);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    #youtube-panel #youtube-title {
+        font-size: 0.9rem;
+        line-height: 1.25;
+    }
+
+    #youtube-panel.is-hidden {
+        transform: translateX(calc(100% + 1rem));
+    }
+
     /* --- Other Mobile Adjustments --- */
-    #youtube-panel { display: none !important; }
     .nav-buttons { display: none; }
     #mobile-nav-bar { display: flex; }
 }

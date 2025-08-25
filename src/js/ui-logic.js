@@ -347,6 +347,7 @@ export function setupMobileTabs() {
     const closeAllPanelsAndResetTabs = () => {
         storyPanel.classed("is-open", false);
         elevationPanel.classed("is-open", false);
+        d3.select("#youtube-panel").classed("is-hidden", false);
         tabsContainer.classed("hide-story", false).classed("hide-elevation", false);
         updateUIVisibility(caminoMetadata.find(d => d.day === AppState.currentDay) || caminoMetadata[0]);
         map.off('click', closeAllPanelsAndResetTabs);
@@ -386,6 +387,7 @@ export function setupMobileTabs() {
         const openStory = () => {
             storyPanel.classed("is-open", true);
             tabsContainer.classed("hide-story", true).classed("hide-elevation", true);
+            d3.select("#youtube-panel").classed("is-hidden", true);
             if (AppState.isFirstTimeStoryOpen) {
                 storyTab.classed("pulse-animation", false);
                 AppState.isFirstTimeStoryOpen = false;
