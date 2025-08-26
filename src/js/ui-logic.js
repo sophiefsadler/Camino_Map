@@ -97,7 +97,7 @@ export function setInitialStoryPanel() {
     AppState.currentDay = -1;
     poiMarkers.clearLayers();
     elevationPanel.classed("hidden", true);
-    youtubePanel.classed("hidden", true);
+    youtubePanel.classed("is-visible", false);
     if(isMobile()) {
         d3.select("#mobile-tabs-container").classed("hide-elevation", true);
     }
@@ -164,9 +164,13 @@ export function updateUIVisibility(dayData) {
         youtubeThumb.attr("src", thumbUrl);
         youtubeTitle.text(dayData.youtube.title);
 
-        youtubePanel.classed("hidden", false);
+        if (!isMobile()) {
+            youtubePanel.classed("is-visible", true);
+        }
     } else {
-        youtubePanel.classed("hidden", true);
+        if (!isMobile()) {
+            youtubePanel.classed("is-visible", false);
+        }
     }
 
     // Show or hide the elevation tab on mobile

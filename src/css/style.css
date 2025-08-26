@@ -221,6 +221,16 @@ body {
     display: none;
 }
 
+#youtube-panel {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+#youtube-panel.is-visible {
+    visibility: visible;
+    opacity: 1;
+}
+
 /* POI Pop-up Modal */
 #poi-modal-overlay {
     position: fixed;
@@ -485,6 +495,7 @@ body {
     }
 
     #youtube-panel {
+        visibility: visible;
         position: fixed;
         bottom: 4.5rem;
         right: 0.5rem;
