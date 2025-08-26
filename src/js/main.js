@@ -22,7 +22,8 @@ import {
     updateActiveButton,
     setupMobileTabs,
     isMobile,
-    setupResizeObserver
+    setupResizeObserver,
+    unlockPoiFromPanel
 } from './ui-logic.js';
 
 // ==========================================================================
@@ -30,6 +31,7 @@ import {
 // ==========================================================================
 
 export function updateStory(dayNumber) {
+    unlockPoiFromPanel();
     d3.selectAll(".next-day-btn").classed("pulse-animation", false);
     
     // Update the application's current state

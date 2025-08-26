@@ -414,6 +414,10 @@ body {
         z-index: 40;
     }
 
+    #reset-story-btn {
+        display: none;
+    }
+
     #elevation-panel {
         display: block !important;
         position: fixed !important;

@@ -112,6 +112,8 @@ export function setInitialStoryPanel() {
     nextDayBtn.property("disabled", false);
     casingLayer.setStyle(styleCasing);
     colorLayer.setStyle(stylePath);
+    d3.select("#reset-story-btn").classed("hidden", true);
+    d3.select("#reset-story-btn").on("click", unlockPoiFromPanel);
 }
 
 export function updatePanelContent(dayData) {
@@ -229,6 +231,23 @@ export function showPoiInPanel(poi) {
         stageDescription.text(poi.description);
         storyContent.classed('content-fading', false);
     }, UITimings.panelFade);
+}
+
+export function lockPoiInPanel(poi) {
+    if (isMobile()) return;
+    showPoiInPanel(poi);
+    d3.select("#reset-story-btn").classed("hidden", false);
+    prevDayBtn.property("disabled", true);
+    nextDayBtn.property("disabled", true);
+}
+
+export function unlockPoiFromPanel() {
+    if (isMobile()) return;
+    if (AppState.currentDay === -1) return; 
+
+    restoreDayInPanel(AppState.currentDay);
+    d3.select("#reset-story-btn").classed("hidden", true);
+    updateButtonStates(AppState.currentDay);
 }
 
 export function showIndicators(dayNumber) {
