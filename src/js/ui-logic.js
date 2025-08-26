@@ -298,8 +298,8 @@ export function createTimeline() {
         const hslColor = d3.hsl(colorScale(String(day.day)));
 
         // Now, modify the saturation and lightness to make a pastel
-        hslColor.s = 0.9;
-        hslColor.l = 0.77;
+        hslColor.s = 0.45;
+        hslColor.l = 0.85;
 
         const button = timeline.append("button")
             .attr("class", "timeline-btn")
@@ -329,8 +329,8 @@ export function updateActiveButton(dayNumber) {
 
         // Recalculate and apply the pastel color
         const hslColor = d3.hsl(colorScale(day));
-        hslColor.s = 0.6; // Saturation
-        hslColor.l = 0.75; // Lightness
+        hslColor.s = 0.45;
+        hslColor.l = 0.85;
         button.style("background-color", hslColor);
     });
 
@@ -341,7 +341,7 @@ export function updateActiveButton(dayNumber) {
         // Add the 'active' class for the border and shadow effect
         activeButton.classed("active", true);
         activeButton.style("background-color", colorScale(String(dayNumber)));
-        activeButton.node().scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
+        activeButton.node().scrollIntoView({ behavior: 'smooth', inline: 'center' });
     }
 }
 
