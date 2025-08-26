@@ -72,9 +72,10 @@ export const youtubeTitle = d3.select("#youtube-title");
 function closeAllMobilePanels() {
     if (!isMobile()) return;
     
-    // Close both panels
+    // Close all panels
     d3.select("#story-panel-container").classed("is-open", false);
     d3.select("#elevation-panel").classed("is-open", false);
+    d3.select("#youtube-panel").classed("is-open", false);
 
     // Reset tab visibility
     const tabsContainer = d3.select("#mobile-tabs-container");
@@ -171,6 +172,12 @@ export function updateUIVisibility(dayData) {
     // Show or hide the elevation tab on mobile
     if (isMobile()) {
         const elevationTab = d3.select("#elevation-tab");
+        const youtubeTab = d3.select("#youtube-tab");
+        if (dayData.youtube && dayData.youtube.videoId) {
+            youtubeTab.style("opacity", 1).style("pointer-events", "auto");
+        } else {
+            youtubeTab.style("opacity", 0).style("pointer-events", "none");
+        }
         const daysWithoutElevation = [-1, 0, 12.5, 32];
         if (daysWithoutElevation.includes(dayData.day)) {
             elevationTab.style("opacity", 0).style("pointer-events", "none");
@@ -299,10 +306,10 @@ export function createTimeline() {
             .attr("data-day", day.day)
             .style("background-color", hslColor)
             .on("click", () => {
-                updateStory(day.day);
                 if (isMobile()) {
                     closeAllMobilePanels();
                 }
+                updateStory(day.day);
             });
 
         button.text(timelineLabels[day.day] || `Day ${day.day}`);
@@ -341,49 +348,65 @@ export function updateActiveButton(dayNumber) {
 export function setupMobileTabs() {
     if (!isMobile()) return;
 
+    // --- Select all mobile tabs and panels ---
     const tabsContainer = d3.select("#mobile-tabs-container");
     const storyTab = d3.select("#story-tab");
     const elevationTab = d3.select("#elevation-tab");
+    const youtubeTab = d3.select("#youtube-tab");
+
     const storyPanel = d3.select("#story-panel-container");
     const elevationPanel = d3.select("#elevation-panel");
+    const youtubePanel = d3.select("#youtube-panel");
+
     const storyCloseBtn = d3.select(".story-panel-close-btn");
     const elevationCloseBtn = d3.select(".elevation-panel-close-btn");
+    const youtubeCloseBtn = d3.select(".youtube-panel-close-btn");
 
     // --- Helper to close everything and reset tabs ---
     const closeAllPanelsAndResetTabs = () => {
         storyPanel.classed("is-open", false);
         elevationPanel.classed("is-open", false);
-        d3.select("#youtube-panel").classed("is-hidden", false);
+        youtubePanel.classed("is-open", false);
+
         tabsContainer.classed("hide-story", false).classed("hide-elevation", false);
-        updateUIVisibility(caminoMetadata.find(d => d.day === AppState.currentDay) || caminoMetadata[0]);
+
+        const dayData = caminoMetadata.find(d => d.day === AppState.currentDay) || caminoMetadata[0];
+        updateUIVisibility(dayData);
+
         map.off('click', closeAllPanelsAndResetTabs);
     };
 
     // --- Stop clicks inside panels from bubbling up ---
     L.DomEvent.on(storyPanel.node(), 'click', L.DomEvent.stopPropagation);
     L.DomEvent.on(elevationPanel.node(), 'click', L.DomEvent.stopPropagation);
+    L.DomEvent.on(youtubePanel.node(), 'click', L.DomEvent.stopPropagation);
 
     // --- Attach closing logic to buttons ---
     storyCloseBtn.on("click", closeAllPanelsAndResetTabs);
-    elevationCloseBtn.on("click", closeAllPanelsAndResetTabs);
+    elevationCloseBtn.on("click", () => {
+        elevationPanel.classed("is-open", false);
+        tabsContainer.classed("hide-story", false);
+    });
+
+    youtubeCloseBtn.on("click", () => {
+        youtubePanel.classed("is-open", false);
+    });
 
     // --- Elevation Tab Click  ---
     elevationTab.on("click", () => {
         // If panel is already open, clicking the tab again closes it.
-        if (elevationPanel.classed("is-open")) {
-            closeAllPanelsAndResetTabs();
-            return;
-        }
+        const willBeOpen = !elevationPanel.classed("is-open");
 
         storyPanel.classed("is-open", false);
-        elevationPanel.classed("is-open", true);
-        tabsContainer.classed("hide-story", false);
+        elevationPanel.classed("is-open", willBeOpen);
 
-        if (AppState.isFirstTimeElevationOpen) {
-            elevationTab.classed("pulse-animation", false);
-            AppState.isFirstTimeElevationOpen = false;
+        if (willBeOpen) {
+            if (AppState.isFirstTimeElevationOpen) {
+                elevationTab.classed("pulse-animation", false);
+                AppState.isFirstTimeElevationOpen = false;
+            }
+            drawElevationProfile(AppState.currentDay);
         }
-        drawElevationProfile(AppState.currentDay);
         map.once('click', closeAllPanelsAndResetTabs);
     });
 
@@ -392,8 +415,12 @@ export function setupMobileTabs() {
         const isElevationOpen = elevationPanel.classed("is-open");
         const openStory = () => {
             storyPanel.classed("is-open", true);
+            elevationPanel.classed("is-open", false);
+            youtubePanel.classed("is-open", false);
+
             tabsContainer.classed("hide-story", true).classed("hide-elevation", true);
-            d3.select("#youtube-panel").classed("is-hidden", true);
+            d3.select("#youtube-tab").style("opacity", 0).style("pointer-events", "none");
+
             if (AppState.isFirstTimeStoryOpen) {
                 storyTab.classed("pulse-animation", false);
                 AppState.isFirstTimeStoryOpen = false;
@@ -402,12 +429,21 @@ export function setupMobileTabs() {
             map.once('click', closeAllPanelsAndResetTabs);
         };
 
-        if (isElevationOpen) {
-            closeAllPanelsAndResetTabs();
-            setTimeout(openStory, 300);
-        } else {
-            openStory();
+        const wasOpen = storyPanel.classed("is-open");
+        closeAllPanelsAndResetTabs();
+        if (!wasOpen) {
+            setTimeout(openStory, 50);
         }
+    });
+
+    // --- YouTube Tab Click ---
+    youtubeTab.on("click", () => {
+        const willBeOpen = !youtubePanel.classed("is-open");
+
+        storyPanel.classed("is-open", false);
+        youtubePanel.classed("is-open", willBeOpen);
+
+        map.once('click', closeAllPanelsAndResetTabs);
     });
 }
 
@@ -476,17 +512,20 @@ photoElement.addEventListener('load', () => {
 });
 
 d3.selectAll(".prev-day-btn").on("click", () => { 
+    if (isMobile()) {
+            closeAllMobilePanels();
+        }
     const currentIndex = caminoMetadata.findIndex(d => d.day === AppState.currentDay);
     if (currentIndex > 0) {
         const prevDayData = caminoMetadata[currentIndex - 1];
         updateStory(prevDayData.day);
-        if (isMobile()) {
-            closeAllMobilePanels();
-        }
     }
 });
 
 d3.selectAll(".next-day-btn").on("click", () => { 
+    if (isMobile()) {
+        closeAllMobilePanels();
+    }
     d3.selectAll(".next-day-btn").classed("pulse-animation", false);
     if (AppState.currentDay === -1) {
         updateStory(caminoMetadata[0].day);
@@ -496,9 +535,5 @@ d3.selectAll(".next-day-btn").on("click", () => {
             const nextDayData = caminoMetadata[currentIndex + 1];
             updateStory(nextDayData.day);
         }
-    }
-
-    if (isMobile()) {
-        closeAllMobilePanels();
     }
 });

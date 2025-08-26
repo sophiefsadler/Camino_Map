@@ -51,6 +51,14 @@ export function updateStory(dayNumber) {
     }
 
     zoomToDay(dayData);
+
+    if (isMobile()) {
+        if (dayData.youtube && dayData.youtube.videoId) {
+            d3.select("#youtube-panel").classed("is-open", true);
+        } else {
+            d3.select("#youtube-panel").classed("is-open", false);
+        }
+    }
 }
 
 async function setInitialView() {

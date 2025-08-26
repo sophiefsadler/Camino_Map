@@ -223,6 +223,14 @@ body {
     background-color: white;
 }
 
+#youtube-tab {
+    display: none;
+}
+
+#youtube-panel .youtube-panel-close-btn {
+    display: none;
+}
+
 /* POI Pop-up Modal */
 #poi-modal-overlay {
     position: fixed;
@@ -307,9 +315,9 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 50; /* High z-index to be on top */
+    z-index: 50;
     
-    display: none; /* Hidden on desktop by default */
+    display: none;
     justify-content: space-around;
     align-items: center;
 
@@ -421,7 +429,8 @@ body {
 
     #story-panel { width: 100%; }
     #story-panel .story-panel-close-btn,
-    #elevation-panel .elevation-panel-close-btn {
+    #elevation-panel .elevation-panel-close-btn,
+    #youtube-panel .youtube-panel-close-btn {
         display: flex;
     }
 
@@ -467,6 +476,42 @@ body {
     #mobile-tabs-container.hide-elevation #elevation-tab {
         opacity: 0 !important;
         pointer-events: none !important;
+    }
+
+    /* --- YouTube Tab & Panel --- */
+    #youtube-tab {
+        display: block;
+        position: fixed;
+        right: 0;
+        bottom: 23rem;
+        z-index: 30;
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    #youtube-panel {
+        position: fixed;
+        bottom: 4.5rem;
+        right: 0.5rem;
+        width: 13rem;
+        z-index: 40;
+
+        transform: translateX(calc(100% + 1rem));
+        transition: transform 0.3s ease-in-out;
+    }
+
+    #youtube-panel #youtube-title {
+        font-size: 0.9rem;
+        line-height: 1.25;
+    }
+
+    #youtube-panel.is-open {
+        transform: translateX(0);
     }
 
     /* --- Main Navigation Bar --- */
@@ -572,26 +617,6 @@ body {
         outline: 2px solid rgba(255, 255, 255, 0.9);
         outline-offset: 2px;
         transform: scale(1.05);
-    }
-
-    #youtube-panel {
-        position: fixed;
-        bottom: 4.5rem;
-        right: 0.5rem;
-        width: 13rem;
-        z-index: 30;
-
-        transform: translateX(0);
-        transition: transform 0.3s ease-in-out;
-    }
-
-    #youtube-panel #youtube-title {
-        font-size: 0.9rem;
-        line-height: 1.25;
-    }
-
-    #youtube-panel.is-hidden {
-        transform: translateX(calc(100% + 1rem));
     }
 
     /* --- Other Mobile Adjustments --- */
