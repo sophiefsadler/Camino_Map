@@ -481,7 +481,7 @@ body {
         border-bottom-right-radius: 0;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.3s ease-in-out;
+        transition: opacity 0.1s ease-in-out;
     }
 
     #youtube-panel {
@@ -492,7 +492,8 @@ body {
         z-index: 40;
 
         transform: translateX(calc(100% + 1rem));
-        transition: transform 0.3s ease-in-out;
+        opacity: 0;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     }
 
     #youtube-panel #youtube-title {
@@ -502,6 +503,7 @@ body {
 
     #youtube-panel.is-open {
         transform: translateX(0);
+        opacity: 1;
     }
 
     /* --- Main Navigation Bar --- */
