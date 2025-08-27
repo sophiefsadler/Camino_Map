@@ -16,7 +16,8 @@ import {
     elevationPanel,
     isMobile,
     showPoiModal,
-    lockPoiInPanel
+    lockPoiInPanel,
+    closeAllMobilePanels
 } from './ui-logic.js';
 import { drawElevationProfile } from './chart.js';
 import { getPathData } from './data.js';
@@ -128,6 +129,9 @@ function createPoiIcon(color) {
 
 function onEachFeature(feature, layer) {
     layer.on('click', function (e) {
+        if (isMobile()) {
+            closeAllMobilePanels();
+        }
         updateStory(feature.properties.day);
     });
 

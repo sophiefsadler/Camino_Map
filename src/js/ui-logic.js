@@ -66,30 +66,6 @@ export const youtubeThumb = d3.select("#youtube-thumb");
 export const youtubeTitle = d3.select("#youtube-title");
 
 // ==========================================================================
-// "PRIVATE" HELPER FUNCTIONS (for mobile UI)
-// ==========================================================================
-
-function closeAllMobilePanels() {
-    if (!isMobile()) return;
-    
-    // Close all panels
-    d3.select("#story-panel-container").classed("is-open", false);
-    d3.select("#elevation-panel").classed("is-open", false);
-    d3.select("#youtube-panel").classed("is-open", false);
-
-    // Reset tab visibility
-    const tabsContainer = d3.select("#mobile-tabs-container");
-    tabsContainer.classed("hide-story", false).classed("hide-elevation", false);
-
-    // After closing, immediately re-run the logic to see which tabs should be visible for the current day
-    const dayData = caminoMetadata.find(d => d.day === AppState.currentDay) || caminoMetadata[0];
-    updateUIVisibility(dayData);
-
-    // Clean up the map listener
-    map.off('click', closeAllMobilePanels);
-}
-
-// ==========================================================================
 // EXPORTED UI FUNCTIONS
 // ==========================================================================
 
@@ -468,6 +444,26 @@ export function setupMobileTabs() {
 
         map.once('click', closeAllPanelsAndResetTabs);
     });
+}
+
+export function closeAllMobilePanels() {
+    if (!isMobile()) return;
+    
+    // Close all panels
+    d3.select("#story-panel-container").classed("is-open", false);
+    d3.select("#elevation-panel").classed("is-open", false);
+    d3.select("#youtube-panel").classed("is-open", false);
+
+    // Reset tab visibility
+    const tabsContainer = d3.select("#mobile-tabs-container");
+    tabsContainer.classed("hide-story", false).classed("hide-elevation", false);
+
+    // After closing, immediately re-run the logic to see which tabs should be visible for the current day
+    const dayData = caminoMetadata.find(d => d.day === AppState.currentDay) || caminoMetadata[0];
+    updateUIVisibility(dayData);
+
+    // Clean up the map listener
+    map.off('click', closeAllMobilePanels);
 }
 
 export function showPoiModal(poi) {
