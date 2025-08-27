@@ -221,9 +221,16 @@ export function unlockPoiFromPanel() {
     if (isMobile()) return;
     if (AppState.currentDay === -1) return; 
 
-    restoreDayInPanel(AppState.currentDay);
-    d3.select("#reset-story-btn").classed("hidden", true);
-    updateButtonStates(AppState.currentDay);
+    // Check if a POI is actually locked by seeing if the reset button is visible.
+    const isPoiLocked = !d3.select("#reset-story-btn").classed("hidden");
+
+    // Only run the logic if the POI panel was actually locked.
+    if (isPoiLocked) {
+        if (AppState.currentDay === -1) return;
+        restoreDayInPanel(AppState.currentDay);
+        d3.select("#reset-story-btn").classed("hidden", true);
+        updateButtonStates(AppState.currentDay);
+    }
 }
 
 export function showIndicators(dayNumber) {
