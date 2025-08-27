@@ -1,4 +1,4 @@
-# My Camino Francés Journey - An Interactive Map 🗺️
+# My Camino Francés - An Interactive Map 🗺️
 
 ![Camino Project GIF](https://github.com/sophiefsadler/Camino_Map/blob/main/assets/Camino_Map.gif)
 
@@ -22,7 +22,7 @@ The project is fully responsive and works independently for desktop and mobile.
 * **Day-by-Day Story Panel:** A narrative panel that updates with photos, diary entries, and distance information for each day of the walk.
 * **Dynamic Elevation Profiles:** For each walking day, a D3.js-powered elevation chart is drawn, with an indicator that syncs with the user's cursor position on the map path.
 * **Clickable Points of Interest:** Custom markers highlight interesting spots, which can be clicked to display more information in the story panel (on desktop) or in a modal (on mobile).
-* * **Interactive Timeline:** A scrollable timeline allows for quick navigation between all 31 stages of the journey.
+* **Interactive Timeline:** A scrollable timeline allows for quick navigation between all 31 stages of the journey.
 * **Fully Responsive Design:** A custom UI for both desktop and mobile, ensuring a great experience on any device. The mobile view features a compact navigation bar and slide-out panels.
 
 ---
