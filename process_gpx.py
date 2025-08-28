@@ -1,5 +1,3 @@
-# process_gpx.py
-
 import os
 import gpxpy
 import gpxpy.gpx
@@ -90,7 +88,7 @@ def parse_gpx_files(directory):
                 'distance': distance_km,
                 'points_full': points_full,
                 'points_simple': points_simple,
-                'elevation_data': elevation_data # New: Add elevation data to the track object
+                'elevation_data': elevation_data
             })
             print(f"  - Processed Day {day_index}: {start_location} to {end_location} ({distance_km} km), found {len(elevation_data)} elevation points.")
 
