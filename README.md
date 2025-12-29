@@ -10,7 +10,7 @@
 
 This project is a visual and interactive diary of my 31-day, 800km walk along the Camino Francés in Spain. I wanted to create a data-driven map that tells the story of the journey day by day, combining geographical data with personal diary entries, photos, and videos.
 
-It was built from scratch to practice and showcase my skills with modern web development techniques, with a focus on data and map-based visualization.
+It was built from scratch to practice and showcase my skills with modern web development techniques, with a focus on data and map-based visualisation.
 
 The project is fully responsive and works independently for desktop and mobile.
 
@@ -30,7 +30,7 @@ The project is fully responsive and works independently for desktop and mobile.
 ## Built With
 
 * **JavaScript (ES6 Modules):** The entire application is built with modern, modular vanilla JavaScript.
-* **D3.js:** Used for all data handling (loading GeoJSON/CSV), color scaling, and drawing the dynamic elevation profiles.
+* **D3.js:** Used for all data handling (loading GeoJSON/CSV), colour scaling, and drawing the dynamic elevation profiles.
 * **Leaflet.js:** Powers the core interactive map, including path rendering, custom markers, and camera movement.
 * **Tailwind CSS:** For all styling and creating the responsive layout.
 * **HTML5**
